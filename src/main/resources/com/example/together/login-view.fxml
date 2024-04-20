@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="459.0" prefWidth="777.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.together.HelloController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+
+    <Label fx:id="welcomeText" />
+    <Button onAction="#onHelloButtonClick" text="Hello!" />
+   <top>
+      <Label styleClass="roboto-bold" text="Login" BorderPane.alignment="CENTER" />
+   </top>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="25.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" styleClass="roboto-medium" text="Label" textAlignment="CENTER" />
+            <TextField />
+            <Label styleClass="roboto-medium" text="Label" />
+            <PasswordField>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </PasswordField>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+   <bottom>
+      <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="BOTTOM_CENTER">
+         <children>
+            <Button mnemonicParsing="false" onAction="#login" text="Login">
+               <styleClass>
+                  <String fx:value="lightButton" />
+                  <String fx:value="roboto-medium" />
+               </styleClass></Button>
+            <Button mnemonicParsing="false" onAction="#signup" stylesheets="@main.css" text="Sign Up">
+               <styleClass>
+                  <String fx:value="lightButton" />
+                  <String fx:value="roboto-medium" />
+               </styleClass></Button>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </BorderPane.margin>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+      </HBox>
+   </bottom>
+</BorderPane>
