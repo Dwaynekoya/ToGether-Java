@@ -1,11 +1,13 @@
 package com.example.together.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class User {
     private int id;
     private String username;
     private String password;
+    private String bio;
     private Set<User> following; //people this user follows
     private Set<User> followers; //people who follow this user
     private Set<Task> tasks;
@@ -22,14 +24,34 @@ public class User {
      * @param groups -> pass empty set if empty. Groups this user belongs to
      */
 
-    public User(int id, String username, String password, Set<User> following, Set<User> followers, Set<Task> tasks, Set<Group> groups) {
+    public User(int id, String username, String password, String bio, Set<User> following, Set<User> followers, Set<Task> tasks, Set<Group> groups) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.bio = bio;
         this.following = following;
         this.followers = followers;
         this.tasks = tasks;
         this.groups = groups;
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+        this.followers = new HashSet<>();
+        this.following = new HashSet<>();
+        this.tasks = new HashSet<>();
+        this.groups = new HashSet<>();
+    }
+    public User(int id, String username, String password, String bio) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.bio = bio;
+        this.followers = new HashSet<>();
+        this.following = new HashSet<>();
+        this.tasks = new HashSet<>();
+        this.groups = new HashSet<>();
     }
 
     public int getId() {

@@ -4,28 +4,41 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="459.0" prefWidth="777.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.together.HelloController">
+<BorderPane prefHeight="459.0" prefWidth="777.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.together.controller.LoginController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
 
-    <Label fx:id="welcomeText" />
-    <Button onAction="#onHelloButtonClick" text="Hello!" />
    <top>
-      <Label styleClass="roboto-bold" text="Login" BorderPane.alignment="CENTER" />
+      <Label styleClass="roboto-bold" text="Login" textFill="#fff6ed" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="JetBrains Mono SemiBold" size="24.0" />
+         </font></Label>
    </top>
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" spacing="25.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" styleClass="roboto-medium" text="Label" textAlignment="CENTER" />
-            <TextField />
-            <Label styleClass="roboto-medium" text="Label" />
-            <PasswordField>
+            <Label alignment="CENTER" styleClass="roboto-medium" text="Username" textAlignment="CENTER" textFill="#fff6ed">
+               <font>
+                  <Font name="JetBrains Mono Medium" size="14.0" />
+               </font></Label>
+            <TextField fx:id="usernameField" />
+            <Label styleClass="roboto-medium" text="Password" textFill="#fff6ed">
+               <font>
+                  <Font name="JetBrains Mono Medium" size="14.0" />
+               </font></Label>
+            <PasswordField fx:id="passwordField">
                <VBox.margin>
-                  <Insets top="20.0" />
+                  <Insets />
                </VBox.margin>
             </PasswordField>
+            <Label fx:id="infoLabel" textFill="#fff6ed">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
          </children>
          <BorderPane.margin>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
