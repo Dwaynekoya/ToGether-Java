@@ -4,8 +4,8 @@
     -fx-text-fill:  #FFF6ED;;
 }
 .lightButton {
-    -fx-background-color: #FFF6ED; /* Change this color to your desired solid color */
-    -fx-text-fill: #8C5D43; /* Set text color to contrast with the background */
+    -fx-background-color: #FFF6ED;
+    -fx-text-fill: #8C5D43;
 }
 
 /*custom font*/

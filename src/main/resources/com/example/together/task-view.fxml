@@ -1,14 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.together.controller.TaskController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<HBox prefHeight="400.0" prefWidth="600.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.together.controller.TaskController">
+    <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="75.0" BorderPane.alignment="CENTER">
+      <children>
+         <Button mnemonicParsing="false" text="Settings" />
+         <Button mnemonicParsing="false" text="Friends" />
+         <Button mnemonicParsing="false" text="Tasks" />
+         <Button mnemonicParsing="false" text="Home" />
+      </children>
+      <padding>
+         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+      </padding></VBox>
+   <BorderPane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+      <bottom>
+         <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+               <Button mnemonicParsing="false" onAction="#createTask" text="Create">
+                  <font>
+                     <Font size="18.0" />
+                  </font></Button>
+               <Button mnemonicParsing="false" onAction="#cancel" text="Cancel">
+                  <font>
+                     <Font size="18.0" />
+                  </font></Button>
+            </children>
+            <padding>
+               <Insets bottom="10.0" />
+            </padding>
+         </HBox>
+      </bottom>
+      <top>
+         <Label text="New Task" textAlignment="RIGHT" BorderPane.alignment="TOP_RIGHT">
+            <font>
+               <Font name="JetBrains Mono ExtraBold" size="24.0" />
+            </font></Label>
+      </top>
+      <center>
+         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <children>
+               <Label text="Name">
+                  <padding>
+                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  </padding>
+                  <font>
+                     <Font name="JetBrains Mono Medium" size="18.0" />
+                  </font></Label>
+               <TextField fx:id="textfieldName" />
+               <Label text="Date">
+                  <padding>
+                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  </padding>
+                  <font>
+                     <Font name="JetBrains Mono Medium" size="18.0" />
+                  </font></Label>
+               <DatePicker fx:id="datePicker" />
+               <Label text="Info">
+                  <padding>
+                     <Insets bottom="5.0" top="5.0" />
+                  </padding>
+                  <font>
+                     <Font name="JetBrains Mono Medium" size="18.0" />
+                  </font></Label>
+               <TextArea fx:id="textAreaInfo" prefHeight="200.0" prefWidth="200.0">
+                  <padding>
+                     <Insets bottom="5.0" top="5.0" />
+                  </padding></TextArea>
+               <CheckBox fx:id="checkBox" mnemonicParsing="false" text="Habit?">
+                  <padding>
+                     <Insets top="5.0" />
+                  </padding>
+                  <font>
+                     <Font name="JetBrains Mono Medium" size="18.0" />
+                  </font></CheckBox>
+            </children>
+            <padding>
+               <Insets left="20.0" right="20.0" top="10.0" />
+            </padding>
+         </VBox>
+      </center>
+   </BorderPane>
+</HBox>
