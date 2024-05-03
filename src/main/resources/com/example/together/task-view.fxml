@@ -3,10 +3,13 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<HBox prefHeight="400.0" prefWidth="600.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.together.controller.TaskController">
-    <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="75.0" BorderPane.alignment="CENTER">
+<StackPane prefHeight="1024.0" prefWidth="1440.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.together.controller.TaskController">
+   <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#fff6ed" height="1024.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1300.0" StackPane.alignment="CENTER_RIGHT" />
+<HBox>
+    <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="130.0" BorderPane.alignment="CENTER">
       <children>
          <Button mnemonicParsing="false" text="Settings" />
          <Button mnemonicParsing="false" text="Friends" />
@@ -77,11 +80,32 @@
                   <font>
                      <Font name="JetBrains Mono Medium" size="18.0" />
                   </font></CheckBox>
+               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <children>
+                     <Label text="Repeat every..." />
+                     <Spinner prefHeight="25.0" prefWidth="65.0">
+                        <HBox.margin>
+                           <Insets left="20.0" right="10.0" />
+                        </HBox.margin>
+                     </Spinner>
+                     <Label text="days" />
+                  </children>
+                  <opaqueInsets>
+                     <Insets />
+                  </opaqueInsets>
+                  <padding>
+                     <Insets left="5.0" right="5.0" />
+                  </padding>
+               </HBox>
             </children>
             <padding>
                <Insets left="20.0" right="20.0" top="10.0" />
             </padding>
          </VBox>
       </center>
+         <padding>
+            <Insets bottom="10.0" left="100.0" right="100.0" top="10.0" />
+         </padding>
    </BorderPane>
 </HBox>
+</StackPane>

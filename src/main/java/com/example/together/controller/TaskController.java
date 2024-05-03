@@ -40,7 +40,7 @@ public class TaskController {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Constants.mysqlDateFormat);
             date = simpleDateFormat.format(Date.from(selectedDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
         } else {
-            // no date has been selected
+            // no date has been selected?
             date = null;
         }
         if (Utils.checkDataValidity(new ArrayList<>(Arrays.asList(taskName)))){
@@ -56,7 +56,8 @@ public class TaskController {
             System.out.printf("TODO");
             //TODO: close window/goback to home view
         } else {
-
+            //TODO: use current user id
+            DBTask.addTask(taskName,date,info,1);
         }
     }
 

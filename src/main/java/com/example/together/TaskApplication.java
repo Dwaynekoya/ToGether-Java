@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class TaskApplication extends Application {
+    boolean newTask;
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("task-view.fxml"));
@@ -14,5 +15,8 @@ public class TaskApplication extends Application {
         stage.setTitle("ToGether!");
         stage.setScene(scene);
         stage.show();
+    }
+    public static void main(String[] args) {
+        launch();
     }
 }
