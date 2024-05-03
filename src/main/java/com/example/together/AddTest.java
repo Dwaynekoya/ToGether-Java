@@ -4,9 +4,11 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -85,7 +87,7 @@ public class AddTest extends Application {
     }
 
     // Custom ListCell implementation for displaying tasks with a CheckBox and a Button
-    static class TaskListCell extends javafx.scene.control.ListCell<Task> {
+    static class TaskListCell extends ListCell<Task> {
         @Override
         protected void updateItem(Task item, boolean empty) {
             super.updateItem(item, empty);
@@ -94,20 +96,30 @@ public class AddTest extends Application {
                 setText(null);
                 setGraphic(null);
             } else {
-                CheckBox checkBox = new CheckBox(item.getName());
+                CheckBox checkBox = new CheckBox();
                 checkBox.setSelected(item.isCompleted());
                 checkBox.setOnAction(event -> item.setCompleted(checkBox.isSelected()));
+
+                Label nameLabel = new Label(item.getName());
+                nameLabel.setAlignment(Pos.CENTER_LEFT);
+                nameLabel.setMaxWidth(Double.MAX_VALUE);
+                HBox.setHgrow(nameLabel, Priority.ALWAYS);
 
                 Button deleteButton = new Button("Delete");
                 deleteButton.setOnAction(event -> getListView().getItems().remove(item));
 
-                HBox hbox = new HBox(checkBox, deleteButton);
+                // Create an HBox for the checkbox, label, and delete button
+                HBox hbox = new HBox(checkBox, nameLabel, deleteButton);
+                hbox.setAlignment(Pos.CENTER_LEFT);
                 hbox.setSpacing(10);
+                hbox.setFillHeight(true);
 
+                // Set the HBox as the graphic for the cell
                 setGraphic(hbox);
             }
         }
     }
+
 
     // Method to show task details in a popup window
     private void showTaskDetailsPopup(Task task, Window owner) {

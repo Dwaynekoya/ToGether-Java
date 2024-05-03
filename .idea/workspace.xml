@@ -4,16 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c554c44-767d-4434-8cb3-5256fb1e9951" name="Changes" comment="method to take json and convert to Task">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/together/AddTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/TaskApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/TaskApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/controller/TaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/controller/TaskController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/DBTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/DBTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/together/task-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/together/task-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/together/tasklist-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/together/tasklist-view.fxml" afterDir="false" />
+    <list default="true" id="7c554c44-767d-4434-8cb3-5256fb1e9951" name="Changes" comment="tasklist renderer">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/AddTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/AddTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,7 +137,7 @@
       <workItem from="1714214894110" duration="12034000" />
       <workItem from="1714565922458" duration="6888000" />
       <workItem from="1714754740118" duration="3093000" />
-      <workItem from="1714757942692" duration="2136000" />
+      <workItem from="1714757942692" duration="2426000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -171,7 +163,23 @@
       <option name="project" value="LOCAL" />
       <updated>1714575530991</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="method to take json and convert to Task">
+      <option name="closed" value="true" />
+      <created>1714760158440</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1714760158440</updated>
+    </task>
+    <task id="LOCAL-00005" summary="tasklist renderer">
+      <option name="closed" value="true" />
+      <created>1714760171793</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1714760171794</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -183,6 +191,7 @@
     <MESSAGE value="Finished login queries" />
     <MESSAGE value="add task query" />
     <MESSAGE value="method to take json and convert to Task" />
-    <option name="LAST_COMMIT_MESSAGE" value="method to take json and convert to Task" />
+    <MESSAGE value="tasklist renderer" />
+    <option name="LAST_COMMIT_MESSAGE" value="tasklist renderer" />
   </component>
 </project>
