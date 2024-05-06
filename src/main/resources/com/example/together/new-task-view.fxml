@@ -2,32 +2,54 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane prefHeight="1024.0" prefWidth="1440.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.together.controller.TaskController">
-   <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#fff6ed" height="1024.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1300.0" StackPane.alignment="CENTER_RIGHT" />
+<StackPane prefHeight="1024.0" prefWidth="1440.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.together.controller.NewTaskController">
+   <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#fff6ed" height="1024.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="drop-shadow" width="1300.0" StackPane.alignment="CENTER_RIGHT" />
 <HBox>
-    <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="130.0" BorderPane.alignment="CENTER">
+   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="130.0">
       <children>
-         <Button mnemonicParsing="false" text="Settings" />
-         <Button mnemonicParsing="false" text="Friends" />
-         <Button mnemonicParsing="false" text="Tasks" />
-         <Button mnemonicParsing="false" text="Home" />
+         <Button mnemonicParsing="false">
+            <graphic>
+               <ImageView fitHeight="16.0" fitWidth="16.0">
+                  <image>
+                     <!-- Add your favicon image URL here -->
+                  </image>
+               </ImageView>
+            </graphic>
+         </Button>
+         <VBox alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
+            <children>
+               <Button mnemonicParsing="false" text="Button 1" />
+               <Button mnemonicParsing="false" text="Button 2" />
+               <Button mnemonicParsing="false" text="Button 3" />
+            </children>
+            <padding>
+               <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+            </padding>
+         </VBox>
       </children>
-      <padding>
-         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
-      </padding></VBox>
+      <VBox.margin>
+         <Insets top="15.0" />
+      </VBox.margin>
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+   </VBox>
+
+
    <BorderPane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
       <bottom>
          <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
-               <Button mnemonicParsing="false" onAction="#createTask" text="Create">
+               <Button mnemonicParsing="false" onAction="#createTask" styleClass="darkButton" text="Create">
                   <font>
                      <Font size="18.0" />
                   </font></Button>
-               <Button mnemonicParsing="false" onAction="#cancel" text="Cancel">
+               <Button mnemonicParsing="false" onAction="#cancel" styleClass="lightButton" text="Cancel">
                   <font>
                      <Font size="18.0" />
                   </font></Button>
@@ -73,22 +95,28 @@
                   <padding>
                      <Insets bottom="5.0" top="5.0" />
                   </padding></TextArea>
-               <CheckBox fx:id="checkBox" mnemonicParsing="false" text="Habit?">
+               <CheckBox fx:id="checkBox" mnemonicParsing="false" onAction="#habitToggle" text="Habit?">
                   <padding>
                      <Insets top="5.0" />
                   </padding>
                   <font>
                      <Font name="JetBrains Mono Medium" size="18.0" />
                   </font></CheckBox>
-               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <HBox fx:id="habitbox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" visible="false">
                   <children>
-                     <Label text="Repeat every..." />
+                     <Label text="Repeat every...">
+                           <font>
+                              <Font name="JetBrains Mono Medium" size="18.0" />
+                           </font></Label>
                      <Spinner prefHeight="25.0" prefWidth="65.0">
                         <HBox.margin>
                            <Insets left="20.0" right="10.0" />
                         </HBox.margin>
                      </Spinner>
-                     <Label text="days" />
+                     <Label text="days">
+                           <font>
+                              <Font name="JetBrains Mono Medium" size="18.0" />
+                           </font></Label>
                   </children>
                   <opaqueInsets>
                      <Insets />
@@ -97,6 +125,11 @@
                      <Insets left="5.0" right="5.0" />
                   </padding>
                </HBox>
+                  <Label fx:id="labelRequiredFields" text="Check that you input at least a name for your task" visible="false">
+                     <font>
+                        <Font name="JetBrains Mono Medium" size="12.0" />
+                     </font>
+                  </Label>
             </children>
             <padding>
                <Insets left="20.0" right="20.0" top="10.0" />

@@ -1,14 +1,15 @@
 package com.example.together.dboperations;
 
 import com.example.together.model.User;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
+import java.lang.reflect.Type;
+import java.net.*;
+import java.util.Set;
 
 public class DBUsers {
     /**
@@ -16,43 +17,34 @@ public class DBUsers {
      * @param username username that identifies the user to look for
      * @return -1 if not found, -2 if incorrect password. Id if found
      */
-    public static int login(String username, String password) {
+    public static int login(String username, String password) throws Exception {
         int userId = -1;
+        URL url = new URL(Constants.login);
+
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("POST");
+        connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+        connection.setDoOutput(true);
+
+        String data = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8");
+        data += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
+
+        connection.getOutputStream().write(data.getBytes("UTF-8"));
+
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        String line = bufferedReader.readLine();
+        bufferedReader.close();
+
+
         try {
-            URL url = new URL(Constants.login);
-
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            connection.setDoOutput(true);
-
-            String data = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8");
-            data += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
-
-            connection.getOutputStream().write(data.getBytes("UTF-8"));
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String line = reader.readLine(); // Read the response line
-            reader.close();
-
-
-            try {
-                userId = Integer.parseInt(line.trim());
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-            }
-
-            connection.disconnect();
-        } catch (Exception e) {
+            userId = Integer.parseInt(line.trim());
+        } catch (NumberFormatException e) {
             e.printStackTrace();
         }
-        return userId;
-    }
 
-    private static String getUserBio(int userId) {
-        //TODO: implement
-        //if null, set a standard message
-        return "";
+        connection.disconnect();
+
+        return userId;
     }
 
     /**
@@ -75,12 +67,12 @@ public class DBUsers {
 
             connection.getOutputStream().write(data.getBytes("UTF-8"));
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String line;
-            while ((line = reader.readLine()) != null) {
+            while ((line = bufferedReader.readLine()) != null) {
                 generatedId = Integer.parseInt(line.trim());
             }
-            reader.close();
+            bufferedReader.close();
 
             connection.disconnect();
         } catch (Exception e) {
@@ -89,4 +81,50 @@ public class DBUsers {
         return generatedId;
     }
 
+    public static User getUser(int id) {
+        try {
+            String url = Constants.getUserGivenId + "?id=" + id;
+            HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+            conn.setRequestMethod("GET");
+
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            StringBuilder response = new StringBuilder();
+            String inputLine;
+            while ((inputLine = bufferedReader.readLine()) != null) {
+                response.append(inputLine);
+            }
+            bufferedReader.close();
+
+            Gson gson = new Gson();
+            User[] users = gson.fromJson(response.toString(), User[].class);
+
+            if (users.length > 0) {
+                return users[0];
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public static Set<User> getAllUsers() throws IOException {
+        URL url = new URL(Constants.getUsers);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        StringBuilder response = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            response.append(line);
+        }
+        reader.close();
+
+        Gson gson = new Gson();
+        Type userType = new TypeToken<Set<User>>() {}.getType();
+        Set<User> users = gson.fromJson(response.toString(), userType);
+
+        return users;
+    }
 }

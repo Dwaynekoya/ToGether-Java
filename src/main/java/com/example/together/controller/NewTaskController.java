@@ -2,12 +2,12 @@ package com.example.together.controller;
 
 import com.example.together.dboperations.Constants;
 import com.example.together.dboperations.DBTask;
+import com.example.together.view.View;
+import com.example.together.view.ViewSwitcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
-public class TaskController {
+public class NewTaskController {
     @FXML
     private TextField textfieldName;
     @FXML
@@ -25,6 +25,10 @@ public class TaskController {
     private TextArea textAreaInfo;
     @FXML
     private CheckBox checkBox;
+    @FXML
+    private HBox habitbox;
+    @FXML
+    private Label labelRequiredFields;
     private String taskName, date, info;
     private boolean habit= false;
     public void createTask(ActionEvent actionEvent) {
@@ -34,7 +38,7 @@ public class TaskController {
     private void takeInputData() {
         taskName = textfieldName.getText();
         info = textAreaInfo.getText();
-        habit = checkBox.isSelected();
+        //habit = checkBox.isSelected();
         LocalDate selectedDate = datePicker.getValue();
         if (selectedDate != null) {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Constants.mysqlDateFormat);
@@ -46,7 +50,7 @@ public class TaskController {
         if (Utils.checkDataValidity(new ArrayList<>(Arrays.asList(taskName)))){
             addNewTask();
         } else {
-
+            labelRequiredFields.setVisible(true);
         }
     }
 
@@ -62,6 +66,13 @@ public class TaskController {
     }
 
     public void cancel(ActionEvent actionEvent) {
-        //TODO: Go back to home view
+        ViewSwitcher.switchView(View.TASKLIST);
     }
+
+    public void habitToggle(ActionEvent actionEvent) {
+        habit = !habit;
+        habitbox.setVisible(habit);
+    }
+
+
 }

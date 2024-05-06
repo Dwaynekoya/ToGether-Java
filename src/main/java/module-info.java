@@ -14,4 +14,6 @@ module com.example.together {
     opens com.example.together.dboperations to javafx.fxml, com.google.gson;
     exports com.example.together.controller;
     opens com.example.together.controller to javafx.fxml, com.google.gson;
+    exports com.example.together.view;
+    opens com.example.together.view to com.google.gson, javafx.fxml;
 }

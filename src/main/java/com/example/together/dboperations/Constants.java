@@ -7,8 +7,10 @@ public class Constants {
     public static String getUserGivenId = phpLocation+"phpusers/getuser_id.php";
     public static String registerUser = phpLocation+"phpusers/putuser.php";
     public static String login = phpLocation+"phpusers/login.php";
+    public static String getUsers = phpLocation + "phpusers/getusers.php";
     //TASK MANAGEMENT PHP FILES:
     public static String addTask = phpLocation + "phptasks/puttask.php";
     //Patterns
     public static String mysqlDateFormat = "yyyy-MM-dd";
+
 }
