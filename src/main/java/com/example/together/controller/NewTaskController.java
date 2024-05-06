@@ -60,8 +60,7 @@ public class NewTaskController {
             System.out.printf("TODO");
             //TODO: close window/goback to home view
         } else {
-            //TODO: use current user id
-            DBTask.addTask(taskName,date,info,1);
+            DBTask.addTask(taskName,date,info,Utils.loggedInUser.getId());
         }
     }
 
