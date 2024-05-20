@@ -15,6 +15,9 @@ public class Main extends Application {
         ViewSwitcher.switchView(View.LOGIN);
         stage.setTitle("ToGether!");
         stage.setScene(scene);
+        stage.setResizable(false);
+        stage.setMinWidth(1440);
+        stage.setMinHeight(800);
         stage.show();
     }
 

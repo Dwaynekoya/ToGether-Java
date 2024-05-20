@@ -28,10 +28,10 @@ public class ViewSwitcher {
         try {
             Parent root;
             if (cache.containsKey(view)){
-                System.out.printf("Loading from cache: %s", view.getFileName());
+                System.out.printf("Loading from cache: %s %n", view.getFileName());
                 root = cache.get(view);
             } else {
-                System.out.printf("Loading from fxml file: %s", view.getFileName());
+                System.out.printf("Loading from fxml file: %s %n", view.getFileName());
                 FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(view.getFileName()));
                 root = fxmlLoader.load();
                 cache.put(view,root);

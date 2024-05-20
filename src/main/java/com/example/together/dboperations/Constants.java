@@ -10,6 +10,10 @@ public class Constants {
     public static String getUsers = phpLocation + "phpusers/getusers.php";
     //TASK MANAGEMENT PHP FILES:
     public static String addTask = phpLocation + "phptasks/puttask.php";
+    public static String getTasksFromUser = phpLocation + "phptasks/gettasks_user.php";
+    public static String uploadPhoto = phpLocation + "phptasks/uploadphoto.php";
+    public static String updateTasks = phpLocation +"phptasks/edittasks.php";
+    public static String deleteTask = phpLocation + "phptasks/deletetask.php";
     //Patterns
     public static String mysqlDateFormat = "yyyy-MM-dd";
 

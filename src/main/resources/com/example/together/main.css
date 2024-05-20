@@ -1,7 +1,7 @@
 .root {
     -fx-background-color: #D98944;
     -fx-font-family: 'Roboto';
-    -fx-text-fill:  #FFF6ED;;
+    -fx-text-fill:  #FFF6ED;
 }
 .lightButton {
     -fx-background-color: #FFF6ED;
@@ -10,6 +10,19 @@
 .darkButton {
     -fx-background-color: #8C5D43;
     -fx-text-fill: #FFF6ED;
+}
+.transparent-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.transparent-button:hover,
+.transparent-button:focused,
+.transparent-button:pressed {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
 }
 
 /*custom font*/
@@ -84,16 +97,27 @@
     font-weight: 900;
     font-style: italic;
 }
-/* gives drop shadow to elements */
 .drop-shadow {
     -fx-stroke: rgba(0, 0, 0, 0);
     -fx-stroke-width: 1;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 0, 0);
 }
-.list-view-no-background {
+.popupBox {
+    -fx-background-color: #D98944;
+    -fx-font-family: 'Roboto';
+    -fx-text-fill:  #FFF6ED;
+    -fx-border-radius: 40 40 40 40;
+}
+.list-view{
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-background-insets: 0;
     -fx-padding: 0;
 }
-
+/*Needed for the cells:*/
+.list-view .list-cell:even {
+    -fx-background-color: transparent;
+}
+.list-view .list-cell:odd {
+    -fx-background-color: transparent;
+}

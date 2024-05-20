@@ -4,6 +4,7 @@ module com.example.together {
     requires java.sql;
     requires org.json;
     requires com.google.gson;
+    requires fontawesomefx;
 
 
     opens com.example.together to javafx.fxml, com.google.gson;

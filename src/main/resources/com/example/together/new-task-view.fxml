@@ -108,10 +108,13 @@
                            <font>
                               <Font name="JetBrains Mono Medium" size="18.0" />
                            </font></Label>
-                     <Spinner prefHeight="25.0" prefWidth="65.0">
+                     <Spinner fx:id="spinnerRepeat" editable="true" prefHeight="25.0" prefWidth="65.0">
                         <HBox.margin>
                            <Insets left="20.0" right="10.0" />
                         </HBox.margin>
+                        <valueFactory>
+                           <SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="1" max="365" min="1" />
+                        </valueFactory>
                      </Spinner>
                      <Label text="days">
                            <font>

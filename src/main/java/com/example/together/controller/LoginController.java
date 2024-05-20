@@ -10,6 +10,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.net.ConnectException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class LoginController {
     @FXML
@@ -20,10 +22,16 @@ public class LoginController {
     private Label infoLabel;
     private String username;
     private String password;
-    private int loginUser; //TODO: pass to new window to identify the user on the app?
 
+    /**
+     *  Takes data from the input fields and uses it to log into the app
+     * @param actionEvent Login button
+     * @throws Exception if it fails to connect to the database or retrieve its data
+     */
     public void login(ActionEvent actionEvent) throws Exception {
-        takeInputData();
+        if (!takeInputData()){
+            return;
+        }
         int loginID = -3;
         try {
             loginID = DBUsers.login(username, password);
@@ -40,13 +48,19 @@ public class LoginController {
         }
     }
 
-    private void launchApp(int loginID) throws Exception {
+    /**
+     * Switches view to the main app
+     * @param loginID to identify the current user
+     */
+    private void launchApp(int loginID) {
         Utils.loggedInUser = DBUsers.getUser(loginID);
-        /*TaskListApplication taskListApplication = new TaskListApplication(loggedUser);
-        taskListApplication.start(new Stage());*/
         ViewSwitcher.switchView(View.TASKLIST);
     }
 
+    /**
+     * Creates a new user in the database taking the input from the textfields
+     * @param actionEvent sign up button
+     */
     public void signup(ActionEvent actionEvent) {
         takeInputData();
         int newID = DBUsers.registerUser(username,password);
@@ -57,9 +71,20 @@ public class LoginController {
         }
     }
 
-    private void takeInputData() {
+    /**
+     * Gets text from the different textfields in the view
+     *
+     * @return
+     */
+    private boolean takeInputData() {
         username = usernameField.getText();
         password = passwordField.getText();
-
+        //checks if all necessary data has been filled in:
+        if (!Utils.checkDataValidity(new ArrayList<>(Arrays.asList(username, password)))){
+            infoLabel.setText("Please fill in your username and password.");
+            return false;
+        } else {
+            return true;
+        }
     }
 }

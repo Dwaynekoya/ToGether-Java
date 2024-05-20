@@ -4,28 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c554c44-767d-4434-8cb3-5256fb1e9951" name="Changes" comment="tasklist renderer">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/together/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/together/ProfileApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/together/controller/EditTaskController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/together/controller/ProfileController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/together/view/View.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/together/view/ViewSwitcher.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/together/BASE-TO-COPY.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/together/profile-view.fxml" afterDir="false" />
+    <list default="true" id="7c554c44-767d-4434-8cb3-5256fb1e9951" name="Changes" comment="use correct user id when creating task">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/PhotoUploader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/SQLDateAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/AddTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/AddTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/TaskApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/NewTaskApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/TaskListApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/TaskListApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/controller/TaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/controller/NewTaskController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/controller/NewTaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/controller/NewTaskController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/controller/TaskListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/controller/TaskListController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/controller/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/controller/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/DBTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/DBTask.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/DBUsers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/DBUsers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/model/Habit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/model/Habit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/view/ViewSwitcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/view/ViewSwitcher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/together/BASE-TO-COPY.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/together/BASE-TO-COPY.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/together/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/together/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/together/task-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/together/new-task-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/together/new-task-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/together/new-task-view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/together/tasklist-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/together/tasklist-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -108,6 +105,32 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="DBTask" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.together.dboperations.DBTask" />
+      <module name="ToGether" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.together.dboperations.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LoginApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="LoginApplication" />
+      <module name="ToGether" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.together.dboperations.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="LoginApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="LoginApplication" />
       <module name="ToGether" />
@@ -134,8 +157,47 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.together.Main" />
+      <module name="ToGether" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.together.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="NewTaskApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.together.NewTaskApplication" />
+      <module name="ToGether" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.together.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NewTaskApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.together.NewTaskApplication" />
+      <module name="ToGether" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.together.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TaskListApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.together.TaskListApplication" />
       <module name="ToGether" />
       <extension name="coverage">
         <pattern>
@@ -192,7 +254,19 @@
       <workItem from="1714838044797" duration="1168000" />
       <workItem from="1714839282914" duration="694000" />
       <workItem from="1714904528397" duration="5378000" />
-      <workItem from="1715014988742" duration="3872000" />
+      <workItem from="1715014988742" duration="5596000" />
+      <workItem from="1715193879860" duration="1217000" />
+      <workItem from="1715615666595" duration="4052000" />
+      <workItem from="1715687880223" duration="9216000" />
+      <workItem from="1715707978897" duration="2608000" />
+      <workItem from="1715792397854" duration="1900000" />
+      <workItem from="1715795927049" duration="1252000" />
+      <workItem from="1715874446008" duration="3298000" />
+      <workItem from="1715977494548" duration="652000" />
+      <workItem from="1715983264729" duration="335000" />
+      <workItem from="1716045847440" duration="1704000" />
+      <workItem from="1716195746778" duration="3501000" />
+      <workItem from="1716199376620" duration="24386000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -242,7 +316,23 @@
       <option name="project" value="LOCAL" />
       <updated>1714760671580</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="fixing view logic">
+      <option name="closed" value="true" />
+      <created>1715021872931</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1715021872931</updated>
+    </task>
+    <task id="LOCAL-00008" summary="use correct user id when creating task">
+      <option name="closed" value="true" />
+      <created>1715022023103</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1715022023103</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -255,6 +345,19 @@
     <MESSAGE value="add task query" />
     <MESSAGE value="method to take json and convert to Task" />
     <MESSAGE value="tasklist renderer" />
-    <option name="LAST_COMMIT_MESSAGE" value="tasklist renderer" />
+    <MESSAGE value="fixing view logic" />
+    <MESSAGE value="use correct user id when creating task" />
+    <option name="LAST_COMMIT_MESSAGE" value="use correct user id when creating task" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/together/controller/NewTaskController.java</url>
+          <line>69</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

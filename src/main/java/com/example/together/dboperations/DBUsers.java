@@ -35,7 +35,6 @@ public class DBUsers {
         String line = bufferedReader.readLine();
         bufferedReader.close();
 
-
         try {
             userId = Integer.parseInt(line.trim());
         } catch (NumberFormatException e) {
@@ -96,13 +95,9 @@ public class DBUsers {
             bufferedReader.close();
 
             Gson gson = new Gson();
-            User[] users = gson.fromJson(response.toString(), User[].class);
+            User user = gson.fromJson(response.toString(), User.class);
 
-            if (users.length > 0) {
-                return users[0];
-            } else {
-                return null;
-            }
+            return user;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

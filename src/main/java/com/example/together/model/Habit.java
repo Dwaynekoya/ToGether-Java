@@ -1,8 +1,12 @@
 package com.example.together.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.sql.Date;
 
 public class Habit extends Task{
+    @SerializedName("task_id")
+    private int id;
     private int repetition;
 
     /**
@@ -19,6 +23,7 @@ public class Habit extends Task{
 
     public Habit(int id, String name, Date date, String info, boolean finished, boolean shared, String image, int repetition) {
         super(id, name, date, info, finished, shared, image);
+        this.setId(id);
         this.repetition = repetition;
     }
 
@@ -38,5 +43,15 @@ public class Habit extends Task{
 
     public void setRepetition(int repetition) {
         this.repetition = repetition;
+    }
+
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
     }
 }
