@@ -49,6 +49,7 @@ public class DBTask {
     }
 
     public static void updateTask(Task task) {
+        System.out.println("Updating task with id " + task.getId());
         try {
             URL url = new URL(Constants.updateTasks);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -119,6 +120,45 @@ public class DBTask {
 
             connection.disconnect();
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public static void finishTask(Task task){
+        try {
+            URL url = new URL(Constants.finishTask);
+
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            connection.setRequestProperty("charset", "utf-8");
+            connection.setRequestProperty("Accept", "application/json");
+            connection.setDoOutput(true);
+            connection.setDoInput(true);
+
+
+            String queryString = String.format("task_id=%d&image=%s&finished=%s", task.getId(), task.getImage(), task.isFinished());
+
+            byte[] postData = queryString.getBytes(StandardCharsets.UTF_8);
+
+            connection.setRequestProperty("Content-Length", Integer.toString(postData.length));
+
+            try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {
+                wr.write(postData);
+            }
+
+            try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                StringBuilder response = new StringBuilder();
+                String line;
+                while ((line = in.readLine()) != null) {
+                    response.append(line);
+                }
+                System.out.println("Response: " + response);
+            }
+
+            connection.disconnect();
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

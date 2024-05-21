@@ -63,9 +63,11 @@ public class PhotoUploader extends Thread{
                     JsonObject jsonResponse = JsonParser.parseString(response.toString()).getAsJsonObject();
                     if (jsonResponse.has("url")) {
                         String url = jsonResponse.get("url").getAsString();
-                        System.out.println(url);
+                        System.out.println(url + " assigned to task " + task.getId());
                         task.setImage(url);
-                        DBTask.updateTask(task);
+                        //DBTask.updateTask(task);
+                        task.setFinished(true);
+                        DBTask.finishTask(task);
                     } else {
                         System.out.println("Failed to get URL from server response.");
                     }

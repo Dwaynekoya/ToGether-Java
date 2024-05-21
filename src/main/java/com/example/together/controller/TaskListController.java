@@ -59,8 +59,8 @@ public class TaskListController implements Initializable {
     /**
      * Initializes the view setting up the listviews to represent data from the DB and setting their listeners
      * It also forces the spinner in the popup to edit Tasks to only accept integers
-     * @param url
-     * @param resourceBundle
+     * @param url needed for the override
+     * @param resourceBundle needed for the override
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -106,18 +106,28 @@ public class TaskListController implements Initializable {
             }
         });
     }
+
+    /**
+     * Method that switches the view to the one for creating new tasks
+     * @param actionEvent new task button
+     */
     public void newTask(ActionEvent actionEvent) {
         ViewSwitcher.switchView(View.NEWTASK);
     }
 
+    /**
+     * Method that updates the database by using the values inputted by the user
+     * @param actionEvent
+     */
     public void editTask(ActionEvent actionEvent) {
         takeInputData();
         DBTask.updateTask(selectedTask);
+        closePopup(actionEvent);
     }
 
     /**
      * Hides the popup used to show task details
-     * @param actionEvent -> cancel button
+     * @param actionEvent cancel button
      */
     public void closePopup(ActionEvent actionEvent) {
         taskPopup.setVisible(false);
@@ -138,12 +148,22 @@ public class TaskListController implements Initializable {
         }
 
         if (selectedTask instanceof Habit){
+            habit = true;
             checkBox.setSelected(true);
             habitbox.setVisible(true);
             spinnerHabit.getValueFactory().setValue(((Habit) selectedTask).getRepetition());
+        } else {
+            habit = false;
+            checkBox.setSelected(false);
+            habitbox.setVisible(false);
+            spinnerHabit.getValueFactory().setValue(0);
         }
         taskPopup.setVisible(true);
     }
+
+    /**
+     * Method that assigns values in user editable fields to variables
+     */
     //TODO: set max length on text fields
     private void takeInputData() {
         taskName = textfieldName.getText();
@@ -166,7 +186,6 @@ public class TaskListController implements Initializable {
         }
         if (Utils.checkDataValidity(fieldsToFill)){
             assignValues();
-            DBTask.updateTask(selectedTask);
         } else {
             //TODO: label
             //labelRequiredFields.setVisible(true);
@@ -174,13 +193,15 @@ public class TaskListController implements Initializable {
     }
 
     /**
-     * Assigns the values that have been taken from the input fields to the corresponding fields in the Task object
+     * Assigns the values that have been taken from the input fields by takeInputData() to the corresponding fields in the Task object
      */
     private void assignValues() {
+        System.out.println("New name: " + taskName);
         selectedTask.setName(taskName);
         selectedTask.setInfo(info);
         selectedTask.setDate(java.sql.Date.valueOf(date));
         if (selectedTask instanceof Habit) ((Habit) selectedTask).setRepetition(repeat);
+        //DBTask.updateTask(selectedTask);
     }
 
     /**
