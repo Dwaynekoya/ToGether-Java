@@ -3,12 +3,19 @@ package com.example.together.dboperations;
 import com.example.together.model.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.lang.reflect.Type;
 import java.net.*;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Set;
 
 public class DBUsers {
@@ -103,23 +110,69 @@ public class DBUsers {
             return null;
         }
     }
-    public static Set<User> getAllUsers() throws IOException {
-        URL url = new URL(Constants.getUsers);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestMethod("GET");
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        StringBuilder response = new StringBuilder();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            response.append(line);
+    public static ObservableList<User> searchUsers(String username) {
+        ObservableList<User> userList = FXCollections.observableArrayList();
+
+        try {
+            URL url = new URL(Constants.searchUsers);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            conn.setDoOutput(true);
+
+            String postData = "username=" + username;
+
+            try (OutputStream os = conn.getOutputStream()) {
+                byte[] input = postData.getBytes("utf-8");
+                os.write(input, 0, input.length);
+            }
+
+            try (BufferedReader br = new BufferedReader(
+                    new InputStreamReader(conn.getInputStream(), "utf-8"))) {
+                StringBuilder response = new StringBuilder();
+                String responseLine;
+                while ((responseLine = br.readLine()) != null) {
+                    response.append(responseLine.trim());
+                }
+
+                Gson gson = new Gson();
+                Type userListType = new TypeToken<List<User>>(){}.getType();
+                List<User> users = gson.fromJson(response.toString(), userListType);
+                userList.addAll(users);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        reader.close();
 
-        Gson gson = new Gson();
-        Type userType = new TypeToken<Set<User>>() {}.getType();
-        Set<User> users = gson.fromJson(response.toString(), userType);
+        return userList;
+    }
+    public static void followUser(int userId, int followsId) {
+        try {
+            URL url = new URL(Constants.followUser);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            conn.setDoOutput(true);
 
-        return users;
+            String postData = String.format("user_id=%d&follows_id=%d", userId, followsId);
+
+            try (OutputStream os = conn.getOutputStream()) {
+                byte[] input = postData.getBytes(StandardCharsets.UTF_8);
+                os.write(input, 0, input.length);
+            }
+
+            int responseCode = conn.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                System.out.println("Followed user with id " + followsId);
+            } else {
+                System.out.println("Failed to follow user. Response code: " + responseCode);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
+

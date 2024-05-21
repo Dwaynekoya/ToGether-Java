@@ -60,7 +60,7 @@
                      <Font size="24.0" />
                   </font></Label>
                <ListView prefHeight="200.0" prefWidth="200.0" />
-               <Button mnemonicParsing="false" text="Search for more">
+               <Button fx:id="searchGroup" mnemonicParsing="false" onAction="#searchView" text="Search for more">
                   <VBox.margin>
                      <Insets bottom="40.0" />
                   </VBox.margin>
@@ -76,7 +76,7 @@
                      <Font size="24.0" />
                   </font></Label>
                <ListView prefHeight="200.0" prefWidth="200.0" />
-               <Button mnemonicParsing="false" text="Search for more">
+               <Button fx:id="searchFriend" mnemonicParsing="false" onAction="#searchView" text="Search for more">
                   <font>
                      <Font size="18.0" />
                   </font>
@@ -148,4 +148,43 @@
          </VBox>
       </center>
    </BorderPane>
+    <Rectangle fx:id="coverRectangle" arcHeight="50.0" arcWidth="50.0" fill="#fff6ed" height="1024.0" layoutX="150.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="drop-shadow" visible="false" width="1000.0" StackPane.alignment="CENTER_RIGHT" />
+   <VBox fx:id="searchBox" alignment="CENTER_RIGHT" maxWidth="1000.0" prefHeight="200.0" prefWidth="500.0" visible="false" StackPane.alignment="CENTER_RIGHT">
+      <children>
+         <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" prefHeight="100.0" prefWidth="600.0">
+            <children>
+               <TextField fx:id="searchField" maxWidth="500.0" prefWidth="500.0" />
+               <Button mnemonicParsing="false" onAction="#search" styleClass="darkButton">
+
+                   <graphic>
+                       <FontIcon fill="#fff6ed" iconLiteral="fa-search" iconSize="20" />
+                   </graphic>
+                  <HBox.margin>
+                     <Insets left="40.0" />
+                  </HBox.margin></Button>
+            </children></HBox>
+         <HBox alignment="CENTER" maxWidth="-Infinity" prefWidth="600.0" spacing="40.0" VBox.vgrow="NEVER">
+            <children>
+      
+      
+                <RadioButton fx:id="radioGroup" styleClass="roboto-medium" text="Group">
+                  <font>
+                     <Font size="14.0" />
+                  </font></RadioButton>
+                <RadioButton fx:id="radioUser" styleClass="roboto-medium" text="User">
+                  <font>
+                     <Font size="14.0" />
+                  </font></RadioButton>
+            </children>
+            <padding>
+               <Insets bottom="20.0" />
+            </padding>
+         </HBox>
+
+          <ListView fx:id="listviewSearch" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" />
+      </children>
+      <padding>
+         <Insets right="40.0" />
+      </padding>
+   </VBox>
 </StackPane>

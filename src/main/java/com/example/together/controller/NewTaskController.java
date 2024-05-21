@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-public class NewTaskController implements Initializable {
+public class NewTaskController {
     @FXML
     public Button settingsButton;
     @FXML
@@ -101,11 +101,9 @@ public class NewTaskController implements Initializable {
 
     /**
      * Sets habit to false by default. Makes the spinner take only integers. Assigns correct events to sidebar buttons
-     * @param url required for override
-     * @param resourceBundle required for override
      */
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    @FXML
+    public void initialize() {
         habit=false;
         spinnerRepeat.setEditable(true);
         spinnerRepeat.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {

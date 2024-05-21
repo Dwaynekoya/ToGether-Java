@@ -31,7 +31,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-public class TaskListController implements Initializable {
+public class TaskListController {
     public Button settingsButton, groupButton, listButton, homeButton;
     @FXML
     private ListView<Task> taskListView;
@@ -52,18 +52,20 @@ public class TaskListController implements Initializable {
     private int repeat;
 
     private boolean habit= false;
-    public void openProfile(ActionEvent actionEvent) throws Exception {
+
+    /**
+     * Switches view to the profile one
+     * @param actionEvent profile button
+     */
+    public void openProfile(ActionEvent actionEvent)  {
         ViewSwitcher.switchView(View.PROFILE);
     }
 
     /**
      * Initializes the view setting up the listviews to represent data from the DB and setting their listeners
      * It also forces the spinner in the popup to edit Tasks to only accept integers
-     * @param url needed for the override
-     * @param resourceBundle needed for the override
      */
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize() {
         TaskFetcher taskFetcher = new TaskFetcher(Utils.loggedInUser.getId(), tasks, habits);
         taskFetcher.start();
 
@@ -135,6 +137,10 @@ public class TaskListController implements Initializable {
         taskPopup.setVisible(false);
     }
 
+    /**
+     * Makes habit true/false and hides/unhides the related fields accordingly
+     * @param actionEvent habit? checkbox
+     */
     public void habitToggle(ActionEvent actionEvent) {
         habit = !habit;
         habitbox.setVisible(habit);
@@ -281,10 +287,8 @@ public class TaskListController implements Initializable {
                 checkBox.setSelected(habit.isFinished());
                 checkBox.setOnAction(event -> {
                     //TODO: ADD PHOTO UPLOAD
-                    Habit newRepetition = new Habit(habit,habit.getRepetition());
                     LocalDate habitDate = habit.getDate().toLocalDate().plusDays(habit.getRepetition());
-                    newRepetition.setDate(java.sql.Date.valueOf(habitDate));
-                    DBTask.addTask(habit.getName(), habit.getDate().toString(), habit.getInfo(), Utils.loggedInUser.getId(), habit.getId());
+                    DBTask.addTask(habit.getName(), java.sql.Date.valueOf(habitDate).toString(), habit.getInfo(), Utils.loggedInUser.getId(), habit.getRepetition());
                     habit.setFinished(checkBox.isSelected());
                     DBTask.updateTask(habit);
                 });

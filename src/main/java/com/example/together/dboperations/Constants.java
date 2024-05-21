@@ -8,6 +8,9 @@ public class Constants {
     public static String registerUser = phpLocation+"phpusers/putuser.php";
     public static String login = phpLocation+"phpusers/login.php";
     public static String getUsers = phpLocation + "phpusers/getusers.php";
+    public static String searchUsers = phpLocation + "phpusers/searchusers.php";
+    //follows:
+    public static String followUser= phpLocation + "phpfollows/followuser.php";
     //TASK MANAGEMENT PHP FILES:
     public static String addTask = phpLocation + "phptasks/puttask.php";
     public static String getTasksFromUser = phpLocation + "phptasks/gettasks_user.php";
