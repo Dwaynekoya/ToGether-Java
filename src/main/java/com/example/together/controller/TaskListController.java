@@ -32,7 +32,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 public class TaskListController implements Initializable {
-    public Button settingsButton;
+    public Button settingsButton, groupButton, listButton, homeButton;
     @FXML
     private ListView<Task> taskListView;
     @FXML
@@ -105,6 +105,8 @@ public class TaskListController implements Initializable {
                 spinnerHabit.getEditor().setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
+
+        Utils.sidebarSetup(settingsButton,groupButton,listButton,homeButton);
     }
 
     /**
@@ -235,7 +237,6 @@ public class TaskListController implements Initializable {
 
                         if (selectedFile != null) {
                             System.out.println("Selected file: " + selectedFile.getAbsolutePath());
-                            // TODO: Add file upload
                             PhotoUploader photoUploader = new PhotoUploader(selectedFile, this.getItem());
                             photoUploader.run();
                             task.setFinished(true);

@@ -162,4 +162,27 @@ public class DBTask {
             e.printStackTrace();
         }
     }
+
+    public static StringBuilder getTasks(int userId) {
+        try {
+            URL url = new URL(Constants.getTasksFromUser + "?id=" + userId);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            StringBuilder json = new StringBuilder();
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                json.append(line);
+            }
+
+            reader.close();
+            connection.disconnect();
+            return json;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

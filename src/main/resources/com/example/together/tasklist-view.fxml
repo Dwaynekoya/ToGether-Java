@@ -24,11 +24,6 @@
     <Rectangle arcHeight="50.0" arcWidth="50.0" fill="WHITE" height="1024.0" layoutX="150.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="drop-shadow" width="424.0" StackPane.alignment="CENTER_RIGHT" />
     <BorderPane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
        <left>
-           
-           
-           
-           
-
            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="130.0">
                <children>
                    <Button fx:id="settingsButton" mnemonicParsing="false" styleClass="transparent-button">

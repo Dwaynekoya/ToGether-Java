@@ -1,6 +1,9 @@
 package com.example.together.controller;
 
 import com.example.together.model.User;
+import com.example.together.view.View;
+import com.example.together.view.ViewSwitcher;
+import javafx.scene.control.Button;
 
 import java.util.List;
 
@@ -18,5 +21,15 @@ public class Utils {
             }
         }
         return true;
+    }
+
+    public static void sidebarSetup(Button settingsButton, Button groupButton, Button listButton, Button homeButton) {
+        //TODO: Settings
+        //settingsButton.setOnAction(actionEvent -> ViewSwitcher.switchView());
+        //TODO: Social view
+        //groupButton.setOnAction(actionEvent -> ViewSwitcher.switchView(View.GROUPS));
+        listButton.setOnAction(actionEvent -> ViewSwitcher.switchView(View.TASKLIST));
+        //TODO:Feed
+        homeButton.setOnAction(actionEvent -> ViewSwitcher.switchView(View.TASKLIST));
     }
 }

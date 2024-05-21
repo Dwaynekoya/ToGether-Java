@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 import java.net.ConnectException;
 import java.util.ArrayList;
@@ -24,23 +26,46 @@ public class LoginController {
     private String password;
 
     /**
-     *  Takes data from the input fields and uses it to log into the app
+     * Adds event handler to textfields
+     */
+    @FXML
+    public void initialize() {
+        usernameField.setOnKeyPressed(this::handleEnterKey);
+        passwordField.setOnKeyPressed(this::handleEnterKey);
+    }
+
+    /**
+     *  When the enter key is pressed inside a textfield, the login function is called
+     * @param keyEvent key pressed in the keyboard
+     */
+    private void handleEnterKey(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            try {
+                login(null);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Takes data from the input fields and uses it to log into the app
      * @param actionEvent Login button
      * @throws Exception if it fails to connect to the database or retrieve its data
      */
     public void login(ActionEvent actionEvent) throws Exception {
-        if (!takeInputData()){
+        if (!takeInputData()) {
             return;
         }
         int loginID = -3;
         try {
             loginID = DBUsers.login(username, password);
-        } catch (ConnectException e){
+        } catch (ConnectException e) {
             System.out.println("ERROR CONNECTING TO DB");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        switch (loginID){
+        switch (loginID) {
             case -1 -> infoLabel.setText("Username not found.");
             case -2 -> infoLabel.setText("Incorrect password.");
             case -3 -> infoLabel.setText("Could not connect to the database. Try again later.");
@@ -63,8 +88,8 @@ public class LoginController {
      */
     public void signup(ActionEvent actionEvent) {
         takeInputData();
-        int newID = DBUsers.registerUser(username,password);
-        switch (newID){
+        int newID = DBUsers.registerUser(username, password);
+        switch (newID) {
             case -1 -> infoLabel.setText("Error registering the user. Try again later :(");
             case -2 -> infoLabel.setText("Username has already been registered.");
             default -> infoLabel.setText("User has been registered!");
@@ -80,7 +105,7 @@ public class LoginController {
         username = usernameField.getText();
         password = passwordField.getText();
         //checks if all necessary data has been filled in:
-        if (!Utils.checkDataValidity(new ArrayList<>(Arrays.asList(username, password)))){
+        if (!Utils.checkDataValidity(new ArrayList<>(Arrays.asList(username, password)))) {
             infoLabel.setText("Please fill in your username and password.");
             return false;
         } else {

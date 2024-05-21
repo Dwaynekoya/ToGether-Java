@@ -21,6 +21,14 @@ import java.util.ResourceBundle;
 
 public class NewTaskController implements Initializable {
     @FXML
+    public Button settingsButton;
+    @FXML
+    public Button groupButton;
+    @FXML
+    public Button listButton;
+    @FXML
+    public Button homeButton;
+    @FXML
     private TextField textfieldName;
     @FXML
     private DatePicker datePicker;
@@ -91,7 +99,11 @@ public class NewTaskController implements Initializable {
         habitbox.setVisible(habit);
     }
 
-
+    /**
+     * Sets habit to false by default. Makes the spinner take only integers. Assigns correct events to sidebar buttons
+     * @param url required for override
+     * @param resourceBundle required for override
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         habit=false;
@@ -101,5 +113,6 @@ public class NewTaskController implements Initializable {
                 spinnerRepeat.getEditor().setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
+        Utils.sidebarSetup(settingsButton,groupButton,listButton,homeButton);
     }
 }

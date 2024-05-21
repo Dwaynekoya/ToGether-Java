@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.*?>
 
 <StackPane prefHeight="1024.0" prefWidth="1440.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.together.controller.ProfileController">
     <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#fff6ed" height="1024.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="drop-shadow" width="1300.0" StackPane.alignment="CENTER_RIGHT" />
@@ -13,20 +16,28 @@
          <left>
              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="130.0">
                  <children>
-                     <Button mnemonicParsing="false">
+                     <Button fx:id="settingsButton" mnemonicParsing="false" styleClass="transparent-button">
                          <graphic>
-                             <ImageView fitHeight="16.0" fitWidth="16.0">
-                                 <image>
-                                     <!-- Add your favicon image URL here -->
-                                 </image>
-                             </ImageView>
+                             <FontIcon fill="#fff6ed" iconLiteral="fa-cog" iconSize="40" />
                          </graphic>
                      </Button>
                      <VBox alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
                          <children>
-                             <Button mnemonicParsing="false" text="Button 1" />
-                             <Button mnemonicParsing="false" text="Button 2" />
-                             <Button mnemonicParsing="false" text="Button 3" />
+                             <Button fx:id="groupButton" mnemonicParsing="false" styleClass="transparent-button">
+                                 <graphic>
+                                     <FontIcon fill="#fff6ed" iconLiteral="fa-users" iconSize="40" />
+                                 </graphic>
+                             </Button>
+                             <Button fx:id="listButton" mnemonicParsing="false" styleClass="transparent-button">
+                                 <graphic>
+                                     <FontIcon fill="#fff6ed" iconLiteral="fa-list" iconSize="40" />
+                                 </graphic>
+                             </Button>
+                             <Button fx:id="homeButton" mnemonicParsing="false" styleClass="transparent-button">
+                                 <graphic>
+                                     <FontIcon fill="#fff6ed" iconLiteral="fa-home" iconSize="40" />
+                                 </graphic>
+                             </Button>
                          </children>
                          <padding>
                              <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
@@ -42,10 +53,37 @@
              </VBox>
          </left>
          <right>
-             <VBox prefWidth="400.0" BorderPane.alignment="CENTER">
+             <VBox alignment="CENTER" prefWidth="400.0" BorderPane.alignment="CENTER">
                  <children>
-                     <Label text="My Groups" />
-                     <Label text="My friends" />
+                     <Label styleClass="roboto-black" text="My Groups">
+                  <font>
+                     <Font size="24.0" />
+                  </font></Label>
+               <ListView prefHeight="200.0" prefWidth="200.0" />
+               <Button mnemonicParsing="false" text="Search for more">
+                  <VBox.margin>
+                     <Insets bottom="40.0" />
+                  </VBox.margin>
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+                  <styleClass>
+                     <String fx:value="darkButton" />
+                     <String fx:value="roboto-black" />
+                  </styleClass></Button>
+                     <Label styleClass="roboto-black" text="My friends">
+                  <font>
+                     <Font size="24.0" />
+                  </font></Label>
+               <ListView prefHeight="200.0" prefWidth="200.0" />
+               <Button mnemonicParsing="false" text="Search for more">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+                  <styleClass>
+                     <String fx:value="darkButton" />
+                     <String fx:value="roboto-black" />
+                  </styleClass></Button>
                  </children>
             <padding>
                <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
@@ -57,20 +95,52 @@
             <children>
                      <HBox prefHeight="100.0" prefWidth="200.0">
                          <children>
-                             <ImageView fitHeight="117.0" fitWidth="117.0" pickOnBounds="true" preserveRatio="true" />
-                             <VBox prefHeight="200.0" prefWidth="100.0">
+                             <ImageView fx:id="profilePic" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                        <HBox.margin>
+                           <Insets left="20.0" right="40.0" />
+                        </HBox.margin></ImageView>
+                             <VBox alignment="TOP_CENTER" prefHeight="200.0">
                                  <children>
-                                     <Label fx:id="usernameLabel" text="USERNAME" />
+                                     <Label fx:id="usernameLabel" prefHeight="35.0" styleClass="roboto-medium" text="USERNAME">
+                              <font>
+                                 <Font size="24.0" />
+                              </font></Label>
+                           <Button alignment="BOTTOM_CENTER" contentDisplay="CENTER" mnemonicParsing="false" styleClass="lightButton" text="Change profile picture" wrapText="true">
+                              <VBox.margin>
+                                 <Insets top="40.0" />
+                              </VBox.margin>
+                           </Button>
                                  </children>
                              </VBox>
                          </children>
+                  <VBox.margin>
+                     <Insets bottom="40.0" top="60.0" />
+                  </VBox.margin>
                      </HBox>
-               <Label text="Completed Tasks:" />
-               <Label text="00" />
-               <Label text="Tasks in progress:" />
-               <Label text="00" />
-               <Label text="About me:" />
-               <Label fx:id="bioLabel" text="Lorem ipsum dolor sit amer ajhfgdjuyahbgsvdfhjuybgvaiuks dbfghjab hjasbdhj fjahsdgfhjasbdhjfbsdhjabfj sad (max 300)" />
+               <Label styleClass="roboto-medium" text="Completed Tasks:">
+                  <font>
+                     <Font size="24.0" />
+                  </font></Label>
+               <Label styleClass="roboto-regular" text="00">
+                  <font>
+                     <Font size="18.0" />
+                  </font></Label>
+               <Label styleClass="roboto-medium" text="Tasks in progress:">
+                  <font>
+                     <Font size="24.0" />
+                  </font></Label>
+               <Label styleClass="roboto-regular" text="00">
+                  <font>
+                     <Font size="18.0" />
+                  </font></Label>
+               <Label styleClass="roboto-medium" text="About me:">
+                  <font>
+                     <Font size="24.0" />
+                  </font></Label>
+               <Label fx:id="bioLabel" styleClass="roboto-regular" text="Lorem ipsum dolor sit amer ajhfgdjuyahbgsvdfhjuybgvaiuks dbfghjab hjasbdhj fjahsdgfhjasbdhjfbsdhjabfj sad (max 300)" wrapText="true" VBox.vgrow="ALWAYS">
+                  <font>
+                     <Font size="18.0" />
+                  </font></Label>
             </children>
             <padding>
                <Insets bottom="50.0" left="150.0" right="50.0" top="50.0" />
