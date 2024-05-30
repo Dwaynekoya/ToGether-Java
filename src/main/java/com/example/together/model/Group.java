@@ -8,6 +8,7 @@ public class Group {
     private String description;
     private Set<User> members;
     private Set<Task> sharedTasks;
+    private Set<Habit> sharedHabits;
     private User manager;
 
     /**
@@ -18,14 +19,14 @@ public class Group {
      * @param members -> All users that have access to group
      * @param sharedTasks -> if there are no tasks, pass empty set. Tasks shared between users
      */
-    public Group(int id, String name, String description, Set<User> members, Set<Task> sharedTasks, User manager) {
+    /*public Group(int id, String name, String description, Set<User> members, Set<Task> sharedTasks, User manager) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.members = members;
         this.sharedTasks = sharedTasks;
         this.manager=manager;
-    }
+    }*/
 
     /**
      * Constructor used when creating a new group
@@ -86,5 +87,13 @@ public class Group {
     }
     public void addSharedTask(Task task){
         this.sharedTasks.add(task);
+    }
+
+    public Set<Habit> getSharedHabits() {
+        return sharedHabits;
+    }
+
+    public void setSharedHabits(Set<Habit> sharedHabits) {
+        this.sharedHabits = sharedHabits;
     }
 }

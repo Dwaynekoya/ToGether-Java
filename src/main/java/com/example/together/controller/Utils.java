@@ -55,7 +55,7 @@ public class Utils {
         //groupButton.setOnAction(actionEvent -> ViewSwitcher.switchView(View.GROUPS));
         listButton.setOnAction(actionEvent -> ViewSwitcher.switchView(View.TASKLIST));
         //TODO:Feed
-        homeButton.setOnAction(actionEvent -> ViewSwitcher.switchView(View.TASKLIST));
+        homeButton.setOnAction(actionEvent -> ViewSwitcher.switchView(View.FEED));
     }
 
     /**

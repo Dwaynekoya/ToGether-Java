@@ -132,7 +132,7 @@
 }
 .taskbox {
     -fx-padding: 10px;
-    -fx-margin: 5px;
+    -fx-margin: 25px;
     -fx-border-radius: 5px;
     -fx-text-fill:  #FFF6ED;
     -fx-background-color: #8C5D43;

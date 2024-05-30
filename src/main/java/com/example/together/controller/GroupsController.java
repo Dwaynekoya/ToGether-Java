@@ -1,8 +1,6 @@
 package com.example.together.controller;
 
 import com.example.together.dboperations.DBGroup;
-import com.example.together.dboperations.DBTask;
-import com.example.together.dboperations.GroupsFollowsFetcher;
 import com.example.together.dboperations.SQLDateAdapter;
 import com.example.together.model.Group;
 import com.example.together.model.Habit;
@@ -12,28 +10,41 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import java.sql.Date;
 import java.util.*;
 
 public class GroupsController {
+    public Button settingsButton, groupButton, listButton, homeButton;
+    //side profile:
+    public Label usernameLabel;
+    public ListView groupsListview, friendsListview;
+    public Button openProfile;
     private ObservableSet<Task> tasksFromGroups = FXCollections.observableSet();
     private ObservableSet<Habit> tasksFromHabits = FXCollections.observableSet();
+    public ScrollPane groupScrollPane;
+    public VBox taskPopup;
     public void initialize() {
+        Utils.sidebarSetup(settingsButton,groupButton,listButton,homeButton);
+        Utils.profileSideSetup(usernameLabel,groupsListview,friendsListview, openProfile);
         fetchGroupTasks();
     }
     private void fetchGroupTasks(){
         for (Group group: Utils.loggedInUser.getGroups()){
             String json = DBGroup.getTasks(group.getId());
-            tasksHabitsFromJSON(json);
+            tasksHabitsFromJSON(json, group);
         }
     }
 
-    private void tasksHabitsFromJSON(String json) {
+    private void tasksHabitsFromJSON(String json, Group group) {
         if (json==null) return;
 
         Gson gson = new GsonBuilder()
@@ -66,6 +77,9 @@ public class GroupsController {
             }
         }
 
+        group.setSharedTasks(new HashSet<>(fetchedTasks));
+        group.setSharedHabits(new HashSet<>(fetchedHabits));
+
         ObservableSet<Task> newTaskSet = FXCollections.observableSet(fetchedTasks);
         ObservableSet<Habit> newHabitSet = FXCollections.observableSet(fetchedHabits);
 
@@ -79,5 +93,25 @@ public class GroupsController {
                 tasksFromHabits.addAll(newHabitSet);
             }
         }
+    public void displayGroups(List<Group> groups) {
+        for (Group group : groups) {
+            VBox groupVBox = new VBox();
+            groupVBox.getStyleClass().add("group-vbox"); // css class
+
+            Label groupNameLabel = new Label(group.getName());
+
+            ListView<Task> taskListView = new ListView<>();
+            ListView<Habit> habitListView = new ListView<>();
+
+            taskListView.setItems(FXCollections.observableArrayList(group.getSharedTasks()));
+            habitListView.setItems(FXCollections.observableArrayList(group.getSharedHabits()));
+
+            HBox listViewsHBox = new HBox(taskListView, habitListView);
+
+            groupVBox.getChildren().addAll(groupNameLabel, listViewsHBox);
+
+            groupScrollPane.setContent(groupVBox);
+        }
     }
+}
 

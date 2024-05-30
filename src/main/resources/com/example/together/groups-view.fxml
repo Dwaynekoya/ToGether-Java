@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.*?>
 
-<?import org.kordamp.ikonli.javafx.FontIcon?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.image.ImageView?>
 <StackPane prefHeight="1024.0" prefWidth="1440.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.together.controller.GroupsController">
     <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#fff6ed" height="1024.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="drop-shadow" width="1300.0" StackPane.alignment="CENTER_RIGHT" />
     <Rectangle arcHeight="50.0" arcWidth="50.0" fill="WHITE" height="1024.0" layoutX="150.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="drop-shadow" width="424.0" StackPane.alignment="CENTER_RIGHT" />
@@ -67,7 +65,7 @@
                                         <font>
                                             <Font size="24.0" />
                                         </font></Label>
-                                    <Button mnemonicParsing="false" onAction="#openProfile" text="Profile">
+                                    <Button fx:id="openProfile" mnemonicParsing="false" text="Profile">
                                         <font>
                                             <Font name="JetBrains Mono SemiBold" size="18.0" />
                                         </font>
@@ -100,43 +98,25 @@
         </right>
         <center>
             <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                <children>
-                    <VBox HBox.hgrow="ALWAYS">
-                        <children>
-                            <Label styleClass="roboto-medium" text="My Tasks">
-                                <font>
-                                    <Font size="18.0" />
-                                </font></Label>
-                            <ListView fx:id="taskListView" prefHeight="700.0" prefWidth="200.0" styleClass="list-view-no-background" />
-                            <Button mnemonicParsing="false" onAction="#newTask" text="New">
-                                <font>
-                                    <Font size="18.0" />
-                                </font>
-                                <styleClass>
-                                    <String fx:value="darkButton" />
-                                    <String fx:value="roboto-medium" />
-                                </styleClass></Button>
-                        </children>
-                        <HBox.margin>
-                            <Insets />
-                        </HBox.margin>
-                        <padding>
-                            <Insets bottom="50.0" left="50.0" right="50.0" top="35.0" />
-                        </padding>
-                    </VBox>
-                    <VBox HBox.hgrow="ALWAYS">
-                        <children>
-                            <Label styleClass="roboto-medium" text="My Habits">
-                                <font>
-                                    <Font size="18.0" />
-                                </font></Label>
-                            <ListView fx:id="habitListView" prefHeight="700.0" prefWidth="200.0" styleClass="list-view-no-background" />
-                        </children>
-                        <padding>
-                            <Insets bottom="50.0" left="50.0" right="50.0" top="35.0" />
-                        </padding>
-                    </VBox>
-                </children>
+            <children>
+               <VBox alignment="TOP_RIGHT" HBox.hgrow="ALWAYS">
+                  <children>
+                     <Label alignment="TOP_RIGHT" styleClass="roboto-medium" text="My Groups">
+                        <font>
+                           <Font size="18.0" />
+                        </font>
+                     </Label>
+                     <ScrollPane fx:id="groupScrollPane" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                       <content>
+                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                       </content>
+                     </ScrollPane>
+                  </children>
+                  <HBox.margin>
+                     <Insets bottom="20.0" left="40.0" right="20.0" top="20.0" />
+                  </HBox.margin>
+               </VBox>
+            </children>
             </HBox>
         </center></BorderPane>
     <VBox fx:id="taskPopup" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0" prefWidth="400.0" visible="false">

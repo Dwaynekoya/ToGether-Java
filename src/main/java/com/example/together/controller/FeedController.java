@@ -12,6 +12,7 @@ import com.google.gson.reflect.TypeToken;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -23,6 +24,10 @@ import java.util.List;
 import java.util.Set;
 
 public class FeedController {
+    public Label usernameLabel;
+    public Button openProfile;
+    public ListView groupsListview;
+    public ListView friendsListview;
     @FXML
     private Button settingsButton, groupButton, listButton, homeButton;
     private Set<Task> tasksFromFollowing=new HashSet<>();
@@ -30,7 +35,10 @@ public class FeedController {
     private ScrollPane scrollPane;
 
     public void initialize(){
+        Utils.sidebarSetup(settingsButton,groupButton,listButton,homeButton);
+        Utils.profileSideSetup(usernameLabel,groupsListview,friendsListview,openProfile);
         fetchFollowingTasks();
+        System.out.println(Utils.loggedInUser.getFollowing());
     }
 
     /**
@@ -40,17 +48,25 @@ public class FeedController {
         for (User user: Utils.loggedInUser.getFollowing()){
             String json = DBTask.getTasks(user.getId(), true);
             tasksFromFollowing.addAll(Utils.parseTasks(json));
+            System.out.println(json);
         }
+
         populateScrollPaneWithTasks();
     }
     private void populateScrollPaneWithTasks() {
         VBox container = new VBox(); // Container VBox to hold all task VBoxes
 
+        if (tasksFromFollowing.isEmpty()) {
+            container.getChildren().add(new Label("No one has finished their tasks yet..."));
+            return;
+        }
+
         for (Task task : tasksFromFollowing) {
             VBox taskBox = new VBox();
             taskBox.getStyleClass().add("taskbox");
 
-
+            String imageURL = task.getImage();
+            if (imageURL==null) return;
             ImageView imageView = new ImageView(new Image(task.getImage()));
             imageView.setFitWidth(400);
             imageView.setFitHeight(500);

@@ -34,8 +34,9 @@ public class ViewSwitcher {
                 System.out.printf("Loading from fxml file: %s %n", view.getFileName());
                 FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(view.getFileName()));
                 root = fxmlLoader.load();
-                //Don't enter new task into the cache to avoid having to manually reset fields
-                if (view.getFileName()!=View.NEWTASK.getFileName()) cache.put(view,root);
+                //Don't enter new task/group into the cache to avoid having to manually reset fields
+                String filename = view.getFileName();
+                if (filename!=View.NEWTASK.getFileName() && filename!=View.NEWGROUP.getFileName()) cache.put(view,root);
             }
             scene.setRoot(root);
         } catch (IOException e) {
