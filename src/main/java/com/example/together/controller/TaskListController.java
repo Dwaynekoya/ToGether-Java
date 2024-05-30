@@ -32,7 +32,8 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 public class TaskListController {
-    public Button settingsButton, groupButton, listButton, homeButton;
+    public Button settingsButton, groupButton, listButton, homeButton, openProfile; //buttons in sidebar + right menu
+
     @FXML
     private ListView<Task> taskListView;
     @FXML
@@ -50,6 +51,10 @@ public class TaskListController {
     public Spinner spinnerHabit;
     private String taskName, date, info;
     private int repeat;
+    //profile menu
+    public Label usernameLabel;
+    public ListView groupsListview;
+    public ListView friendsListview;
 
     private boolean habit= false;
 
@@ -69,6 +74,29 @@ public class TaskListController {
         TaskFetcher taskFetcher = new TaskFetcher(Utils.loggedInUser.getId(), tasks, habits);
         taskFetcher.start();
 
+        listViewsSetup();
+
+        //set spinner so it only takes integers
+        SpinnerValueFactory.IntegerSpinnerValueFactory valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 365, 1);
+        spinnerHabit.setValueFactory(valueFactory);
+
+        spinnerHabit.setEditable(true);
+        spinnerHabit.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                spinnerHabit.getEditor().setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
+
+        Utils.sidebarSetup(settingsButton,groupButton,listButton,homeButton);
+        Utils.profileSideSetup(usernameLabel,groupsListview,friendsListview,openProfile);
+        Utils.setCharacterLimit(textfieldName, 60);
+        Utils.setCharacterLimit(textAreaInfo, 600);
+    }
+
+    /**
+     * Assigns items to listviews, gives them a custom look and adds a listener to show their items when double-clicked
+     */
+    private void listViewsSetup() {
         taskListView.setItems(tasks);
         taskListView.setCellFactory(param -> new TaskListCell());
 
@@ -96,19 +124,6 @@ public class TaskListController {
                 }
             }
         });
-
-        //set spinner so it only takes integers
-        SpinnerValueFactory.IntegerSpinnerValueFactory valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 365, 1);
-        spinnerHabit.setValueFactory(valueFactory);
-
-        spinnerHabit.setEditable(true);
-        spinnerHabit.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("\\d*")) {
-                spinnerHabit.getEditor().setText(newValue.replaceAll("[^\\d]", ""));
-            }
-        });
-
-        Utils.sidebarSetup(settingsButton,groupButton,listButton,homeButton);
     }
 
     /**
@@ -124,8 +139,16 @@ public class TaskListController {
      * @param actionEvent
      */
     public void editTask(ActionEvent actionEvent) {
+        System.out.println("Selected task id: " + selectedTask.getId());
+        Habit newHabit = new Habit(selectedTask,repeat);
+        System.out.println("New id: " + newHabit.getId());
         takeInputData();
-        DBTask.updateTask(selectedTask);
+        //if task didn't use to be a Habit, but has been modified to become one:
+        if (! (selectedTask instanceof Habit) && habit){
+            DBTask.updateTask(new Habit(selectedTask, repeat));
+        } else {
+            DBTask.updateTask(selectedTask);
+        }
         closePopup(actionEvent);
     }
 
@@ -172,7 +195,7 @@ public class TaskListController {
     /**
      * Method that assigns values in user editable fields to variables
      */
-    //TODO: set max length on text fields
+
     private void takeInputData() {
         taskName = textfieldName.getText();
         info = textAreaInfo.getText();
@@ -209,7 +232,6 @@ public class TaskListController {
         selectedTask.setInfo(info);
         selectedTask.setDate(java.sql.Date.valueOf(date));
         if (selectedTask instanceof Habit) ((Habit) selectedTask).setRepetition(repeat);
-        //DBTask.updateTask(selectedTask);
     }
 
     /**
@@ -226,19 +248,19 @@ public class TaskListController {
                 setGraphic(null);
             } else {
                 CheckBox checkBox = new CheckBox();
-                checkBox.setSelected(task.isFinished());
+                boolean finished = task.isFinished();
+                checkBox.setSelected(finished);
                 checkBox.setOnAction(event -> {
+                    FileChooser fileChooser = new FileChooser();
+                    fileChooser.setTitle("Select Image File");
+
+                    // File chooser can only pick image files
+                    FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter(
+                            "Image Files", "*.jpg", "*.jpeg", "*.png", "*.gif", "*.bmp");
+                    fileChooser.getExtensionFilters().add(imageFilter);
+
+                    Window currentWindow = ((CheckBox) event.getSource()).getScene().getWindow();
                     if (checkBox.isSelected()) {
-                        FileChooser fileChooser = new FileChooser();
-                        fileChooser.setTitle("Select Image File");
-
-                        // File chooser can only pick image files
-                        FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter(
-                                "Image Files", "*.jpg", "*.jpeg", "*.png", "*.gif", "*.bmp");
-                        fileChooser.getExtensionFilters().add(imageFilter);
-
-                        Window currentWindow = ((CheckBox) event.getSource()).getScene().getWindow();
-
                         File selectedFile = fileChooser.showOpenDialog(currentWindow);
 
                         if (selectedFile != null) {
@@ -286,11 +308,26 @@ public class TaskListController {
                 CheckBox checkBox = new CheckBox();
                 checkBox.setSelected(habit.isFinished());
                 checkBox.setOnAction(event -> {
-                    //TODO: ADD PHOTO UPLOAD
-                    LocalDate habitDate = habit.getDate().toLocalDate().plusDays(habit.getRepetition());
-                    DBTask.addTask(habit.getName(), java.sql.Date.valueOf(habitDate).toString(), habit.getInfo(), Utils.loggedInUser.getId(), habit.getRepetition());
-                    habit.setFinished(checkBox.isSelected());
-                    DBTask.updateTask(habit);
+                    FileChooser fileChooser = new FileChooser();
+                    fileChooser.setTitle("Select Image File");
+
+                    // File chooser can only pick image files
+                    FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter(
+                            "Image Files", "*.jpg", "*.jpeg", "*.png", "*.gif", "*.bmp");
+                    fileChooser.getExtensionFilters().add(imageFilter);
+
+                    Window currentWindow = ((CheckBox) event.getSource()).getScene().getWindow();
+                    if (checkBox.isSelected()) {
+                        File selectedFile = fileChooser.showOpenDialog(currentWindow);
+
+                        if (selectedFile != null) {
+                            LocalDate habitDate = habit.getDate().toLocalDate().plusDays(habit.getRepetition());
+                            Habit newHabit = new Habit(habit, java.sql.Date.valueOf(habitDate));
+                            DBTask.addTask(newHabit);
+                            habit.setFinished(checkBox.isSelected());
+                            DBTask.updateTask(habit);
+                        }
+                    }
                 });
 
                 Label nameLabel = new Label(habit.getName());

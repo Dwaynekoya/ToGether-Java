@@ -34,7 +34,18 @@ public class Habit extends Task{
      */
     public Habit(Task task, int repetition){
         super(task.getId(),task.getName(),task.getDate(), task.getInfo(), task.isFinished(), task.isShared(), task.getImage());
+        this.setId(task.getId()); //need to force this or else it gets assigned 0
         this.repetition = repetition;
+    }
+
+    /**
+     * Used when completing a previous iteration of the habit
+     * @param habit old iteration
+     * @param habitDate new date to complete the habit by then
+     */
+    public Habit(Habit habit, Date habitDate) {
+        super(habit.getId(), habit.getName(), habitDate, habit.getInfo(),false, habit.isShared(), habit.getImage());
+        this.repetition = habit.getRepetition();
     }
 
     public int getRepetition() {

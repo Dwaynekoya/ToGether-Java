@@ -11,4 +11,5 @@ public class SettingsController {
     public void initialize(){
         Utils.sidebarSetup(settingsButton,groupButton,listButton,homeButton);
     }
+    //TODO: Delete all (own) tasks, leave all groups, sign out
 }

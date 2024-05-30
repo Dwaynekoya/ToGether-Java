@@ -2,6 +2,8 @@ package com.example.together.controller;
 
 import com.example.together.dboperations.Constants;
 import com.example.together.dboperations.DBTask;
+import com.example.together.model.Habit;
+import com.example.together.model.Task;
 import com.example.together.view.View;
 import com.example.together.view.ViewSwitcher;
 import javafx.event.ActionEvent;
@@ -11,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 
 import java.net.URL;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -75,10 +78,21 @@ public class NewTaskController {
      * Adds a new task to database. The php file hosted decides whether to put it into the tasks or habits table.
      */
     private void addNewTask() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Constants.mysqlDateFormat);
+        java.sql.Date sqlDate = null;
+        try {
+            if (date != null) {
+                sqlDate = new java.sql.Date(simpleDateFormat.parse(date).getTime());
+            }
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        Task newTask = new Task(0,taskName,sqlDate,info,false,false,"");
         if (habit){
-            DBTask.addTask(taskName,date,info,Utils.loggedInUser.getId(), (Integer) spinnerRepeat.getValue());
+            Habit newHabit = new Habit(newTask, (Integer) spinnerRepeat.getValue());
+            DBTask.addTask(newHabit);
         } else {
-            DBTask.addTask(taskName,date,info,Utils.loggedInUser.getId(), null);
+            DBTask.addTask(newTask);
         }
         ViewSwitcher.switchView(View.TASKLIST);
     }

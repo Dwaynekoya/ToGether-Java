@@ -1,5 +1,6 @@
 package com.example.together.dboperations;
 
+import com.example.together.controller.Utils;
 import com.example.together.model.Habit;
 import com.example.together.model.Task;
 import com.google.gson.Gson;
@@ -15,34 +16,22 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class DBTask {
-    public static void addTask(String name, String date, String info, int userId, Integer repeat) {
+    /**
+     * Puts a new task in the tasks table (and, if it´s a habit, also in the habits one)
+     * @param task new task to add to the table
+     */
+    public static void addTask(Task task) {
         try {
             URL url = new URL(Constants.addTask);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-            connection.setDoOutput(true);
-
             StringBuilder postData = new StringBuilder();
-            postData.append("name=").append(URLEncoder.encode(name, StandardCharsets.UTF_8));
-            if (date != null) postData.append("&date=").append(URLEncoder.encode(date, StandardCharsets.UTF_8));
-            if (info != null) postData.append("&info=").append(URLEncoder.encode(info, StandardCharsets.UTF_8));
-            postData.append("&user_id=").append(userId);
-            if (repeat!=null) postData.append("&repeat=").append(repeat);
+            postData.append("name=").append(URLEncoder.encode(task.getName(), StandardCharsets.UTF_8));
+            if (task.getDate() != null) postData.append("&date=").append(URLEncoder.encode(String.valueOf(task.getDate()), StandardCharsets.UTF_8));
+            if (task.getInfo() != null) postData.append("&info=").append(URLEncoder.encode(task.getInfo(), StandardCharsets.UTF_8));
+            postData.append("&user_id=").append(Utils.loggedInUser.getId());
+            if (task instanceof Habit) postData.append("&repeat=").append(((Habit) task).getRepetition());
             //postData.append("&repeat=").append(repeat != null ? repeat : "null"); // Include repeat field
 
-            try (OutputStream os = connection.getOutputStream()) {
-                byte[] input = postData.toString().getBytes(StandardCharsets.UTF_8);
-                os.write(input, 0, input.length);
-            }
-
-            int responseCode = connection.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                System.out.println("Task added successfully.");
-            } else {
-                System.out.println("Failed to add task. Response code: " + responseCode);
-            }
-
-            connection.disconnect();
+            DBGeneral.sendHttpPostRequest(url,postData.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -52,12 +41,6 @@ public class DBTask {
         System.out.println("Updating task with id " + task.getId());
         try {
             URL url = new URL(Constants.updateTasks);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-            connection.setRequestMethod("POST");
-            connection.setDoOutput(true);
-            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-
             StringBuilder postData = new StringBuilder();
             postData.append("task_id=").append(task.getId())
                     .append("&name=").append(task.getName())
@@ -70,116 +53,54 @@ public class DBTask {
                 postData.append("&repeat=").append("");
             }*/
 
-
-            byte[] postDataBytes = postData.toString().getBytes(StandardCharsets.UTF_8);
-
-            try (OutputStream os = connection.getOutputStream()) {
-                os.write(postDataBytes);
-                os.flush();
-            }
-
-            int responseCode = connection.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                System.out.println("Task updated successfully.");
-            } else {
-                System.err.println("Failed to update task. HTTP response code: " + responseCode);
-            }
-
-            connection.disconnect();
+            DBGeneral.sendHttpPostRequest(url,postData.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Deletes task by its id
+     * @param task Task to delete
+     */
     public static void deleteTask(Task task) {
         int id = task.getId();
         System.out.println("Deleting task with id " + id);
         try {
             URL url = new URL(Constants.deleteTask);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-            connection.setRequestMethod("POST");
-            connection.setDoOutput(true);
-            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-
             String postData = "id=" + id;
-
-            byte[] postDataBytes = postData.getBytes(StandardCharsets.UTF_8);
-
-            try (OutputStream os = connection.getOutputStream()) {
-                os.write(postDataBytes);
-                os.flush();
-            }
-
-            int responseCode = connection.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                System.out.println("Task deleted successfully.");
-            } else {
-                System.err.println("Failed to delete task. HTTP response code: " + responseCode);
-            }
-
-            connection.disconnect();
+            String response = DBGeneral.sendHttpPostRequest(url,postData);
+            System.out.println("Response when deleting: " + response);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Sets task as finished and adds the url for the assigned image
+     * @param task to set as finished
+     */
     public static void finishTask(Task task){
         try {
             URL url = new URL(Constants.finishTask);
-
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-            connection.setRequestMethod("POST");
-            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            connection.setRequestProperty("charset", "utf-8");
-            connection.setRequestProperty("Accept", "application/json");
-            connection.setDoOutput(true);
-            connection.setDoInput(true);
-
-
-            String queryString = String.format("task_id=%d&image=%s&finished=%s", task.getId(), task.getImage(), task.isFinished());
-
-            byte[] postData = queryString.getBytes(StandardCharsets.UTF_8);
-
-            connection.setRequestProperty("Content-Length", Integer.toString(postData.length));
-
-            try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {
-                wr.write(postData);
-            }
-
-            try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
-                StringBuilder response = new StringBuilder();
-                String line;
-                while ((line = in.readLine()) != null) {
-                    response.append(line);
-                }
-                System.out.println("Response: " + response);
-            }
-
-            connection.disconnect();
-
+            String queryString = String.format("task_id=%d&image=%s&finished=%s", task.getId(), task.getImage(), true);
+            String response = DBGeneral.sendHttpPostRequest(url, queryString);
+            System.out.printf("Response when finishing task with id $d: $s $n", task.getId(), response);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static StringBuilder getTasks(int userId) {
+    /**
+     * Gets all tasks from a given user from the database
+     * @param userId current user identifying int
+     * @param following if tasks are from a user that´s followed by the current user
+     * @return StringBuilder json containing all tasks
+     */
+    public static String getTasks(int userId, boolean following) {
         try {
-            URL url = new URL(Constants.getTasksFromUser + "?id=" + userId);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            StringBuilder json = new StringBuilder();
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                json.append(line);
-            }
-
-            reader.close();
-            connection.disconnect();
-            return json;
+            URL url = new URL(Constants.getTasksFromUser + "?id=" + userId + "&following=" + following);
+            return  DBGeneral.sendHttpGetRequest(url);
         } catch (Exception e) {
             e.printStackTrace();
             return null;

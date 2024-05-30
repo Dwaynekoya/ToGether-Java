@@ -1,6 +1,7 @@
 package com.example.together.controller;
 
 import com.example.together.dboperations.DBUsers;
+import com.example.together.dboperations.GroupsFollowsFetcher;
 import com.example.together.view.View;
 import com.example.together.view.ViewSwitcher;
 import javafx.event.ActionEvent;
@@ -26,12 +27,15 @@ public class LoginController {
     private String password;
 
     /**
-     * Adds event handler to textfields
+     * Adds event handler to textfields, as well as max. characters
      */
     @FXML
     public void initialize() {
         usernameField.setOnKeyPressed(this::handleEnterKey);
         passwordField.setOnKeyPressed(this::handleEnterKey);
+
+        Utils.setCharacterLimit(usernameField, 25);
+        Utils.setCharacterLimit(passwordField, 48);
     }
 
     /**
@@ -62,8 +66,7 @@ public class LoginController {
             loginID = DBUsers.login(username, password);
         } catch (ConnectException e) {
             System.out.println("ERROR CONNECTING TO DB");
-        } catch (Exception e) {
-            e.printStackTrace();
+            loginID = -3;
         }
         switch (loginID) {
             case -1 -> infoLabel.setText("Username not found.");
@@ -74,11 +77,13 @@ public class LoginController {
     }
 
     /**
-     * Switches view to the main app
+     * Switches view to the main app and starts a background thread to receive additional user info
      * @param loginID to identify the current user
      */
     private void launchApp(int loginID) {
         Utils.loggedInUser = DBUsers.getUser(loginID);
+        GroupsFollowsFetcher groupsFollowsFetcher = new GroupsFollowsFetcher();
+        groupsFollowsFetcher.start();
         ViewSwitcher.switchView(View.TASKLIST);
     }
 

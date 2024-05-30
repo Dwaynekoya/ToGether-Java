@@ -1,8 +1,11 @@
 package com.example.together.controller;
 
+import com.example.together.dboperations.DBGroup;
 import com.example.together.dboperations.DBUsers;
 import com.example.together.model.Group;
 import com.example.together.model.User;
+import com.example.together.view.View;
+import com.example.together.view.ViewSwitcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -27,6 +30,7 @@ public class ProfileController {
     public ImageView profilePic;
     public Button searchGroup, searchFriend;
     public ListView listviewSearch;
+    public Button createGroup;
     @FXML
     private Button settingsButton, groupButton, listButton, homeButton;
     @FXML
@@ -41,7 +45,6 @@ public class ProfileController {
      * Sets the cell renderer for the listview
      */
     public void initialize() {
-        //TODO: load user info
         usernameLabel.setText(Utils.loggedInUser.getUsername());
         bioLabel.setText(Utils.loggedInUser.getBio());
         Utils.sidebarSetup(settingsButton,groupButton,listButton,homeButton);
@@ -53,16 +56,25 @@ public class ProfileController {
         listviewSearch.setCellFactory(param -> new SearchListCell());
     }
 
+    /**
+     * Sends a LIKE query with the text in the textfield.
+     * Table for the query depends on the selected radio button.
+     * @param actionEvent search button
+     */
     public void search(ActionEvent actionEvent) {
         Toggle selectedRadioButton = toggleGroup.getSelectedToggle();
         String search = searchField.getText().strip();
         if (selectedRadioButton.equals(radioGroup)){
-
+            listviewSearch.setItems(DBGroup.searchGroups(search));
         } else if (selectedRadioButton.equals(radioUser)){
             listviewSearch.setItems(DBUsers.searchUsers(search));
         }
     }
 
+    /**
+     * Shows a hidden part of the view destined to search elements from the groups and users tables
+     * @param actionEvent the search for more buttons.
+     */
     public void searchView(ActionEvent actionEvent) {
         if (actionEvent.getSource() == searchGroup) {
             radioGroup.setSelected(true);
@@ -72,13 +84,24 @@ public class ProfileController {
         coverRectangle.setVisible(true);
         searchBox.setVisible(true);
     }
+
+    /**
+     * Switches view to create a new group.
+     * @param actionEvent Create group button
+     */
+    public void newGroupView(ActionEvent actionEvent) {
+        ViewSwitcher.switchView(View.NEWGROUP);
+    }
+
+    /**
+     * Format for the cells in the listview. Includes a button next to each element.
+     * Changes the action triggered depending on whether the search is for a group or an user.
+     */
     private static class SearchListCell extends ListCell<Object> {
         private HBox content;
         private Button actionButton;
-        private Label label;
         public SearchListCell() {
             super();
-            label = new Label();
             actionButton = new Button("Action");
             actionButton.getStyleClass().add("darkButton");
 
@@ -104,10 +127,8 @@ public class ProfileController {
                         setText(null);
                         actionButton.setDisable(true);
                     }else {
-
                         setText(user.getUsername());
                         actionButton.setText("Follow");
-                        //TODO: Follow
                         actionButton.setOnAction(event -> {
                             System.out.println("Button clicked for user: " + user.getUsername());
                             DBUsers.followUser(Utils.loggedInUser.getId(), user.getId());
@@ -117,9 +138,9 @@ public class ProfileController {
                     Group group = (Group) item;
                     setText(group.getName());
                     actionButton.setText("Join");
-                   //TODO: join group
                     actionButton.setOnAction(event -> {
                         System.out.println("Button clicked for group: " + group.getName());
+                        DBGroup.putMember(group,Utils.loggedInUser);
                     });
                 }
                 setGraphic(content);

@@ -1,57 +1,36 @@
 package com.example.together.dboperations;
 
 import com.example.together.model.User;
-import com.google.gson.Gson;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.lang.reflect.Type;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class DBUsers {
     /**
      * Looks for a given user in the table using a php file
      * @param username username that identifies the user to look for
-     * @return -1 if not found, -2 if incorrect password. Id if found
+     * @return -1 if not found, -2 if incorrect password, -3 if failed connection. Id if found
      */
     public static int login(String username, String password) throws Exception {
-        int userId = -1;
         URL url = new URL(Constants.login);
+        String postData = String.format("username=%s&password=%s",
+                URLEncoder.encode(username, StandardCharsets.UTF_8),
+                URLEncoder.encode(password, StandardCharsets.UTF_8));
 
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestMethod("POST");
-        connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-        connection.setDoOutput(true);
+        String jsonResponse = DBGeneral.sendHttpPostRequest(url, postData);
 
-        String data = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8");
-        data += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
-
-        connection.getOutputStream().write(data.getBytes("UTF-8"));
-
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        String line = bufferedReader.readLine();
-        bufferedReader.close();
-
-        try {
-            userId = Integer.parseInt(line.trim());
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
-
-        connection.disconnect();
-
+        int userId = Integer.parseInt(jsonResponse.trim());
         return userId;
     }
+
 
     /**
      * Puts a new user into the table using a php file.
@@ -59,48 +38,32 @@ public class DBUsers {
      * @param password
      * @return -1 if failed, -2 if username already exists. If succesful, new user id
      */
-    public static int registerUser(String username, String password){
+    public static int registerUser(String username, String password) {
         int generatedId = -1;
         try {
             URL url = new URL(Constants.registerUser);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            connection.setDoOutput(true);
+            String postData = String.format("username=%s&password=%s",
+                    URLEncoder.encode(username, StandardCharsets.UTF_8),
+                    URLEncoder.encode(password, StandardCharsets.UTF_8));
 
-            String data = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8");
-            data += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
+            String jsonResponse = DBGeneral.sendHttpPostRequest(url, postData);
 
-            connection.getOutputStream().write(data.getBytes("UTF-8"));
-
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                generatedId = Integer.parseInt(line.trim());
-            }
-            bufferedReader.close();
-
-            connection.disconnect();
+            generatedId = Integer.parseInt(jsonResponse.trim());
         } catch (Exception e) {
             e.printStackTrace();
         }
         return generatedId;
     }
 
+    /**
+     * Looks for user in database given its id
+     * @param id int that identifies user
+     * @return User object if found, null if not
+     */
     public static User getUser(int id) {
         try {
-            String url = Constants.getUserGivenId + "?id=" + id;
-            HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
-            conn.setRequestMethod("GET");
-
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            StringBuilder response = new StringBuilder();
-            String inputLine;
-            while ((inputLine = bufferedReader.readLine()) != null) {
-                response.append(inputLine);
-            }
-            bufferedReader.close();
-
+            URL url = new URL(Constants.getUserGivenId + "?id=" + id);
+            String response = DBGeneral.sendHttpGetRequest(url);
             Gson gson = new Gson();
             User user = gson.fromJson(response.toString(), User.class);
 
@@ -111,67 +74,85 @@ public class DBUsers {
         }
     }
 
+    /**
+     * Looks for users with a LIKE query
+     * @param username String to look for usernames containing it
+     * @return ObservableList with matches
+     */
     public static ObservableList<User> searchUsers(String username) {
         ObservableList<User> userList = FXCollections.observableArrayList();
 
         try {
             URL url = new URL(Constants.searchUsers);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            conn.setDoOutput(true);
-
             String postData = "username=" + username;
+            String response = DBGeneral.sendHttpPostRequest(url, postData);
 
-            try (OutputStream os = conn.getOutputStream()) {
-                byte[] input = postData.getBytes("utf-8");
-                os.write(input, 0, input.length);
-            }
-
-            try (BufferedReader br = new BufferedReader(
-                    new InputStreamReader(conn.getInputStream(), "utf-8"))) {
-                StringBuilder response = new StringBuilder();
-                String responseLine;
-                while ((responseLine = br.readLine()) != null) {
-                    response.append(responseLine.trim());
-                }
-
-                Gson gson = new Gson();
-                Type userListType = new TypeToken<List<User>>(){}.getType();
-                List<User> users = gson.fromJson(response.toString(), userListType);
-                userList.addAll(users);
-            }
-
+            userList.addAll(parseUsers(response));
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         return userList;
     }
+
+    /**
+     * Adds a new line to the user_follows table
+     * @param userId int that identifies current user
+     * @param followsId int that identifies user to follow
+     */
     public static void followUser(int userId, int followsId) {
         try {
             URL url = new URL(Constants.followUser);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            conn.setDoOutput(true);
-
             String postData = String.format("user_id=%d&follows_id=%d", userId, followsId);
+            String response = DBGeneral.sendHttpPostRequest(url, postData);
 
-            try (OutputStream os = conn.getOutputStream()) {
-                byte[] input = postData.getBytes(StandardCharsets.UTF_8);
-                os.write(input, 0, input.length);
-            }
-
-            int responseCode = conn.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                System.out.println("Followed user with id " + followsId);
-            } else {
-                System.out.println("Failed to follow user. Response code: " + responseCode);
-            }
-
+            System.out.println("Follow User Response: " + response);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * Looks for users a user follows
+     * @param currentUser to extract id for the search
+     * @return set of users followed by current user
+     */
+    public static HashSet<User> searchFollowing(User currentUser) {
+        try {
+            URL url = new URL(Constants.getFollowing);
+            String postdata = String.format("user_id=%d", currentUser.getId());
+            String jsonResponse = DBGeneral.sendHttpPostRequest(url, postdata);
+            if (jsonResponse.equals("")) return null;
+
+            HashSet<User> userHashSet = new HashSet<>();
+            JsonArray jsonArray = JsonParser.parseString(jsonResponse).getAsJsonArray();
+            for (JsonElement jsonElement: jsonArray) {
+                JsonObject jsonObject = jsonElement.getAsJsonObject();
+                int followsId = jsonObject.get("follows_id").getAsInt();
+                User user = DBUsers.getUser(followsId);
+                if (user!=null) userHashSet.add(user);
+            }
+            return userHashSet;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * Method to convert json array into a list of User objects
+     * @param jsonResponse String with the json taken from the database query php
+     * @return list of users from the json
+     */
+    private static List<User> parseUsers(String jsonResponse) {
+        Gson gson = new Gson();
+        Type userListType = new TypeToken<List<User>>(){}.getType();
+        try {
+            List<User> users = gson.fromJson(jsonResponse, userListType);
+            return users;
+        }catch (JsonSyntaxException exception){
+            System.out.printf("EXCEPTION PARSING USERS: %s %n", jsonResponse);
+            return null;
         }
     }
 }

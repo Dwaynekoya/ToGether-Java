@@ -27,6 +27,16 @@ public class Group {
         this.manager=manager;
     }
 
+    /**
+     * Constructor used when creating a new group
+     * @param name name for the group to be searched by
+     * @param description added by users to define the group
+     */
+    public Group(String name, String description){
+        this.name=name;
+        this.description=description;
+    }
+
     public int getId() {
         return id;
     }

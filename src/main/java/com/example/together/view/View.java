@@ -4,7 +4,8 @@ public enum View {
     LOGIN("login-view.fxml"),
     TASKLIST("tasklist-view.fxml"),
     PROFILE("profile-view.fxml"),
-    NEWTASK("new-task-view.fxml");
+    NEWTASK("new-task-view.fxml"),
+    NEWGROUP("new-group-view.fxml");
     private String fileName;
 
     View(String fileName) {

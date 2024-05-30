@@ -71,6 +71,17 @@
                      <String fx:value="darkButton" />
                      <String fx:value="roboto-black" />
                   </styleClass></Button>
+                     <Button fx:id="createGroup" mnemonicParsing="false" onAction="#newGroupView" text="Create group">
+                         <VBox.margin>
+                             <Insets bottom="40.0" />
+                         </VBox.margin>
+                         <font>
+                             <Font size="18.0" />
+                         </font>
+                         <styleClass>
+                             <String fx:value="darkButton" />
+                             <String fx:value="roboto-black" />
+                         </styleClass></Button>
                      <Label styleClass="roboto-black" text="My friends">
                   <font>
                      <Font size="24.0" />

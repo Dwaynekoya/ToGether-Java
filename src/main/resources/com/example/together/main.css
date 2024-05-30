@@ -121,3 +121,19 @@
 .list-view .list-cell:odd {
     -fx-background-color: transparent;
 }
+.list-view .list-cell:focused {
+    -fx-text-fill: #D98944;
+}
+/*Removes colored background from scrollpanes*/
+.scroll-pane > .viewport {
+    -fx-background-color: transparent; }
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+.taskbox {
+    -fx-padding: 10px;
+    -fx-margin: 5px;
+    -fx-border-radius: 5px;
+    -fx-text-fill:  #FFF6ED;
+    -fx-background-color: #8C5D43;
+}

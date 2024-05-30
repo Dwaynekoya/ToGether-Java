@@ -1,5 +1,7 @@
 package com.example.together.dboperations;
 
+import java.net.URL;
+
 public class Constants {
     public static String phpLocation = "http://localhost/ToGether/";
     //USER MANAGEMENT PHP FILES:
@@ -7,7 +9,7 @@ public class Constants {
     public static String getUserGivenId = phpLocation+"phpusers/getuser_id.php";
     public static String registerUser = phpLocation+"phpusers/putuser.php";
     public static String login = phpLocation+"phpusers/login.php";
-    public static String getUsers = phpLocation + "phpusers/getusers.php";
+    public static String getFollowing = phpLocation+ "phpfollows/getfollowing.php";
     public static String searchUsers = phpLocation + "phpusers/searchusers.php";
     //follows:
     public static String followUser= phpLocation + "phpfollows/followuser.php";
@@ -18,8 +20,16 @@ public class Constants {
     public static String updateTasks = phpLocation +"phptasks/edittasks.php";
     public static String deleteTask = phpLocation + "phptasks/deletetask.php";
     public static String finishTask = phpLocation + "phptasks/finishtask.php";
+    //GROUP MANAGEMENT PHP FILES
+    public static String createGroup = phpLocation + "phpgroups/putgroup.php";
+    public static String searchGroups = phpLocation + "phpgroups/searchgroups.php";
+    public static String putMember = phpLocation + "phpgroups/putmember.php";
+    public static String groupsFromMember = phpLocation + "phpgroups/getgroups_frommember.php";
+    public static String getGroupGivenId = phpLocation + "phpgroups/getgroup.php";
+    public static String getTasksFromGroup = phpLocation + "phpgroups/gettasks_group.php";
     //Patterns
     public static String mysqlDateFormat = "yyyy-MM-dd";
+
 
 
 }

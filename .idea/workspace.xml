@@ -4,17 +4,40 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c554c44-767d-4434-8cb3-5256fb1e9951" name="Changes" comment="testing">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/together/controller/SettingsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/together/settings-view.fxml" afterDir="false" />
+    <list default="true" id="7c554c44-767d-4434-8cb3-5256fb1e9951" name="Changes" comment="follow user works">
+      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/together/controller/FeedController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/together/controller/GroupsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/together/controller/NewGroupController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/BooleanTypeAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/DBGeneral.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/DBGroup.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/GroupsFollowsFetcher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/together/feed-view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/together/groups-view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/together/new-group-view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/controller/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/controller/NewTaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/controller/NewTaskController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/controller/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/controller/ProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/controller/SettingsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/controller/SettingsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/controller/TaskListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/controller/TaskListController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/controller/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/controller/Utils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/DBTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/DBTask.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/DBUsers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/DBUsers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/TaskFetcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/TaskFetcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/model/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/model/Group.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/model/Habit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/model/Habit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/view/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/view/View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/together/BASE-TO-COPY.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/together/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/together/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/together/new-task-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/together/new-task-view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/together/profile-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/together/profile-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/together/tasklist-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/together/tasklist-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +86,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -258,7 +281,16 @@
       <workItem from="1716045847440" duration="1704000" />
       <workItem from="1716195746778" duration="3501000" />
       <workItem from="1716199376620" duration="26424000" />
-      <workItem from="1716286401321" duration="21405000" />
+      <workItem from="1716286401321" duration="27293000" />
+      <workItem from="1716398398476" duration="4565000" />
+      <workItem from="1716489865759" duration="657000" />
+      <workItem from="1716632863333" duration="18148000" />
+      <workItem from="1716726096117" duration="10065000" />
+      <workItem from="1716833066773" duration="629000" />
+      <workItem from="1716833859509" duration="6081000" />
+      <workItem from="1716912996553" duration="9479000" />
+      <workItem from="1717003805284" duration="3537000" />
+      <workItem from="1717089274717" duration="1654000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -348,7 +380,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716300461202</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="follow user works">
+      <option name="closed" value="true" />
+      <created>1716315704394</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1716315704395</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -366,14 +406,15 @@
     <MESSAGE value="can't assign url to photo field" />
     <MESSAGE value="fixed url for photos" />
     <MESSAGE value="testing" />
-    <option name="LAST_COMMIT_MESSAGE" value="testing" />
+    <MESSAGE value="follow user works" />
+    <option name="LAST_COMMIT_MESSAGE" value="follow user works" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/example/together/controller/NewTaskController.java</url>
-          <line>77</line>
+          <line>90</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>

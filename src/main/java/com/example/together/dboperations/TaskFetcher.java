@@ -38,10 +38,9 @@ public class TaskFetcher extends Thread {
     @Override
     public void run() {
        while (true){
-           //TODO: ? add global variable that forces refresh when adding/editing/completing task
            fetchTasks();
            try {
-               Thread.sleep(5000); // Adjust the interval as needed
+               Thread.sleep(1000);
            } catch (InterruptedException e) {
                e.printStackTrace();
            }
@@ -52,14 +51,15 @@ public class TaskFetcher extends Thread {
      * Takes tasks and habits from database, converts the json data to Java objects and stores them in the lists provided
      */
     private void fetchTasks() {
-        StringBuilder json = DBTask.getTasks(userId);
+        String json = DBTask.getTasks(userId, false);
 
         if (json==null) return;
 
         Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Date.class, new SQLDateAdapter())
+                .registerTypeAdapter(Date.class, new SQLDateAdapter()) //adapts mysql dates
+                .registerTypeAdapter(boolean.class, new BooleanTypeAdapter()) //adapts mysql booleans (0,1) to java ones
                 .create();
-        //System.out.println(json);
+//        System.out.println(json);
         JsonObject jsonObject = JsonParser.parseString(json.toString()).getAsJsonObject();
 
         List<Task> fetchedTasks = gson.fromJson(jsonObject.getAsJsonArray("tasks"), new TypeToken<List<Task>>() {}.getType());
@@ -73,6 +73,7 @@ public class TaskFetcher extends Thread {
         Iterator<Task> taskIterator = fetchedTasks.iterator();
         while (taskIterator.hasNext()) {
             Task task = taskIterator.next();
+            System.out.println(task.getName() + "  " + task.isFinished());
             if (habitMap.containsKey(task.getId())) {
                 Habit habit = habitMap.get(task.getId());
                 //System.out.println("Matching Task and Habit ID: " + task.getId());
