@@ -71,7 +71,8 @@ public class TaskListController {
         TaskFetcher taskFetcher = new TaskFetcher(Utils.loggedInUser.getId(), tasks, habits);
         taskFetcher.start();
 
-        listViewsSetup();
+        listViewsSetup(taskListView, tasks);
+        listViewsSetup(habitListView, habits);
 
         //set spinner so it only takes integers
         SpinnerValueFactory.IntegerSpinnerValueFactory valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 365, 1);
@@ -93,31 +94,15 @@ public class TaskListController {
     /**
      * Assigns items to listviews, gives them a custom look and adds a listener to show their items when double-clicked
      */
-    private void listViewsSetup() {
-        taskListView.setItems(tasks);
-        taskListView.setCellFactory(param -> new TaskListCell());
-
-        taskListView.setOnMouseClicked(event -> {
+    private <T extends Task> void listViewsSetup(ListView<T> listView, ObservableList<T> tasks) {
+        listView.setItems(tasks);
+        listView.setCellFactory(param -> new TaskListCell<>());
+        listView.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
-                Task selectedTaskFromList = taskListView.getSelectionModel().getSelectedItem();
-                if (selectedTaskFromList != null) {
-                    selectedTask = selectedTaskFromList;
+                T selectedItem = listView.getSelectionModel().getSelectedItem();
+                if (selectedItem != null) {
+                    selectedTask = selectedItem;
                     showPopup();
-                    System.out.println("Selected task");
-                }
-            }
-        });
-
-        habitListView.setItems(habits);
-        habitListView.setCellFactory(param -> new HabitCellList());
-
-        habitListView.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2) {
-                Habit selectedHabit = habitListView.getSelectionModel().getSelectedItem();
-                if (selectedHabit != null) {
-                    selectedTask = selectedHabit;
-                    showPopup();
-                    System.out.println("Selected habit");
                 }
             }
         });
@@ -224,7 +209,6 @@ public class TaskListController {
      * Assigns the values that have been taken from the input fields by takeInputData() to the corresponding fields in the Task object
      */
     private void assignValues() {
-        System.out.println("New name: " + taskName);
         selectedTask.setName(taskName);
         selectedTask.setInfo(info);
         selectedTask.setDate(java.sql.Date.valueOf(date));
@@ -235,66 +219,17 @@ public class TaskListController {
      * Custom ListCell implementation for displaying tasks with a CheckBox and a Button
      * Checkbox marks tasks as finished while the button deletes them
      */
-    static class TaskListCell extends ListCell<Task> {
+    static class TaskListCell<T extends Task> extends ListCell<T> {
         @Override
-        protected void updateItem(Task task, boolean empty) {
-            super.updateItem(task, empty);
+        protected void updateItem(T item, boolean empty) {
+            super.updateItem(item, empty);
 
-            if (empty || task == null) {
+            if (empty || item == null) {
                 setText(null);
                 setGraphic(null);
             } else {
                 CheckBox checkBox = new CheckBox();
-                boolean finished = task.isFinished();
-                checkBox.setSelected(finished);
-                checkBox.setOnAction(event -> {
-                    if (checkBox.isSelected()) {
-                        File selectedFile = imageFileChooser(event);
-
-                        if (selectedFile != null) {
-                            System.out.println("Selected file: " + selectedFile.getAbsolutePath());
-                            PhotoUploader photoUploader = new PhotoUploader(selectedFile, this.getItem());
-                            photoUploader.run();
-                            task.setFinished(true);
-                        }
-                    }
-                });
-
-                Label nameLabel = new Label(task.getName());
-                nameLabel.setAlignment(Pos.CENTER_LEFT);
-                nameLabel.setMaxWidth(Double.MAX_VALUE);
-                HBox.setHgrow(nameLabel, Priority.ALWAYS);
-
-                Button deleteButton = new Button("Delete");
-                deleteButton.setOnAction(event -> {
-                    getListView().getItems().remove(task);
-                    DBTask.deleteTask(task);
-                });
-
-                HBox hbox = new HBox(checkBox, nameLabel, deleteButton);
-                hbox.setAlignment(Pos.CENTER_LEFT);
-                hbox.setSpacing(10);
-                hbox.setFillHeight(true);
-
-                setGraphic(hbox);
-            }
-        }
-    }
-
-    /**
-     * Same list cell implementation for the Habit class
-     * When checkbox is marked, creates a habit according to the repetition field in the completed one
-     */
-    static class HabitCellList extends ListCell<Habit> {
-        @Override
-        protected void updateItem(Habit habit, boolean empty) {
-            super.updateItem(habit, empty);
-            if (empty || habit == null) {
-                setText(null);
-                setGraphic(null);
-            } else {
-                CheckBox checkBox = new CheckBox();
-                boolean finished = habit.isFinished();
+                boolean finished = item.isFinished();
                 checkBox.setSelected(finished);
                 checkBox.setOnAction(event -> {
                     if (checkBox.isSelected()) {
@@ -303,24 +238,26 @@ public class TaskListController {
                         if (selectedFile != null) {
                             PhotoUploader photoUploader = new PhotoUploader(selectedFile, this.getItem());
                             photoUploader.run();
-                            LocalDate habitDate = habit.getDate().toLocalDate().plusDays(habit.getRepetition());
-                            Habit newHabit = new Habit(habit, java.sql.Date.valueOf(habitDate));
-                            DBTask.addTask(newHabit);
-                            habit.setFinished(true);
-                            DBTask.updateTask(habit);
+                            if (item instanceof Habit) {
+                                LocalDate habitDate = item.getDate().toLocalDate().plusDays(((Habit) item).getRepetition());
+                                Habit newHabit = new Habit((Habit) item, java.sql.Date.valueOf(habitDate));
+                                DBTask.addTask(newHabit);
+                            }
+                            item.setFinished(true);
+                            DBTask.updateTask(item);
                         }
                     }
                 });
 
-                Label nameLabel = new Label(habit.getName());
+                Label nameLabel = new Label(item.getName());
                 nameLabel.setAlignment(Pos.CENTER_LEFT);
                 nameLabel.setMaxWidth(Double.MAX_VALUE);
                 HBox.setHgrow(nameLabel, Priority.ALWAYS);
 
                 Button deleteButton = new Button("Delete");
                 deleteButton.setOnAction(event -> {
-                    getListView().getItems().remove(habit);
-                    DBTask.deleteTask(habit);
+                    getListView().getItems().remove(item);
+                    DBTask.deleteTask(item);
                 });
 
                 HBox hbox = new HBox(checkBox, nameLabel, deleteButton);
