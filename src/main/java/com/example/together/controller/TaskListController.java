@@ -12,7 +12,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -22,14 +21,12 @@ import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
 import java.io.File;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.ResourceBundle;
 
 public class TaskListController {
     public Button settingsButton, groupButton, listButton, homeButton, openProfile; //buttons in sidebar + right menu
@@ -251,17 +248,8 @@ public class TaskListController {
                 boolean finished = task.isFinished();
                 checkBox.setSelected(finished);
                 checkBox.setOnAction(event -> {
-                    FileChooser fileChooser = new FileChooser();
-                    fileChooser.setTitle("Select Image File");
-
-                    // File chooser can only pick image files
-                    FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter(
-                            "Image Files", "*.jpg", "*.jpeg", "*.png", "*.gif", "*.bmp");
-                    fileChooser.getExtensionFilters().add(imageFilter);
-
-                    Window currentWindow = ((CheckBox) event.getSource()).getScene().getWindow();
                     if (checkBox.isSelected()) {
-                        File selectedFile = fileChooser.showOpenDialog(currentWindow);
+                        File selectedFile = imageFileChooser(event);
 
                         if (selectedFile != null) {
                             System.out.println("Selected file: " + selectedFile.getAbsolutePath());
@@ -306,25 +294,19 @@ public class TaskListController {
                 setGraphic(null);
             } else {
                 CheckBox checkBox = new CheckBox();
-                checkBox.setSelected(habit.isFinished());
+                boolean finished = habit.isFinished();
+                checkBox.setSelected(finished);
                 checkBox.setOnAction(event -> {
-                    FileChooser fileChooser = new FileChooser();
-                    fileChooser.setTitle("Select Image File");
-
-                    // File chooser can only pick image files
-                    FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter(
-                            "Image Files", "*.jpg", "*.jpeg", "*.png", "*.gif", "*.bmp");
-                    fileChooser.getExtensionFilters().add(imageFilter);
-
-                    Window currentWindow = ((CheckBox) event.getSource()).getScene().getWindow();
                     if (checkBox.isSelected()) {
-                        File selectedFile = fileChooser.showOpenDialog(currentWindow);
+                        File selectedFile = imageFileChooser(event);
 
                         if (selectedFile != null) {
+                            PhotoUploader photoUploader = new PhotoUploader(selectedFile, this.getItem());
+                            photoUploader.run();
                             LocalDate habitDate = habit.getDate().toLocalDate().plusDays(habit.getRepetition());
                             Habit newHabit = new Habit(habit, java.sql.Date.valueOf(habitDate));
                             DBTask.addTask(newHabit);
-                            habit.setFinished(checkBox.isSelected());
+                            habit.setFinished(true);
                             DBTask.updateTask(habit);
                         }
                     }
@@ -349,5 +331,17 @@ public class TaskListController {
                 setGraphic(hbox);
             }
         }
+    }
+    public static File imageFileChooser(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Image File");
+
+        // File chooser can only pick image files
+        FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter(
+                "Image Files", "*.jpg", "*.jpeg", "*.png", "*.gif", "*.bmp");
+        fileChooser.getExtensionFilters().add(imageFilter);
+
+        Window currentWindow = ((CheckBox) event.getSource()).getScene().getWindow();
+        return fileChooser.showOpenDialog(currentWindow);
     }
 }

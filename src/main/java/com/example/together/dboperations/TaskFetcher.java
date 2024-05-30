@@ -73,7 +73,7 @@ public class TaskFetcher extends Thread {
         Iterator<Task> taskIterator = fetchedTasks.iterator();
         while (taskIterator.hasNext()) {
             Task task = taskIterator.next();
-            System.out.println(task.getName() + "  " + task.isFinished());
+//            System.out.println(task.getName() + "  " + task.isFinished());
             if (habitMap.containsKey(task.getId())) {
                 Habit habit = habitMap.get(task.getId());
                 //System.out.println("Matching Task and Habit ID: " + task.getId());
@@ -82,6 +82,7 @@ public class TaskFetcher extends Thread {
                 habit.setName(task.getName());
                 habit.setDate(task.getDate());
                 habit.setInfo(task.getInfo());
+                habit.setFinished(task.isFinished());
 
                 taskIterator.remove();
             }

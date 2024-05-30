@@ -52,7 +52,6 @@ public class DBTask {
             } /*else {
                 postData.append("&repeat=").append("");
             }*/
-
             DBGeneral.sendHttpPostRequest(url,postData.toString());
         } catch (Exception e) {
             e.printStackTrace();
