@@ -332,6 +332,12 @@ public class TaskListController {
             }
         }
     }
+
+    /**
+     * Opens a file chooser that can only pick image files
+     * @param event used to extract the current window
+     * @return chosen image file
+     */
     public static File imageFileChooser(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Image File");
