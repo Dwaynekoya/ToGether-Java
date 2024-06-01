@@ -1,7 +1,6 @@
 package com.example.together.controller;
 
 import com.example.together.Main;
-import com.example.together.dboperations.DBTask;
 import com.example.together.dboperations.SQLDateAdapter;
 import com.example.together.model.Group;
 import com.example.together.model.Task;
@@ -20,8 +19,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.VBox;
 import javafx.stage.*;
@@ -89,44 +86,33 @@ public class Utils {
 
         openProfile.setOnAction(event -> openProfile());
 
-        // Handle double-click on groups list view items
+        // Handle double-click on list view items to show a popup with additional info
         groupsListView.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
-                Utils.selectedGroup = groupsListView.getSelectionModel().getSelectedItem();
+                selectedGroup = groupsListView.getSelectionModel().getSelectedItem();
                 if (selectedGroup != null) {
-                    showGroupDetails(selectedGroup);
+                    showPopup(View.GROUP_POPUP);
                 }
             }
         });
 
-        // Handle double-click on friends list view items
         friendsListView.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
                 selectedUser = friendsListView.getSelectionModel().getSelectedItem();
                 if (selectedUser != null) {
-                    showUserDetails();
+                    showPopup(View.USER_POPUP);
                 }
             }
         });
     }
 
-    private static void showGroupDetails(Group group) {
-        Label nameLabel = new Label(group.getName());
-        Label descriptionLabel = new Label(group.getDescription());
-        ListView<User> membersListView = new ListView<>();
-        ObservableList<User> members = FXCollections.observableArrayList(group.getMembers()); // Assuming Group has a getMembers() method
-        membersListView.setItems(members);
-        ScrollPane membersScrollPane = new ScrollPane(membersListView);
-
-        VBox groupDetailsBox = new VBox(nameLabel, descriptionLabel, membersScrollPane);
-        groupDetailsBox.getStyleClass().add("taskbox");
-
-        // TODO: Display the VBox
-    }
-
-    private static void showUserDetails() {
+    /**
+     * Shows a fxml view as a popup window
+     * @param view View to display (fxml file)
+     */
+    public static void showPopup(View view) {
         try {
-            FXMLLoader loader = new FXMLLoader(Main.class.getResource(View.POPUP_USER.getFileName()));
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource(view.getFileName()));
             Parent root = loader.load();
 
             Stage stage = new Stage();
@@ -138,7 +124,6 @@ public class Utils {
             e.printStackTrace();
         }
     }
-
     /**
      * Switches view to the  current user's profile
      */

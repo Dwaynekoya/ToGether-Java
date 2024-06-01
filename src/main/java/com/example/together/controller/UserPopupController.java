@@ -18,8 +18,8 @@ public class UserPopupController {
         imageview.setImage(new Image(Utils.selectedUser.getIcon()));
     }
     @FXML
-    private void closePopup(ActionEvent event) {
-        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+    private void closePopup(ActionEvent actionEvent) {
+        Stage stage = (Stage) ((javafx.scene.Node) actionEvent.getSource()).getScene().getWindow();
         stage.close();
     }
 }

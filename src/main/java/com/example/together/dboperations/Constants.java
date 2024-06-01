@@ -28,6 +28,7 @@ public class Constants {
     public static String groupsFromMember = phpLocation + "phpgroups/getgroups_frommember.php";
     public static String getGroupGivenId = phpLocation + "phpgroups/getgroup.php";
     public static String getTasksFromGroup = phpLocation + "phpgroups/gettasks_group.php";
+    public static String getManager = phpLocation + "phpgroups/getmanager.php";
     //Patterns
     public static String mysqlDateFormat = "yyyy-MM-dd";
 

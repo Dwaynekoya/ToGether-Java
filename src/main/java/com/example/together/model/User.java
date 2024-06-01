@@ -133,7 +133,7 @@ public class User {
     }
 
     /**
-     *
+     * Compares users based on IDs
      * @param obj -> should be instaceof User. Object to be compared.
      * @return true if obj is a User object AND ids match
      */

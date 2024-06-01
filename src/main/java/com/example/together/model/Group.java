@@ -101,4 +101,15 @@ public class Group {
     public String toString() {
         return this.name;
     }
+
+    /**
+     * Compares groups based on IDs
+     * @param obj should be instance of Group. Object to be compared to this group
+     * @return true if obj is a Group with this id
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Group)) return false;
+        return this.id == ((Group) obj).getId();
+    }
 }

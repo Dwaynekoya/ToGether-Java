@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -96,12 +97,33 @@ public class DBGroup {
                 Group group = DBGroup.getGroup(groupId);
                 if (group!=null) groupHashSet.add(group);
             }
+
+            for (Group group: groupHashSet){
+                group.setManager(DBGroup.searchManager(group));
+            }
+
             return groupHashSet;
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         return null;
+    }
+
+    private static User searchManager(Group group) {
+        try {
+            URL url = new URL(Constants.getManager);
+            String postdata = String.format("group_id=%d", group.getId());
+            String response = DBGeneral.sendHttpPostRequest(url, postdata);
+            System.out.println(response);
+            Gson gson = new Gson();
+            User manager = gson.fromJson(response, User.class);
+            return manager;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
     }
 
     /**
@@ -114,7 +136,7 @@ public class DBGroup {
             URL url = new URL(Constants.getGroupGivenId + "?id=" + groupId);
             String response = DBGeneral.sendHttpGetRequest(url);
             Gson gson = new Gson();
-            Group group = gson.fromJson(response.toString(), Group.class);
+            Group group = gson.fromJson(response, Group.class);
             return group;
         } catch (IOException e) {
             System.out.println("Exception getting group from id");
