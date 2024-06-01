@@ -84,9 +84,8 @@ public class DBGroup {
      */
     public static HashSet<Group> searchGroupsFromMember(User user) {
         try {
-            URL url = new URL(Constants.groupsFromMember);
-            String postData = "user_id=" + user.getId();
-            String jsonResponse = DBGeneral.sendHttpPostRequest(url, postData);
+            URL url = new URL(Constants.groupsFromMember + "?user_id=" + user.getId());
+            String jsonResponse = DBGeneral.sendHttpGetRequest(url);
             if (jsonResponse.equals("")) return null;
 
             HashSet<Group> groupHashSet = new HashSet<>();
@@ -130,7 +129,7 @@ public class DBGroup {
      */
     public static String getTasks(int id) {
         try {
-            URL url = new URL(Constants.getTasksFromUser + "?id=" + id);
+            URL url = new URL(Constants.getTasksFromGroup + "?id=" + id);
             return  DBGeneral.sendHttpGetRequest(url);
         } catch (Exception e) {
             e.printStackTrace();

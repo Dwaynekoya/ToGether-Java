@@ -51,10 +51,8 @@ public class Utils {
     public static void sidebarSetup(Button settingsButton, Button groupButton, Button listButton, Button homeButton) {
         //TODO: Settings
         //settingsButton.setOnAction(actionEvent -> ViewSwitcher.switchView());
-        //TODO: Social view
-        //groupButton.setOnAction(actionEvent -> ViewSwitcher.switchView(View.GROUPS));
+        groupButton.setOnAction(actionEvent -> ViewSwitcher.switchView(View.GROUPS));
         listButton.setOnAction(actionEvent -> ViewSwitcher.switchView(View.TASKLIST));
-        //TODO:Feed
         homeButton.setOnAction(actionEvent -> ViewSwitcher.switchView(View.FEED));
     }
 

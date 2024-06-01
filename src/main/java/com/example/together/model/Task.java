@@ -10,6 +10,7 @@ public class Task {
     private boolean finished;
     private boolean shared;
     private String image; //image URL
+    private User owner;
     /**
      * Constructor used to create a task from scratch
      * @param id -> identifier
@@ -86,8 +87,17 @@ public class Task {
         this.image = image;
     }
 
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
     @Override
     public String toString() {
         return this.getName();
     }
+
 }

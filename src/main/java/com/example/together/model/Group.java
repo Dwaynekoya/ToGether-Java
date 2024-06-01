@@ -96,4 +96,9 @@ public class Group {
     public void setSharedHabits(Set<Habit> sharedHabits) {
         this.sharedHabits = sharedHabits;
     }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

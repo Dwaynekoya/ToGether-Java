@@ -50,14 +50,20 @@
          <children>
             <Button mnemonicParsing="false" onAction="#login" text="Login">
                <styleClass>
-                  <String fx:value="lightButton" />
+                  <String fx:value="darkButton" />
                   <String fx:value="roboto-medium" />
-               </styleClass></Button>
+               </styleClass>
+               <font>
+                  <Font size="18.0" />
+               </font></Button>
             <Button mnemonicParsing="false" onAction="#signup" stylesheets="@main.css" text="Sign Up">
                <styleClass>
-                  <String fx:value="lightButton" />
+                  <String fx:value="darkButton" />
                   <String fx:value="roboto-medium" />
-               </styleClass></Button>
+               </styleClass>
+               <font>
+                  <Font size="18.0" />
+               </font></Button>
          </children>
          <BorderPane.margin>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

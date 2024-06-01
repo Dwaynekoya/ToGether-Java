@@ -12,6 +12,7 @@ import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -36,6 +37,7 @@ public class GroupsController {
         Utils.sidebarSetup(settingsButton,groupButton,listButton,homeButton);
         Utils.profileSideSetup(usernameLabel,groupsListview,friendsListview, openProfile);
         fetchGroupTasks();
+        displayGroups(Utils.loggedInUser.getGroups());
     }
     private void fetchGroupTasks(){
         for (Group group: Utils.loggedInUser.getGroups()){
@@ -51,6 +53,7 @@ public class GroupsController {
                 .registerTypeAdapter(Date.class, new SQLDateAdapter())
                 .create();
         //System.out.println(json);
+        System.out.println(json);
         JsonObject jsonObject = JsonParser.parseString(json.toString()).getAsJsonObject();
 
         Set<Task> fetchedTasks = gson.fromJson(jsonObject.getAsJsonArray("tasks"), new TypeToken<Set<Task>>() {}.getType());
@@ -93,7 +96,7 @@ public class GroupsController {
                 tasksFromHabits.addAll(newHabitSet);
             }
         }
-    public void displayGroups(List<Group> groups) {
+    public void displayGroups(Set<Group> groups) {
         for (Group group : groups) {
             VBox groupVBox = new VBox();
             groupVBox.getStyleClass().add("group-vbox"); // css class
@@ -112,6 +115,15 @@ public class GroupsController {
 
             groupScrollPane.setContent(groupVBox);
         }
+    }
+
+    public void habitToggle(ActionEvent actionEvent) {
+    }
+
+    public void editTask(ActionEvent actionEvent) {
+    }
+
+    public void closePopup(ActionEvent actionEvent) {
     }
 }
 

@@ -3,6 +3,8 @@
     -fx-font-family: 'Roboto';
     -fx-text-fill:  #FFF6ED;
 }
+
+/* BUTTONS */
 .lightButton {
     -fx-background-color: #FFF6ED;
     -fx-text-fill: #8C5D43;
@@ -17,13 +19,82 @@
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
 }
-
 .transparent-button:hover,
 .transparent-button:focused,
 .transparent-button:pressed {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
 }
+
+
+
+.drop-shadow {
+    -fx-stroke: rgba(0, 0, 0, 0);
+    -fx-stroke-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 0, 0);
+}
+
+.popupBox {
+    -fx-background-color: #D98944;
+    -fx-font-family: 'Roboto';
+    -fx-text-fill:  #FFF6ED;
+    -fx-border-radius: 40 40 40 40;
+}
+
+.list-view{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+/*Needed for the cells:*/
+.list-view .list-cell:even {
+    -fx-background-color: transparent;
+}
+.list-view .list-cell:odd {
+    -fx-background-color: transparent;
+}
+.list-view .list-cell:focused {
+    -fx-text-fill: #D98944;
+}
+
+
+.transparent-checkbox .check-box {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-border-color: transparent;
+}
+
+
+/*Removes colored background from scrollpanes*/
+.scroll-pane > .viewport {
+    -fx-background-color: transparent; }
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+
+.taskbox {
+    -fx-padding: 40px;
+    -fx-background-radius: 40px;
+    -fx-background-color: #8C5D43;
+}
+.taskbox .label {
+    -fx-text-fill: #FFF6ED;
+    -fx-font-size: 18px;
+    font-family: "Roboto", sans-serif;
+}
+
+.taskbox .username-label {
+    -fx-text-fill: #f8b276;
+    -fx-cursor: hand;
+}
+.taskbox .username-label:hover {
+    -fx-text-fill: #f8b276;
+    -fx-underline: true;
+}
+
+
 
 /*custom font*/
 .roboto-thin {
@@ -96,44 +167,4 @@
     font-family: "Roboto", sans-serif;
     font-weight: 900;
     font-style: italic;
-}
-.drop-shadow {
-    -fx-stroke: rgba(0, 0, 0, 0);
-    -fx-stroke-width: 1;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 0, 0);
-}
-.popupBox {
-    -fx-background-color: #D98944;
-    -fx-font-family: 'Roboto';
-    -fx-text-fill:  #FFF6ED;
-    -fx-border-radius: 40 40 40 40;
-}
-.list-view{
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
-    -fx-background-insets: 0;
-    -fx-padding: 0;
-}
-/*Needed for the cells:*/
-.list-view .list-cell:even {
-    -fx-background-color: transparent;
-}
-.list-view .list-cell:odd {
-    -fx-background-color: transparent;
-}
-.list-view .list-cell:focused {
-    -fx-text-fill: #D98944;
-}
-/*Removes colored background from scrollpanes*/
-.scroll-pane > .viewport {
-    -fx-background-color: transparent; }
-.scroll-pane {
-    -fx-background-color: transparent;
-}
-.taskbox {
-    -fx-padding: 10px;
-    -fx-margin: 25px;
-    -fx-border-radius: 5px;
-    -fx-text-fill:  #FFF6ED;
-    -fx-background-color: #8C5D43;
 }

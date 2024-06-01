@@ -6,6 +6,7 @@ import com.example.together.dboperations.PhotoUploader;
 import com.example.together.dboperations.TaskFetcher;
 import com.example.together.model.Habit;
 import com.example.together.model.Task;
+import com.example.together.view.TaskListCell;
 import com.example.together.view.View;
 import com.example.together.view.ViewSwitcher;
 import javafx.collections.FXCollections;
@@ -213,78 +214,5 @@ public class TaskListController {
         selectedTask.setInfo(info);
         selectedTask.setDate(java.sql.Date.valueOf(date));
         if (selectedTask instanceof Habit) ((Habit) selectedTask).setRepetition(repeat);
-    }
-
-    /**
-     * Custom ListCell implementation for displaying tasks with a CheckBox and a Button
-     * Checkbox marks tasks as finished while the button deletes them
-     */
-    static class TaskListCell<T extends Task> extends ListCell<T> {
-        @Override
-        protected void updateItem(T item, boolean empty) {
-            super.updateItem(item, empty);
-
-            if (empty || item == null) {
-                setText(null);
-                setGraphic(null);
-            } else {
-                CheckBox checkBox = new CheckBox();
-                boolean finished = item.isFinished();
-                checkBox.setSelected(finished);
-                checkBox.setOnAction(event -> {
-                    if (checkBox.isSelected()) {
-                        File selectedFile = imageFileChooser(event);
-
-                        if (selectedFile != null) {
-                            PhotoUploader photoUploader = new PhotoUploader(selectedFile, this.getItem());
-                            photoUploader.run();
-                            if (item instanceof Habit) {
-                                LocalDate habitDate = item.getDate().toLocalDate().plusDays(((Habit) item).getRepetition());
-                                Habit newHabit = new Habit((Habit) item, java.sql.Date.valueOf(habitDate));
-                                DBTask.addTask(newHabit);
-                            }
-                            item.setFinished(true);
-                            DBTask.updateTask(item);
-                        }
-                    }
-                });
-
-                Label nameLabel = new Label(item.getName());
-                nameLabel.setAlignment(Pos.CENTER_LEFT);
-                nameLabel.setMaxWidth(Double.MAX_VALUE);
-                HBox.setHgrow(nameLabel, Priority.ALWAYS);
-
-                Button deleteButton = new Button("Delete");
-                deleteButton.setOnAction(event -> {
-                    getListView().getItems().remove(item);
-                    DBTask.deleteTask(item);
-                });
-
-                HBox hbox = new HBox(checkBox, nameLabel, deleteButton);
-                hbox.setAlignment(Pos.CENTER_LEFT);
-                hbox.setSpacing(10);
-                hbox.setFillHeight(true);
-
-                setGraphic(hbox);
-            }
-        }
-    }
-
-    /**
-     * Opens a file chooser that can only pick image files
-     * @param event used to extract the current window
-     * @return chosen image file
-     */
-    public static File imageFileChooser(ActionEvent event) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select Image File");
-
-        // File chooser can only pick image files
-        FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter(
-                "Image Files", "*.jpg", "*.jpeg", "*.png", "*.gif", "*.bmp");
-        fileChooser.getExtensionFilters().add(imageFilter);
-
-        Window currentWindow = ((CheckBox) event.getSource()).getScene().getWindow();
-        return fileChooser.showOpenDialog(currentWindow);
     }
 }
