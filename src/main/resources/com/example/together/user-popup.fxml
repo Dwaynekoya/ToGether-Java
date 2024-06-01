@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="400.0" prefWidth="600.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.together.controller.UserPopupController">
+    <padding>
+        <Insets bottom="20.0" left="50.0" right="50.0" top="50.0" />
+    </padding>
+    <children>
+        <HBox prefHeight="100.0" prefWidth="200.0">
+            <children>
+                <ImageView fx:id="imageview" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets bottom="20.0" right="60.0" />
+               </HBox.margin></ImageView>
+                <Label fx:id="labelUsername" alignment="TOP_RIGHT" styleClass="roboto-medium" text="USERNAME" wrapText="true" HBox.hgrow="ALWAYS">
+                    <font>
+                        <Font size="24.0" />
+                    </font>
+                </Label>
+            </children>
+        </HBox>
+        <Label fx:id="labelBio" styleClass="roboto-regular" text="Bio" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+        <!-- Spacer to push the button to the bottom -->
+        <Region VBox.vgrow="ALWAYS" />
+        <HBox alignment="CENTER">
+            <children>
+                <Button mnemonicParsing="false" onAction="#closePopup" styleClass="darkButton" text="✖" />
+            </children>
+        </HBox>
+    </children>
+</VBox>

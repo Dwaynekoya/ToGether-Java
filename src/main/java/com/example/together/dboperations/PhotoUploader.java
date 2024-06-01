@@ -1,6 +1,7 @@
 package com.example.together.dboperations;
 
 import com.example.together.model.Task;
+import com.example.together.model.User;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -12,9 +13,14 @@ import java.nio.charset.StandardCharsets;
 public class PhotoUploader extends Thread{
     private File photoFile;
     private Task task;
+    private User user;
     public PhotoUploader (File photoFile, Task task) {
         this.photoFile=photoFile;
         this.task =task;
+    }
+    public PhotoUploader(File photoFile, User user){
+        this.photoFile=photoFile;
+        this.user=user;
     }
     @Override
     public void run() {
@@ -31,7 +37,6 @@ public class PhotoUploader extends Thread{
                     OutputStream output = connection.getOutputStream();
                     PrintWriter writer = new PrintWriter(new OutputStreamWriter(output, StandardCharsets.UTF_8), true)
             ) {
-                // Send the photo file
                 writer.append("--").append(boundary).append(CRLF);
                 writer.append("Content-Disposition: form-data; name=\"photo\"; filename=\"").append(photoFile.getName()).append("\"").append(CRLF);
                 writer.append("Content-Type: ").append(HttpURLConnection.guessContentTypeFromName(photoFile.getName())).append(CRLF);
@@ -63,11 +68,17 @@ public class PhotoUploader extends Thread{
                     JsonObject jsonResponse = JsonParser.parseString(response.toString()).getAsJsonObject();
                     if (jsonResponse.has("url")) {
                         String url = jsonResponse.get("url").getAsString();
-                        System.out.println(url + " assigned to task " + task.getId());
-                        task.setImage(url);
-                        //DBTask.updateTask(task);
-                        task.setFinished(true);
-                        DBTask.finishTask(task);
+                        System.out.println("URL FOR UPLOAD: " + url);
+                        if (task!=null){
+                            task.setImage(url);
+                            //DBTask.updateTask(task);
+                            task.setFinished(true);
+                            DBTask.finishTask(task);
+                        }
+                        if (user!=null){
+                            user.setIcon(url);
+                            DBUsers.updateProfilePicture(user);
+                        }
                     } else {
                         System.out.println("Failed to get URL from server response.");
                     }

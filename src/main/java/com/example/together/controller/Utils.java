@@ -1,5 +1,6 @@
 package com.example.together.controller;
 
+import com.example.together.Main;
 import com.example.together.dboperations.DBTask;
 import com.example.together.dboperations.SQLDateAdapter;
 import com.example.together.model.Group;
@@ -15,18 +16,26 @@ import com.google.gson.reflect.TypeToken;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.VBox;
+import javafx.stage.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
 import java.util.Set;
 
 public class Utils {
     public static User loggedInUser;
+    public static User selectedUser; //for popups
+    public static Group selectedGroup; //for popups
     /**
      * Used to determine if the user has inputted all the data necessary to create an object
      * @param strings: fields that the user must fill
@@ -83,7 +92,7 @@ public class Utils {
         // Handle double-click on groups list view items
         groupsListView.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
-                Group selectedGroup = groupsListView.getSelectionModel().getSelectedItem();
+                Utils.selectedGroup = groupsListView.getSelectionModel().getSelectedItem();
                 if (selectedGroup != null) {
                     showGroupDetails(selectedGroup);
                 }
@@ -93,9 +102,9 @@ public class Utils {
         // Handle double-click on friends list view items
         friendsListView.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
-                User selectedUser = friendsListView.getSelectionModel().getSelectedItem();
+                selectedUser = friendsListView.getSelectionModel().getSelectedItem();
                 if (selectedUser != null) {
-                    showUserDetails(selectedUser);
+                    showUserDetails();
                 }
             }
         });
@@ -115,20 +124,19 @@ public class Utils {
         // TODO: Display the VBox
     }
 
-    private static void showUserDetails(User user) {
-        Label usernameLabel = new Label(user.getUsername());
-        Label bioLabel = new Label(user.getBio());
-        //TODO: profile pic in users
-        ImageView profileImageView = new ImageView();
-        //ImageView profileImageView = new ImageView(new Image(user.get()));
-        profileImageView.setFitWidth(100);
-        profileImageView.setFitHeight(100);
-        profileImageView.setPreserveRatio(true);
+    private static void showUserDetails() {
+        try {
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource(View.POPUP_USER.getFileName()));
+            Parent root = loader.load();
 
-        VBox userDetailsBox = new VBox(usernameLabel, bioLabel, profileImageView);
-        userDetailsBox.getStyleClass().add("taskbox");
-
-        // TODO: Display the VBox
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNDECORATED); // Hide the title bar
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -166,5 +174,41 @@ public class Utils {
         List<Task> fetchedTasks = gson.fromJson(jsonObject.getAsJsonArray("tasks"), new TypeToken<List<Task>>() {}.getType());
         return fetchedTasks;
     }
+    /**
+     * Opens a file chooser that can only pick image files
+     * @param event used to extract the current window
+     * @return chosen image file
+     */
+    public static File imageFileChooser(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Image File");
 
+        // File chooser can only pick image files
+        FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter(
+                "Image Files", "*.jpg", "*.jpeg", "*.png", "*.gif", "*.bmp");
+        fileChooser.getExtensionFilters().add(imageFilter);
+
+        Window currentWindow = ((ButtonBase) event.getSource()).getScene().getWindow();
+        return fileChooser.showOpenDialog(currentWindow);
+    }
+    public void showPopup(Stage parentStage) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/popup_view.fxml"));
+            Parent root = fxmlLoader.load();
+
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.initStyle(StageStyle.UNDECORATED);  // Hide the title bar
+            popupStage.setScene(new Scene(root));
+
+            // Set the popup at the center of the parent window
+            popupStage.setX(parentStage.getX() + parentStage.getWidth() / 2 - root.prefWidth(-1) / 2);
+            popupStage.setY(parentStage.getY() + parentStage.getHeight() / 2 - root.prefHeight(-1) / 2);
+
+            popupStage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

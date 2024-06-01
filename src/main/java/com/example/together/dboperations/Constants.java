@@ -11,6 +11,7 @@ public class Constants {
     public static String login = phpLocation+"phpusers/login.php";
     public static String getFollowing = phpLocation+ "phpfollows/getfollowing.php";
     public static String searchUsers = phpLocation + "phpusers/searchusers.php";
+    public static String updateIcon = phpLocation + "phpusers/updateuser_icon.php";
     //follows:
     public static String followUser= phpLocation + "phpfollows/followuser.php";
     //TASK MANAGEMENT PHP FILES:

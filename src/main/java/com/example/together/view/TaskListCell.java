@@ -1,5 +1,6 @@
 package com.example.together.view;
 
+import com.example.together.controller.Utils;
 import com.example.together.dboperations.DBTask;
 import com.example.together.dboperations.PhotoUploader;
 import com.example.together.model.Habit;
@@ -37,11 +38,11 @@ public class TaskListCell<T extends Task> extends ListCell<T> {
             checkBox.setSelected(finished);
             checkBox.setOnAction(event -> {
                 if (checkBox.isSelected()) {
-                    File selectedFile = imageFileChooser(event);
+                    File selectedFile = Utils.imageFileChooser(event);
 
                     if (selectedFile != null) {
                         PhotoUploader photoUploader = new PhotoUploader(selectedFile, this.getItem());
-                        photoUploader.run();
+                        photoUploader.start();
                         if (item instanceof Habit) {
                             LocalDate habitDate = item.getDate().toLocalDate().plusDays(((Habit) item).getRepetition());
                             Habit newHabit = new Habit((Habit) item, java.sql.Date.valueOf(habitDate));
@@ -74,23 +75,5 @@ public class TaskListCell<T extends Task> extends ListCell<T> {
 
             setGraphic(hbox);
         }
-    }
-
-    /**
-     * Opens a file chooser that can only pick image files
-     * @param event used to extract the current window
-     * @return chosen image file
-     */
-    private static File imageFileChooser(ActionEvent event) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select Image File");
-
-        // File chooser can only pick image files
-        FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter(
-                "Image Files", "*.jpg", "*.jpeg", "*.png", "*.gif", "*.bmp");
-        fileChooser.getExtensionFilters().add(imageFilter);
-
-        Window currentWindow = ((CheckBox) event.getSource()).getScene().getWindow();
-        return fileChooser.showOpenDialog(currentWindow);
     }
 }

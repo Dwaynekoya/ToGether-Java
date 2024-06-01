@@ -63,7 +63,7 @@ public class DBGroup {
 
         try {
             URL url = new URL(Constants.searchGroups);
-            String postData = "name=" + name;
+            String postData =  "name=" + name;
             String jsonResponse = DBGeneral.sendHttpPostRequest(url, postData);
 
             Gson gson = new Gson();

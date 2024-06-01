@@ -2,6 +2,7 @@ package com.example.together.controller;
 
 import com.example.together.dboperations.DBGroup;
 import com.example.together.dboperations.DBUsers;
+import com.example.together.dboperations.PhotoUploader;
 import com.example.together.model.Group;
 import com.example.together.model.User;
 import com.example.together.view.View;
@@ -12,12 +13,14 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 
+import java.io.File;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -47,6 +50,7 @@ public class ProfileController {
     public void initialize() {
         usernameLabel.setText(Utils.loggedInUser.getUsername());
         bioLabel.setText(Utils.loggedInUser.getBio());
+        profilePic.setImage(new Image(Utils.loggedInUser.getIcon()));
         Utils.sidebarSetup(settingsButton,groupButton,listButton,homeButton);
         //Radio buttons:
         toggleGroup= new ToggleGroup();
@@ -93,6 +97,14 @@ public class ProfileController {
         ViewSwitcher.switchView(View.NEWGROUP);
     }
 
+    public void changeProfilePicture(ActionEvent actionEvent) {
+        File selectedFile = Utils.imageFileChooser(actionEvent);
+        Utils.loggedInUser.setIcon(selectedFile.getAbsolutePath());
+        PhotoUploader photoUploader = new PhotoUploader(selectedFile,Utils.loggedInUser);
+        photoUploader.start();
+        DBUsers.updateProfilePicture(Utils.loggedInUser);
+    }
+
     /**
      * Format for the cells in the listview. Includes a button next to each element.
      * Changes the action triggered depending on whether the search is for a group or an user.
@@ -111,7 +123,6 @@ public class ProfileController {
             content.setSpacing(80);
             content.getChildren().add(actionButton);
         }
-
         @Override
         protected void updateItem(Object item, boolean empty) {
             super.updateItem(item, empty);
@@ -122,7 +133,7 @@ public class ProfileController {
                 actionButton.setDisable(false);
                 if (item instanceof User) {
                     User user = (User) item;
-                    if (user.getId()==Utils.loggedInUser.getId()){
+                    /*if (user.getId()==Utils.loggedInUser.getId()){
                         setGraphic(null);
                         setText(null);
                         actionButton.setDisable(true);
@@ -133,7 +144,15 @@ public class ProfileController {
                             System.out.println("Button clicked for user: " + user.getUsername());
                             DBUsers.followUser(Utils.loggedInUser.getId(), user.getId());
                         });
-                    }
+                    }*/
+                    setText(user.getUsername());
+                    actionButton.setText("Follow");
+                    actionButton.setOnAction(event -> {
+                        System.out.println("Button clicked for user: " + user.getUsername());
+                        DBUsers.followUser(Utils.loggedInUser.getId(), user.getId());
+                    });
+                    //can't follow someone you already follow
+                    if (Utils.loggedInUser.getFollowing().contains(user)) actionButton.setDisable(true);
                 } else if (item instanceof Group) {
                     Group group = (Group) item;
                     setText(group.getName());

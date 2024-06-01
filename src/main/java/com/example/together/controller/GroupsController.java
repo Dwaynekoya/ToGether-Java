@@ -99,7 +99,7 @@ public class GroupsController {
     public void displayGroups(Set<Group> groups) {
         for (Group group : groups) {
             VBox groupVBox = new VBox();
-            groupVBox.getStyleClass().add("group-vbox"); // css class
+            groupVBox.getStyleClass().add("taskbox"); // css class
 
             Label groupNameLabel = new Label(group.getName());
 

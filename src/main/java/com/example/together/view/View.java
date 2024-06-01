@@ -7,7 +7,8 @@ public enum View {
     NEWTASK("new-task-view.fxml"),
     NEWGROUP("new-group-view.fxml"),
     GROUPS("groups-view.fxml"),
-    FEED("feed-view.fxml");
+    FEED("feed-view.fxml"),
+    POPUP_USER("user-popup.fxml");
     private String fileName;
 
     View(String fileName) {

@@ -116,7 +116,7 @@
                               <font>
                                  <Font size="24.0" />
                               </font></Label>
-                           <Button alignment="BOTTOM_CENTER" contentDisplay="CENTER" mnemonicParsing="false" styleClass="lightButton" text="Change profile picture" wrapText="true">
+                           <Button alignment="BOTTOM_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#changeProfilePicture" styleClass="lightButton" text="Change profile picture" wrapText="true">
                               <VBox.margin>
                                  <Insets top="40.0" />
                               </VBox.margin>
@@ -159,9 +159,14 @@
          </VBox>
       </center>
    </BorderPane>
-    <Rectangle fx:id="coverRectangle" arcHeight="50.0" arcWidth="50.0" fill="#fff6ed" height="1024.0" layoutX="150.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="drop-shadow" visible="false" width="1000.0" StackPane.alignment="CENTER_RIGHT" />
-   <VBox fx:id="searchBox" alignment="CENTER_RIGHT" maxWidth="1000.0" prefHeight="200.0" prefWidth="500.0" visible="false" StackPane.alignment="CENTER_RIGHT">
+    <Rectangle fx:id="coverRectangle" arcHeight="50.0" arcWidth="50.0" fill="#fff6ed" height="1024.0" layoutX="150.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="drop-shadow" visible="false" width="700.0" StackPane.alignment="CENTER_RIGHT" />
+   <VBox fx:id="searchBox" alignment="CENTER_RIGHT" maxWidth="700.0" prefHeight="200.0" prefWidth="700.0" visible="false" StackPane.alignment="CENTER_RIGHT">
       <children>
+         <Label styleClass="roboto-medium" text="Search">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </Label>
          <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" prefHeight="100.0" prefWidth="600.0">
             <children>
                <TextField fx:id="searchField" maxWidth="500.0" prefWidth="500.0" />

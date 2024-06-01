@@ -8,6 +8,7 @@ public class User {
     private String username;
     private String password;
     private String bio;
+    private String icon;
     private Set<User> following; //people this user follows
     private Set<User> followers; //people who follow this user
     private Set<Task> tasks;
@@ -116,6 +117,14 @@ public class User {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     @Override

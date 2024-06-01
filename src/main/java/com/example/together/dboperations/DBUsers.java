@@ -1,5 +1,6 @@
 package com.example.together.dboperations;
 
+import com.example.together.controller.Utils;
 import com.example.together.model.User;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
@@ -84,7 +85,7 @@ public class DBUsers {
 
         try {
             URL url = new URL(Constants.searchUsers);
-            String postData = "username=" + username;
+            String postData = String.format("user_id=%d&username=%s", Utils.loggedInUser.getId(), username);
             String response = DBGeneral.sendHttpPostRequest(url, postData);
 
             userList.addAll(parseUsers(response));
@@ -153,6 +154,16 @@ public class DBUsers {
         }catch (JsonSyntaxException exception){
             System.out.printf("EXCEPTION PARSING USERS: %s %n", jsonResponse);
             return null;
+        }
+    }
+
+    public static void updateProfilePicture(User currentUser) {
+        try {
+            URL url = new URL(Constants.updateIcon);
+            String postdata = String.format("user_id=%d&icon_url=%s", currentUser.getId(), currentUser.getIcon());
+            DBGeneral.sendHttpPostRequest(url, postdata);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

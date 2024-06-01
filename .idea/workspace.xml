@@ -4,10 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c554c44-767d-4434-8cb3-5256fb1e9951" name="Changes" comment="feed is almost ready">
+    <list default="true" id="7c554c44-767d-4434-8cb3-5256fb1e9951" name="Changes" comment="adding style">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/together/controller/UserPopupController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/together/user-popup.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/controller/GroupsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/controller/GroupsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/controller/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/controller/ProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/controller/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/controller/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/DBGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/DBGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/DBUsers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/DBUsers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/PhotoUploader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/PhotoUploader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/model/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/view/TaskListCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/view/TaskListCell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/together/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/together/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/view/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/view/View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/together/profile-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/together/profile-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,8 +30,8 @@
       <list>
         <option value="JUnit5 Test Class" />
         <option value="Enum" />
-        <option value="FxmlFile" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -262,7 +273,7 @@
       <workItem from="1717003805284" duration="3537000" />
       <workItem from="1717089274717" duration="14089000" />
       <workItem from="1717171735670" duration="10196000" />
-      <workItem from="1717237834853" duration="6439000" />
+      <workItem from="1717237834853" duration="19164000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -408,7 +419,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717245790048</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="adding style">
+      <option name="closed" value="true" />
+      <created>1717247791027</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1717247791027</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -432,7 +451,8 @@
     <MESSAGE value="refactoring" />
     <MESSAGE value="advancing stuff" />
     <MESSAGE value="feed is almost ready" />
-    <option name="LAST_COMMIT_MESSAGE" value="feed is almost ready" />
+    <MESSAGE value="adding style" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding style" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
