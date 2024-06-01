@@ -59,10 +59,19 @@
 }
 
 
-.transparent-checkbox .check-box {
+.check-box {
     -fx-background-color: transparent;
-    -fx-padding: 0;
-    -fx-border-color: transparent;
+}
+.check-box .box {
+    -fx-background-color: transparent;
+    -fx-border-color: #8C5D43;
+}
+.check-box:selected .mark {
+    -fx-background-color: #FFF6ED;
+}
+
+.check-box:selected .box {
+    -fx-background-color: #8C5D43;
 }
 
 

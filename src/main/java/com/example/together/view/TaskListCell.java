@@ -33,7 +33,6 @@ public class TaskListCell<T extends Task> extends ListCell<T> {
         } else {
             //checkbox to define task as finished or unfinished
             CheckBox checkBox = new CheckBox();
-            checkBox.getStyleClass().add("transparent-checkbox"); //CSS
             boolean finished = item.isFinished();
             checkBox.setSelected(finished);
             checkBox.setOnAction(event -> {
