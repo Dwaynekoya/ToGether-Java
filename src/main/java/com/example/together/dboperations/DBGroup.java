@@ -157,5 +157,15 @@ public class DBGroup {
             return null;
         }
     }
+
+    public static void leaveAllGroups() {
+        try {
+            URL url = new URL(Constants.leaveAllGroups);
+            String postdata = String.format("id=%d", Utils.loggedInUser.getId());
+            DBGeneral.sendHttpPostRequest(url, postdata);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 }
 

@@ -21,6 +21,7 @@ public class Constants {
     public static String updateTasks = phpLocation +"phptasks/edittasks.php";
     public static String deleteTask = phpLocation + "phptasks/deletetask.php";
     public static String finishTask = phpLocation + "phptasks/finishtask.php";
+    public static String deleteAllTasks = phpLocation + "phptasks/deletealltasks.php";
     //GROUP MANAGEMENT PHP FILES
     public static String createGroup = phpLocation + "phpgroups/putgroup.php";
     public static String searchGroups = phpLocation + "phpgroups/searchgroups.php";
@@ -29,6 +30,7 @@ public class Constants {
     public static String getGroupGivenId = phpLocation + "phpgroups/getgroup.php";
     public static String getTasksFromGroup = phpLocation + "phpgroups/gettasks_group.php";
     public static String getManager = phpLocation + "phpgroups/getmanager.php";
+    public static String leaveAllGroups = phpLocation + "phpgroups/leaveallgroups.php";
     //Patterns
     public static String mysqlDateFormat = "yyyy-MM-dd";
 

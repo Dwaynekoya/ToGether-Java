@@ -57,8 +57,7 @@ public class Utils {
      * @param homeButton shows the main feed
      */
     public static void sidebarSetup(Button settingsButton, Button groupButton, Button listButton, Button homeButton) {
-        //TODO: Settings
-        //settingsButton.setOnAction(actionEvent -> ViewSwitcher.switchView());
+        settingsButton.setOnAction(actionEvent -> ViewSwitcher.switchView(View.SETTINGS));
         groupButton.setOnAction(actionEvent -> ViewSwitcher.switchView(View.GROUPS));
         listButton.setOnAction(actionEvent -> ViewSwitcher.switchView(View.TASKLIST));
         homeButton.setOnAction(actionEvent -> ViewSwitcher.switchView(View.FEED));

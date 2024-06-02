@@ -31,7 +31,6 @@ import java.util.Date;
 
 public class TaskListController {
     public Button settingsButton, groupButton, listButton, homeButton, openProfile; //buttons in sidebar + right menu
-
     @FXML
     private ListView<Task> taskListView;
     @FXML
@@ -51,18 +50,9 @@ public class TaskListController {
     private int repeat;
     //profile menu
     public Label usernameLabel;
-    public ListView groupsListview;
-    public ListView friendsListview;
+    public ListView groupsListview, friendsListview;
 
     private boolean habit= false;
-
-    /**
-     * Switches view to the profile one
-     * @param actionEvent profile button
-     */
-    public void openProfile(ActionEvent actionEvent)  {
-        ViewSwitcher.switchView(View.PROFILE);
-    }
 
     /**
      * Initializes the view setting up the listviews to represent data from the DB and setting their listeners
@@ -95,7 +85,7 @@ public class TaskListController {
     /**
      * Assigns items to listviews, gives them a custom look and adds a listener to show their items when double-clicked
      */
-    private <T extends Task> void listViewsSetup(ListView<T> listView, ObservableList<T> tasks) {
+    public <T extends Task> void listViewsSetup(ListView<T> listView, ObservableList<T> tasks) {
         listView.setItems(tasks);
         listView.setCellFactory(param -> new TaskListCell<>());
         listView.setOnMouseClicked(event -> {
@@ -123,9 +113,9 @@ public class TaskListController {
      * @param actionEvent
      */
     public void editTask(ActionEvent actionEvent) {
-        System.out.println("Selected task id: " + selectedTask.getId());
-        Habit newHabit = new Habit(selectedTask,repeat);
-        System.out.println("New id: " + newHabit.getId());
+        //System.out.println("Selected task id: " + selectedTask.getId());
+       // Habit newHabit = new Habit(selectedTask,repeat);
+        //System.out.println("New id: " + newHabit.getId());
         takeInputData();
         //if task didn't use to be a Habit, but has been modified to become one:
         if (! (selectedTask instanceof Habit) && habit){

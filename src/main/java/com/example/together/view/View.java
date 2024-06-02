@@ -9,7 +9,8 @@ public enum View {
     GROUPS("groups-view.fxml"),
     FEED("feed-view.fxml"),
     USER_POPUP("user-popup.fxml"),
-    GROUP_POPUP("group-popup.fxml");
+    GROUP_POPUP("group-popup.fxml"),
+    SETTINGS("settings-view.fxml");
     private String fileName;
 
     View(String fileName) {

@@ -1,11 +1,13 @@
 package com.example.together.controller;
 
+import com.example.together.dboperations.Constants;
 import com.example.together.dboperations.DBGroup;
 import com.example.together.dboperations.DBTask;
 import com.example.together.dboperations.SQLDateAdapter;
 import com.example.together.model.Group;
 import com.example.together.model.Habit;
 import com.example.together.model.Task;
+import com.example.together.view.TaskListCell;
 import com.example.together.view.View;
 import com.example.together.view.ViewSwitcher;
 import com.google.gson.Gson;
@@ -14,17 +16,18 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 
 public class GroupsController {
@@ -33,15 +36,27 @@ public class GroupsController {
     public Label usernameLabel;
     public ListView groupsListview, friendsListview;
     public Button openProfile;
+    public TextField textfieldName;
+    public DatePicker datePicker;
+    public TextArea textAreaInfo;
+    public CheckBox checkBox;
+    public HBox habitbox;
+    public Spinner spinnerHabit;
     private ObservableSet<Task> tasksFromGroups = FXCollections.observableSet();
     private ObservableSet<Habit> habitsFromGroups = FXCollections.observableSet();
     public ScrollPane groupScrollPane;
     public VBox taskPopup;
+    private Task selectedTask;
+    private boolean habit;
+    private int repeat;
+    private String taskName, date, info;
+
     public void initialize() {
-        Utils.sidebarSetup(settingsButton,groupButton,listButton,homeButton);
-        Utils.profileSideSetup(usernameLabel,groupsListview,friendsListview, openProfile);
         fetchGroupTasks();
         displayGroups(Utils.loggedInUser.getGroups());
+
+        Utils.sidebarSetup(settingsButton,groupButton,listButton,homeButton);
+        Utils.profileSideSetup(usernameLabel,groupsListview,friendsListview, openProfile);
     }
     private void fetchGroupTasks(){
         for (Group group: Utils.loggedInUser.getGroups()){
@@ -49,7 +64,6 @@ public class GroupsController {
             tasksHabitsFromJSON(json, group);
         }
     }
-
 
     public void displayGroups(Set<Group> groups) {
         for (Group group : groups) {
@@ -89,13 +103,109 @@ public class GroupsController {
     }
 
     public void habitToggle(ActionEvent actionEvent) {
+        habit = !habit;
+        habitbox.setVisible(habit);
     }
 
     public void editTask(ActionEvent actionEvent) {
+        takeInputData();
+        //if task didn't use to be a Habit, but has been modified to become one:
+        if (! (selectedTask instanceof Habit) && habit){
+            DBTask.updateTask(new Habit(selectedTask, repeat));
+        } else {
+            DBTask.updateTask(selectedTask);
+        }
+        closePopup(actionEvent);
     }
 
-    public void closePopup(ActionEvent actionEvent) {
+    private void takeInputData() {
+        taskName = textfieldName.getText();
+        info = textAreaInfo.getText();
+        LocalDate selectedDate = datePicker.getValue();
+        //if it doesn´t have a selected date, ignore the date field
+        if (selectedDate.getYear() != 0) {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Constants.mysqlDateFormat);
+            date = simpleDateFormat.format(java.util.Date.from(selectedDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        } else {
+            // no date has been selected
+            date = null;
+        }
+        ArrayList<String> fieldsToFill;
+        if (habit){
+            repeat = (int) spinnerHabit.getValue();
+            fieldsToFill = new ArrayList<>(Arrays.asList(taskName,repeat+""));
+        } else {
+            fieldsToFill = new ArrayList<>(Arrays.asList(taskName));
+        }
+        if (Utils.checkDataValidity(fieldsToFill)){
+            assignValues();
+        } else {
+            //TODO: label
+            //labelRequiredFields.setVisible(true);
+        }
     }
+    /**
+     * Assigns the values that have been taken from the input fields by takeInputData() to the corresponding fields in the Task object
+     */
+    private void assignValues() {
+        selectedTask.setName(taskName);
+        selectedTask.setInfo(info);
+        selectedTask.setDate(java.sql.Date.valueOf(date));
+        if (selectedTask instanceof Habit) ((Habit) selectedTask).setRepetition(repeat);
+    }
+
+    /**
+     * Hides the popup used to show task details
+     * @param actionEvent cancel button
+     */
+    public void closePopup(ActionEvent actionEvent) {
+        taskPopup.setVisible(false);
+    }
+    /**
+     * Assigns items to listviews, gives them a custom look and adds a listener to show their items when double-clicked
+     */
+    public <T extends Task> void listViewsSetup(ListView<T> listView, ObservableList<T> tasks) {
+        listView.setItems(tasks);
+        listView.setCellFactory(param -> new TaskListCell<>());
+        listView.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                T selectedItem = listView.getSelectionModel().getSelectedItem();
+                if (selectedItem != null) {
+                    selectedTask = selectedItem;
+                    showPopup();
+                }
+            }
+        });
+    }
+    /**
+     * Shows popup populated with the values from the selected task on the list
+     */
+    private void showPopup() {
+        textfieldName.setText(selectedTask.getName());
+        textAreaInfo.setText(selectedTask.getInfo() != null ? selectedTask.getInfo() : "");
+        if (selectedTask.getDate() != null) {
+            datePicker.setValue(selectedTask.getDate().toLocalDate());
+        }
+
+        if (selectedTask instanceof Habit){
+            habit = true;
+            checkBox.setSelected(true);
+            habitbox.setVisible(true);
+            spinnerHabit.getValueFactory().setValue(((Habit) selectedTask).getRepetition());
+        } else {
+            habit = false;
+            checkBox.setSelected(false);
+            habitbox.setVisible(false);
+            spinnerHabit.getValueFactory().setValue(0);
+        }
+        taskPopup.setVisible(true);
+    }
+
+    /**
+     * Extracts Tasks and Habits from a json String
+     * @param json json containing the tasks
+     * @param group group the tasks belong to
+     */
     private void tasksHabitsFromJSON(String json, Group group) {
         if (json==null) return;
 

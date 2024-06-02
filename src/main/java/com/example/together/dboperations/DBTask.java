@@ -114,4 +114,14 @@ public class DBTask {
             return null;
         }
     }
+
+    public static void deleteAllTasks() {
+        try {
+            URL url = new URL(Constants.deleteAllTasks);
+            String postdata = String.format("id=%d", Utils.loggedInUser.getId());
+            DBGeneral.sendHttpPostRequest(url,postdata);
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
