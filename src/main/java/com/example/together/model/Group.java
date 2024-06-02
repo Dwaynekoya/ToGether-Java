@@ -1,5 +1,6 @@
 package com.example.together.model;
 
+import java.util.Objects;
 import java.util.Set;
 
 public class Group {
@@ -104,12 +105,19 @@ public class Group {
 
     /**
      * Compares groups based on IDs
-     * @param obj should be instance of Group. Object to be compared to this group
+     * @param o should be instance of Group. Object to be compared to this group
      * @return true if obj is a Group with this id
      */
     @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof Group)) return false;
-        return this.id == ((Group) obj).getId();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Group group = (Group) o;
+        return id == group.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

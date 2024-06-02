@@ -156,6 +156,12 @@ public class ProfileController {
                         System.out.println("Button clicked for group: " + group.getName());
                         DBGroup.putMember(group,Utils.loggedInUser);
                     });
+                    //if user is in group disable the join button
+                    boolean inGroup = Utils.loggedInUser.getGroups().contains(group);
+
+                    if (inGroup) {
+                        actionButton.setDisable(true);
+                    }
                 }
                 setGraphic(content);
             }
