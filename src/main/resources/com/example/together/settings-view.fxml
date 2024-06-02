@@ -11,104 +11,100 @@
     <BorderPane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
         <left>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="130.0">
-                <children>
-                    <Button fx:id="settingsButton" mnemonicParsing="false" styleClass="transparent-button">
-                        <graphic>
-                            <FontIcon fill="#fff6ed" iconLiteral="fa-cog" iconSize="40" />
-                        </graphic>
-                    </Button>
-                    <VBox alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
-                        <children>
-                            <Button fx:id="groupButton" mnemonicParsing="false" styleClass="transparent-button">
-                                <graphic>
-                                    <FontIcon fill="#fff6ed" iconLiteral="fa-users" iconSize="40" />
-                                </graphic>
-                            </Button>
-                            <Button fx:id="listButton" mnemonicParsing="false" styleClass="transparent-button">
-                                <graphic>
-                                    <FontIcon fill="#fff6ed" iconLiteral="fa-list" iconSize="40" />
-                                </graphic>
-                            </Button>
-                            <Button fx:id="homeButton" mnemonicParsing="false" styleClass="transparent-button">
-                                <graphic>
-                                    <FontIcon fill="#fff6ed" iconLiteral="fa-home" iconSize="40" />
-                                </graphic>
-                            </Button>
-                        </children>
-                        <padding>
-                            <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
-                        </padding>
-                    </VBox>
-                </children>
                 <VBox.margin>
-                    <Insets top="15.0" />
+                    <Insets top="15.0"/>
                 </VBox.margin>
                 <padding>
-                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
                 </padding>
+                <Button fx:id="settingsButton" mnemonicParsing="false" styleClass="transparent-button">
+                    <graphic>
+                        <FontIcon fill="#fff6ed" iconLiteral="fa-cog" iconSize="40"/>
+                    </graphic>
+                </Button>
+                <VBox alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
+                    <padding>
+                        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0"/>
+                    </padding>
+                    <Button fx:id="groupButton" mnemonicParsing="false" styleClass="transparent-button">
+                        <graphic>
+                            <FontIcon fill="#fff6ed" iconLiteral="fa-users" iconSize="40"/>
+                        </graphic>
+                    </Button>
+                    <Button fx:id="listButton" mnemonicParsing="false" styleClass="transparent-button">
+                        <graphic>
+                            <FontIcon fill="#fff6ed" iconLiteral="fa-list" iconSize="40"/>
+                        </graphic>
+                    </Button>
+                    <Button fx:id="homeButton" mnemonicParsing="false" styleClass="transparent-button">
+                        <graphic>
+                            <FontIcon fill="#fff6ed" iconLiteral="fa-home" iconSize="40"/>
+                        </graphic>
+                    </Button>
+                </VBox>
             </VBox>
         </left>
         <center>
-            <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="40.0" BorderPane.alignment="CENTER">
-                <children>
-                    <Button mnemonicParsing="false" onAction="#logOut" text="Log out">
-                        <styleClass>
-                            <String fx:value="darkButton" />
-                            <String fx:value="roboto-medium" />
-                        </styleClass>
-                        <font>
-                            <Font size="24.0" />
-                        </font></Button>
-                    <Button mnemonicParsing="false" onAction="#deleteAllTasks" text="Delete all tasks">
-                  <styleClass>
-                     <String fx:value="lightButton" />
-                     <String fx:value="roboto-regular" />
-                  </styleClass></Button>
-                    <Button mnemonicParsing="false" onAction="#leaveAllGroups" text="Leave all groups">
-                  <styleClass>
-                     <String fx:value="lightButton" />
-                     <String fx:value="roboto-regular" />
-                  </styleClass></Button>
-                </children>
+            <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="40.0"
+                  BorderPane.alignment="CENTER">
                 <BorderPane.margin>
-                    <Insets bottom="80.0" left="80.0" right="80.0" top="80.0" />
+                    <Insets bottom="80.0" left="80.0" right="80.0" top="80.0"/>
                 </BorderPane.margin>
+                <Button mnemonicParsing="false" onAction="#logOut" text="Log out">
+                    <styleClass>
+                        <String fx:value="darkButton"/>
+                        <String fx:value="roboto-medium"/>
+                    </styleClass>
+                    <font>
+                        <Font size="24.0"/>
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#deleteAllTasks" text="Delete all tasks">
+                    <styleClass>
+                        <String fx:value="lightButton"/>
+                        <String fx:value="roboto-regular"/>
+                    </styleClass>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#leaveAllGroups" text="Leave all groups">
+                    <styleClass>
+                        <String fx:value="lightButton"/>
+                        <String fx:value="roboto-regular"/>
+                    </styleClass>
+                </Button>
             </VBox>
         </center>
     </BorderPane>
-   <VBox fx:id="confirmPopup" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: FFF6ED;" visible="false">
-      <styleClass>
-         <String fx:value="drop-shadow" />
-         <String fx:value="popupBox" />
-      </styleClass>
-      <children>
-         <Label styleClass="roboto-bold" text="THIS ACTION CANNOT BE UNDONE. Are you sure you want to proceed?" textAlignment="CENTER" wrapText="true">
-            <font>
-               <Font size="24.0" />
-            </font>
-         </Label>
-         <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
-            <children>
-               <Button mnemonicParsing="false" onAction="#confirmAction" text="Yes">
-                  <font>
-                     <Font size="18.0" />
-                  </font>
-                  <styleClass>
-                     <String fx:value="roboto-medium" />
-                     <String fx:value="lightButton" />
-                  </styleClass>
-               </Button>
-               <Button mnemonicParsing="false" onAction="#dismissPopup" text="No">
-                  <font>
-                     <Font size="18.0" />
-                  </font>
-                  <styleClass>
-                     <String fx:value="roboto-medium" />
-                     <String fx:value="darkButton" />
-                  </styleClass>
-               </Button>
-            </children>
-         </HBox>
-      </children>
-   </VBox>
+    <VBox fx:id="confirmPopup" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0"
+          prefWidth="700.0" style="-fx-background-color: FFF6ED;" visible="false">
+        <styleClass>
+            <String fx:value="drop-shadow"/>
+            <String fx:value="popupBox"/>
+        </styleClass>
+        <Label styleClass="roboto-bold" text="THIS ACTION CANNOT BE UNDONE. Are you sure you want to proceed?"
+               textAlignment="CENTER" wrapText="true">
+           <font>
+               <Font size="24.0"/>
+           </font>
+        </Label>
+        <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+            <Button mnemonicParsing="false" onAction="#confirmAction" text="Yes">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+                <styleClass>
+                    <String fx:value="roboto-medium"/>
+                    <String fx:value="lightButton"/>
+                </styleClass>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#dismissPopup" text="No">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+                <styleClass>
+                    <String fx:value="roboto-medium"/>
+                    <String fx:value="darkButton"/>
+                </styleClass>
+            </Button>
+        </HBox>
+    </VBox>
 </StackPane>

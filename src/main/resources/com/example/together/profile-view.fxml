@@ -15,206 +15,207 @@
      <BorderPane prefHeight="200.0" prefWidth="200.0">
          <left>
              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="130.0">
-                 <children>
-                     <Button fx:id="settingsButton" mnemonicParsing="false" styleClass="transparent-button">
-                         <graphic>
-                             <FontIcon fill="#fff6ed" iconLiteral="fa-cog" iconSize="40" />
-                         </graphic>
-                     </Button>
-                     <VBox alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
-                         <children>
-                             <Button fx:id="groupButton" mnemonicParsing="false" styleClass="transparent-button">
-                                 <graphic>
-                                     <FontIcon fill="#fff6ed" iconLiteral="fa-users" iconSize="40" />
-                                 </graphic>
-                             </Button>
-                             <Button fx:id="listButton" mnemonicParsing="false" styleClass="transparent-button">
-                                 <graphic>
-                                     <FontIcon fill="#fff6ed" iconLiteral="fa-list" iconSize="40" />
-                                 </graphic>
-                             </Button>
-                             <Button fx:id="homeButton" mnemonicParsing="false" styleClass="transparent-button">
-                                 <graphic>
-                                     <FontIcon fill="#fff6ed" iconLiteral="fa-home" iconSize="40" />
-                                 </graphic>
-                             </Button>
-                         </children>
-                         <padding>
-                             <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
-                         </padding>
-                     </VBox>
-                 </children>
                  <VBox.margin>
-                     <Insets top="15.0" />
+                     <Insets top="15.0"/>
                  </VBox.margin>
                  <padding>
-                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
                  </padding>
+                 <Button fx:id="settingsButton" mnemonicParsing="false" styleClass="transparent-button">
+                     <graphic>
+                         <FontIcon fill="#fff6ed" iconLiteral="fa-cog" iconSize="40"/>
+                     </graphic>
+                 </Button>
+                 <VBox alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
+                     <padding>
+                         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0"/>
+                     </padding>
+                     <Button fx:id="groupButton" mnemonicParsing="false" styleClass="transparent-button">
+                         <graphic>
+                             <FontIcon fill="#fff6ed" iconLiteral="fa-users" iconSize="40"/>
+                         </graphic>
+                     </Button>
+                     <Button fx:id="listButton" mnemonicParsing="false" styleClass="transparent-button">
+                         <graphic>
+                             <FontIcon fill="#fff6ed" iconLiteral="fa-list" iconSize="40"/>
+                         </graphic>
+                     </Button>
+                     <Button fx:id="homeButton" mnemonicParsing="false" styleClass="transparent-button">
+                         <graphic>
+                             <FontIcon fill="#fff6ed" iconLiteral="fa-home" iconSize="40"/>
+                         </graphic>
+                     </Button>
+                 </VBox>
              </VBox>
          </left>
          <right>
              <VBox alignment="CENTER" prefWidth="400.0" BorderPane.alignment="CENTER">
-                 <children>
-                     <Label styleClass="roboto-black" text="My Groups">
-                  <font>
-                     <Font size="24.0" />
-                  </font></Label>
-               <ListView prefHeight="200.0" prefWidth="200.0" />
-               <Button fx:id="searchGroup" mnemonicParsing="false" onAction="#searchView" text="Search for more">
-                  <VBox.margin>
-                     <Insets bottom="40.0" />
-                  </VBox.margin>
-                  <font>
-                     <Font size="18.0" />
-                  </font>
-                  <styleClass>
-                     <String fx:value="darkButton" />
-                     <String fx:value="roboto-black" />
-                  </styleClass></Button>
-                     <Button fx:id="createGroup" mnemonicParsing="false" onAction="#newGroupView" text="Create group">
-                         <VBox.margin>
-                             <Insets bottom="40.0" />
-                         </VBox.margin>
-                         <font>
-                             <Font size="18.0" />
-                         </font>
-                         <styleClass>
-                             <String fx:value="darkButton" />
-                             <String fx:value="roboto-black" />
-                         </styleClass></Button>
-                     <Label styleClass="roboto-black" text="My friends">
-                  <font>
-                     <Font size="24.0" />
-                  </font></Label>
-               <ListView prefHeight="200.0" prefWidth="200.0" />
-               <Button fx:id="searchFriend" mnemonicParsing="false" onAction="#searchView" text="Search for more">
-                  <font>
-                     <Font size="18.0" />
-                  </font>
-                  <styleClass>
-                     <String fx:value="darkButton" />
-                     <String fx:value="roboto-black" />
-                  </styleClass></Button>
-                 </children>
-            <padding>
-               <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
-            </padding>
+                 <padding>
+                     <Insets bottom="40.0" left="40.0" right="40.0" top="40.0"/>
+                 </padding>
+                 <Label styleClass="roboto-black" text="My Groups">
+                     <font>
+                         <Font size="24.0"/>
+                     </font>
+                 </Label>
+                 <ListView prefHeight="200.0" prefWidth="200.0"/>
+                 <Button fx:id="searchGroup" mnemonicParsing="false" onAction="#searchView" text="Search for more">
+                     <VBox.margin>
+                         <Insets bottom="40.0"/>
+                     </VBox.margin>
+                     <font>
+                         <Font size="18.0"/>
+                     </font>
+                     <styleClass>
+                         <String fx:value="darkButton"/>
+                         <String fx:value="roboto-black"/>
+                     </styleClass>
+                 </Button>
+                 <Button fx:id="createGroup" mnemonicParsing="false" onAction="#newGroupView" text="Create group">
+                     <VBox.margin>
+                         <Insets bottom="40.0"/>
+                     </VBox.margin>
+                     <font>
+                         <Font size="18.0"/>
+                     </font>
+                     <styleClass>
+                         <String fx:value="darkButton"/>
+                         <String fx:value="roboto-black"/>
+                     </styleClass>
+                 </Button>
+                 <Label styleClass="roboto-black" text="My friends">
+                     <font>
+                         <Font size="24.0"/>
+                     </font>
+                 </Label>
+                 <ListView prefHeight="200.0" prefWidth="200.0"/>
+                 <Button fx:id="searchFriend" mnemonicParsing="false" onAction="#searchView" text="Search for more">
+                     <font>
+                         <Font size="18.0"/>
+                     </font>
+                     <styleClass>
+                         <String fx:value="darkButton"/>
+                         <String fx:value="roboto-black"/>
+                     </styleClass>
+                 </Button>
              </VBox>
          </right>
       <center>
-         <VBox BorderPane.alignment="CENTER">
-            <children>
-                     <HBox prefHeight="100.0" prefWidth="200.0">
-                         <children>
-                             <ImageView fx:id="profilePic" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
-                        <HBox.margin>
-                           <Insets left="20.0" right="40.0" />
-                        </HBox.margin></ImageView>
-                             <VBox alignment="TOP_CENTER" prefHeight="200.0">
-                                 <children>
-                                     <Label fx:id="usernameLabel" prefHeight="35.0" styleClass="roboto-medium" text="USERNAME">
-                              <font>
-                                 <Font size="24.0" />
-                              </font></Label>
-                           <Button alignment="BOTTOM_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#changeProfilePicture" styleClass="lightButton" text="Change profile picture" wrapText="true">
-                              <VBox.margin>
-                                 <Insets top="40.0" />
-                              </VBox.margin>
-                           </Button>
-                                 </children>
-                             </VBox>
-                         </children>
+          <VBox BorderPane.alignment="CENTER">
+              <padding>
+                  <Insets bottom="50.0" left="150.0" right="50.0" top="50.0"/>
+              </padding>
+              <HBox prefHeight="100.0" prefWidth="200.0">
                   <VBox.margin>
-                     <Insets bottom="40.0" top="60.0" />
+                      <Insets bottom="40.0" top="60.0"/>
                   </VBox.margin>
-                     </HBox>
-               <Label styleClass="roboto-medium" text="Completed Tasks:">
-                  <font>
-                     <Font size="24.0" />
-                  </font></Label>
-               <Label styleClass="roboto-regular" text="00">
-                  <font>
-                     <Font size="18.0" />
-                  </font></Label>
-               <Label styleClass="roboto-medium" text="Tasks in progress:">
-                  <font>
-                     <Font size="24.0" />
-                  </font></Label>
-               <Label styleClass="roboto-regular" text="00">
-                  <font>
-                     <Font size="18.0" />
-                  </font></Label>
-               <Label styleClass="roboto-medium" text="About me:">
-                  <font>
-                     <Font size="24.0" />
-                  </font></Label>
-               <TextArea fx:id="textAreaBio" prefHeight="200.0" prefWidth="200.0">
-                  <VBox.margin>
-                     <Insets top="20.0" />
-                  </VBox.margin>
-               </TextArea>
-               <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
-                  <children>
-                     <Button mnemonicParsing="false" onAction="#editBio" text="Edit bio">
-                        <font>
-                           <Font size="18.0" />
-                        </font>
-                        <styleClass>
-                           <String fx:value="lightButton" />
-                           <String fx:value="roboto-medium" />
-                        </styleClass>
-                     </Button>
-                  </children>
-               </HBox>
-            </children>
-            <padding>
-               <Insets bottom="50.0" left="150.0" right="50.0" top="50.0" />
-            </padding>
-         </VBox>
+                  <ImageView fx:id="profilePic" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true"
+                             preserveRatio="true">
+                      <HBox.margin>
+                          <Insets left="20.0" right="40.0"/>
+                      </HBox.margin>
+                  </ImageView>
+                  <VBox alignment="TOP_CENTER" prefHeight="200.0">
+                      <Label fx:id="usernameLabel" prefHeight="35.0" styleClass="roboto-medium" text="USERNAME">
+                          <font>
+                              <Font size="24.0"/>
+                          </font>
+                      </Label>
+                      <Button alignment="BOTTOM_CENTER" contentDisplay="CENTER" mnemonicParsing="false"
+                              onAction="#changeProfilePicture" styleClass="lightButton"
+                              text="Change profile picture" wrapText="true">
+                          <VBox.margin>
+                              <Insets top="40.0"/>
+                          </VBox.margin>
+                      </Button>
+                  </VBox>
+              </HBox>
+              <Label styleClass="roboto-medium" text="Completed Tasks:">
+                 <font>
+                     <Font size="24.0"/>
+                 </font>
+              </Label>
+              <Label styleClass="roboto-regular" text="00">
+                 <font>
+                     <Font size="18.0"/>
+                 </font>
+              </Label>
+              <Label styleClass="roboto-medium" text="Tasks in progress:">
+                 <font>
+                     <Font size="24.0"/>
+                 </font>
+              </Label>
+              <Label styleClass="roboto-regular" text="00">
+                 <font>
+                     <Font size="18.0"/>
+                 </font>
+              </Label>
+              <Label styleClass="roboto-medium" text="About me:">
+                 <font>
+                     <Font size="24.0"/>
+                 </font>
+              </Label>
+              <TextArea fx:id="textAreaBio" prefHeight="200.0" prefWidth="200.0">
+                 <VBox.margin>
+                     <Insets top="20.0"/>
+                 </VBox.margin>
+              </TextArea>
+              <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                  <Button mnemonicParsing="false" onAction="#editBio" text="Edit bio">
+                      <font>
+                          <Font size="18.0"/>
+                      </font>
+                      <styleClass>
+                          <String fx:value="lightButton"/>
+                          <String fx:value="roboto-medium"/>
+                      </styleClass>
+                  </Button>
+              </HBox>
+          </VBox>
       </center>
    </BorderPane>
     <Rectangle fx:id="coverRectangle" arcHeight="50.0" arcWidth="50.0" fill="#fff6ed" height="1024.0" layoutX="150.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="drop-shadow" visible="false" width="700.0" StackPane.alignment="CENTER_RIGHT" />
-   <VBox fx:id="searchBox" alignment="CENTER_RIGHT" maxWidth="700.0" prefHeight="200.0" prefWidth="700.0" visible="false" StackPane.alignment="CENTER_RIGHT">
-      <children>
-         <Label styleClass="roboto-medium" text="Search">
-            <font>
-               <Font size="24.0" />
-            </font>
-         </Label>
-         <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" prefHeight="100.0" prefWidth="600.0">
-            <children>
-               <TextField fx:id="searchField" maxWidth="500.0" prefWidth="500.0" />
-               <Button mnemonicParsing="false" onAction="#search" styleClass="darkButton">
+    <VBox fx:id="searchBox" alignment="CENTER_RIGHT" maxWidth="700.0" prefHeight="200.0" prefWidth="700.0"
+          visible="false" StackPane.alignment="CENTER_RIGHT">
+        <padding>
+            <Insets right="40.0"/>
+        </padding>
+        <Label styleClass="roboto-medium" text="Search">
+           <font>
+               <Font size="24.0"/>
+           </font>
+        </Label>
+        <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" prefHeight="100.0" prefWidth="600.0">
+            <TextField fx:id="searchField" maxWidth="500.0" prefWidth="500.0"/>
+            <Button mnemonicParsing="false" onAction="#search" styleClass="darkButton">
 
-                   <graphic>
-                       <FontIcon fill="#fff6ed" iconLiteral="fa-search" iconSize="20" />
-                   </graphic>
-                  <HBox.margin>
-                     <Insets left="40.0" />
-                  </HBox.margin></Button>
-            </children></HBox>
-         <HBox alignment="CENTER" maxWidth="-Infinity" prefWidth="600.0" spacing="40.0" VBox.vgrow="NEVER">
-            <children>
-      
-      
-                <RadioButton fx:id="radioGroup" styleClass="roboto-medium" text="Group">
-                  <font>
-                     <Font size="14.0" />
-                  </font></RadioButton>
-                <RadioButton fx:id="radioUser" styleClass="roboto-medium" text="User">
-                  <font>
-                     <Font size="14.0" />
-                  </font></RadioButton>
-            </children>
+                <graphic>
+                    <FontIcon fill="#fff6ed" iconLiteral="fa-search" iconSize="20"/>
+                </graphic>
+                <HBox.margin>
+                    <Insets left="40.0"/>
+                </HBox.margin>
+            </Button>
+        </HBox>
+        <HBox alignment="CENTER" maxWidth="-Infinity" prefWidth="600.0" spacing="40.0" VBox.vgrow="NEVER">
             <padding>
-               <Insets bottom="20.0" />
+                <Insets bottom="20.0"/>
             </padding>
-         </HBox>
 
-          <ListView fx:id="listviewSearch" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" />
-      </children>
-      <padding>
-         <Insets right="40.0" />
-      </padding>
-   </VBox>
+
+            <RadioButton fx:id="radioGroup" styleClass="roboto-medium" text="Group">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </RadioButton>
+            <RadioButton fx:id="radioUser" styleClass="roboto-medium" text="User">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </RadioButton>
+        </HBox>
+
+        <ListView fx:id="listviewSearch" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0"
+                  prefWidth="600.0"/>
+    </VBox>
 </StackPane>

@@ -12,41 +12,37 @@
    <BorderPane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
       <left>
          <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="130.0">
-            <children>
-               <Button fx:id="settingsButton" mnemonicParsing="false" styleClass="transparent-button">
-                  <graphic>
-                     <FontIcon fill="#fff6ed" iconLiteral="fa-cog" iconSize="40" />
-                  </graphic>
-               </Button>
-               <VBox alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
-                  <children>
-                     <Button fx:id="groupButton" mnemonicParsing="false" styleClass="transparent-button">
-                        <graphic>
-                           <FontIcon fill="#fff6ed" iconLiteral="fa-users" iconSize="40" />
-                        </graphic>
-                     </Button>
-                     <Button fx:id="listButton" mnemonicParsing="false" styleClass="transparent-button">
-                        <graphic>
-                           <FontIcon fill="#fff6ed" iconLiteral="fa-list" iconSize="40" />
-                        </graphic>
-                     </Button>
-                     <Button fx:id="homeButton" mnemonicParsing="false" styleClass="transparent-button">
-                        <graphic>
-                           <FontIcon fill="#fff6ed" iconLiteral="fa-home" iconSize="40" />
-                        </graphic>
-                     </Button>
-                  </children>
-                  <padding>
-                     <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
-                  </padding>
-               </VBox>
-            </children>
             <VBox.margin>
-               <Insets top="15.0" />
+               <Insets top="15.0"/>
             </VBox.margin>
             <padding>
-               <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
             </padding>
+            <Button fx:id="settingsButton" mnemonicParsing="false" styleClass="transparent-button">
+               <graphic>
+                  <FontIcon fill="#fff6ed" iconLiteral="fa-cog" iconSize="40"/>
+               </graphic>
+            </Button>
+            <VBox alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="15.0" left="5.0" right="5.0" top="15.0"/>
+               </padding>
+               <Button fx:id="groupButton" mnemonicParsing="false" styleClass="transparent-button">
+                  <graphic>
+                     <FontIcon fill="#fff6ed" iconLiteral="fa-users" iconSize="40"/>
+                  </graphic>
+               </Button>
+               <Button fx:id="listButton" mnemonicParsing="false" styleClass="transparent-button">
+                  <graphic>
+                     <FontIcon fill="#fff6ed" iconLiteral="fa-list" iconSize="40"/>
+                  </graphic>
+               </Button>
+               <Button fx:id="homeButton" mnemonicParsing="false" styleClass="transparent-button">
+                  <graphic>
+                     <FontIcon fill="#fff6ed" iconLiteral="fa-home" iconSize="40"/>
+                  </graphic>
+               </Button>
+            </VBox>
          </VBox>
       </left>
       <top>
@@ -57,93 +53,95 @@
       </top>
       <center>
          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-            <children>
-               <Label text="Name">
-                  <padding>
-                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                  </padding>
-                  <font>
-                     <Font name="JetBrains Mono Medium" size="18.0" />
-                  </font></Label>
-               <TextField fx:id="textfieldName" />
-               <Label text="Date">
-                  <padding>
-                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                  </padding>
-                  <font>
-                     <Font name="JetBrains Mono Medium" size="18.0" />
-                  </font></Label>
-               <DatePicker fx:id="datePicker" />
-               <Label text="Info">
-                  <padding>
-                     <Insets bottom="5.0" top="5.0" />
-                  </padding>
-                  <font>
-                     <Font name="JetBrains Mono Medium" size="18.0" />
-                  </font></Label>
-               <TextArea fx:id="textAreaInfo" prefHeight="200.0" prefWidth="200.0">
-                  <padding>
-                     <Insets bottom="5.0" top="5.0" />
-                  </padding></TextArea>
-               <CheckBox fx:id="checkBox" mnemonicParsing="false" onAction="#habitToggle" text="Habit?">
-                  <padding>
-                     <Insets top="5.0" />
-                  </padding>
-                  <font>
-                     <Font name="JetBrains Mono Medium" size="18.0" />
-                  </font></CheckBox>
-               <HBox fx:id="habitbox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" visible="false">
-                  <children>
-                     <Label text="Repeat every...">
-                           <font>
-                              <Font name="JetBrains Mono Medium" size="18.0" />
-                           </font></Label>
-                     <Spinner fx:id="spinnerRepeat" editable="true" prefHeight="25.0" prefWidth="65.0">
-                        <HBox.margin>
-                           <Insets left="20.0" right="10.0" />
-                        </HBox.margin>
-                        <valueFactory>
-                           <SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="1" max="365" min="1" />
-                        </valueFactory>
-                     </Spinner>
-                     <Label text="days">
-                           <font>
-                              <Font name="JetBrains Mono Medium" size="18.0" />
-                           </font></Label>
-                  </children>
-                  <opaqueInsets>
-                     <Insets />
-                  </opaqueInsets>
-                  <padding>
-                     <Insets left="5.0" right="5.0" />
-                  </padding>
-               </HBox>
-                  <Label fx:id="labelRequiredFields" text="Check that you input at least a name for your task" visible="false">
-                     <font>
-                        <Font name="JetBrains Mono Medium" size="12.0" />
-                     </font>
-                  </Label>
-               <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
-                  <children>
-                     <Button mnemonicParsing="false" onAction="#createTask" styleClass="darkButton" text="Create">
-                        <font>
-                           <Font size="18.0" />
-                        </font>
-                     </Button>
-                     <Button mnemonicParsing="false" onAction="#cancel" styleClass="lightButton" text="Cancel">
-                        <font>
-                           <Font size="18.0" />
-                        </font>
-                     </Button>
-                  </children>
-                  <padding>
-                     <Insets bottom="10.0" />
-                  </padding>
-               </HBox>
-            </children>
             <padding>
-               <Insets left="100.0" right="20.0" top="10.0" />
+               <Insets left="100.0" right="20.0" top="10.0"/>
             </padding>
+            <Label text="Name">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+               </padding>
+               <font>
+                  <Font name="JetBrains Mono Medium" size="18.0"/>
+               </font>
+            </Label>
+            <TextField fx:id="textfieldName"/>
+            <Label text="Date">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+               </padding>
+               <font>
+                  <Font name="JetBrains Mono Medium" size="18.0"/>
+               </font>
+            </Label>
+            <DatePicker fx:id="datePicker"/>
+            <Label text="Info">
+               <padding>
+                  <Insets bottom="5.0" top="5.0"/>
+               </padding>
+               <font>
+                  <Font name="JetBrains Mono Medium" size="18.0"/>
+               </font>
+            </Label>
+            <TextArea fx:id="textAreaInfo" prefHeight="200.0" prefWidth="200.0">
+               <padding>
+                  <Insets bottom="5.0" top="5.0"/>
+               </padding>
+            </TextArea>
+            <CheckBox fx:id="checkBox" mnemonicParsing="false" onAction="#habitToggle" text="Habit?">
+               <padding>
+                  <Insets top="5.0"/>
+               </padding>
+               <font>
+                  <Font name="JetBrains Mono Medium" size="18.0"/>
+               </font>
+            </CheckBox>
+            <HBox fx:id="habitbox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" visible="false">
+               <opaqueInsets>
+                  <Insets/>
+               </opaqueInsets>
+               <padding>
+                  <Insets left="5.0" right="5.0"/>
+               </padding>
+               <Label text="Repeat every...">
+                  <font>
+                     <Font name="JetBrains Mono Medium" size="18.0"/>
+                  </font>
+               </Label>
+               <Spinner fx:id="spinnerRepeat" editable="true" prefHeight="25.0" prefWidth="65.0">
+                  <HBox.margin>
+                     <Insets left="20.0" right="10.0"/>
+                  </HBox.margin>
+                  <valueFactory>
+                     <SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="1" max="365" min="1"/>
+                  </valueFactory>
+               </Spinner>
+               <Label text="days">
+                  <font>
+                     <Font name="JetBrains Mono Medium" size="18.0"/>
+                  </font>
+               </Label>
+            </HBox>
+            <Label fx:id="labelRequiredFields" text="Check that you input at least a name for your task"
+                   visible="false">
+               <font>
+                  <Font name="JetBrains Mono Medium" size="12.0"/>
+               </font>
+            </Label>
+            <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
+               <padding>
+                  <Insets bottom="10.0"/>
+               </padding>
+               <Button mnemonicParsing="false" onAction="#createTask" styleClass="darkButton" text="Create">
+                  <font>
+                     <Font size="18.0"/>
+                  </font>
+               </Button>
+               <Button mnemonicParsing="false" onAction="#cancel" styleClass="lightButton" text="Cancel">
+                  <font>
+                     <Font size="18.0"/>
+                  </font>
+               </Button>
+            </HBox>
          </VBox>
       </center>
          <padding>

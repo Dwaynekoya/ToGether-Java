@@ -11,84 +11,73 @@
         <Insets bottom="20.0" left="50.0" right="50.0" top="50.0" />
     </padding>
     <VBox fx:id="nonOwnerBox">
-        <children>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-                <children>
-                    <Label fx:id="labelName" alignment="TOP_RIGHT" styleClass="roboto-medium" text="GROUPNAME" wrapText="true" HBox.hgrow="ALWAYS">
-                        <font>
-                            <Font size="24.0" />
-                        </font>
-                    </Label>
-                    <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                    <Button mnemonicParsing="false" styleClass="lightButton" text="Leave">
-                        <font>
-                            <Font size="14.0" />
-                        </font></Button>
-                </children>
-            </HBox>
-            <Label fx:id="labelDescription" styleClass="roboto-regular" text="Description" wrapText="true">
+        <HBox prefHeight="100.0" prefWidth="200.0">
+            <Label fx:id="labelName" alignment="TOP_RIGHT" styleClass="roboto-medium" text="GROUPNAME"
+                   wrapText="true" HBox.hgrow="ALWAYS">
                 <font>
-                    <Font size="18.0" />
-                </font></Label>
-            <!-- Spacer to push the button to the bottom -->
-            <Region VBox.vgrow="ALWAYS" />
-            <HBox alignment="CENTER">
-                <children>
-                    <Button mnemonicParsing="false" onAction="#closePopup" styleClass="darkButton" text="✖" />
-                </children>
-            </HBox>
-        </children>
+                    <Font size="24.0"/>
+                </font>
+            </Label>
+            <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS"/>
+            <Button mnemonicParsing="false" styleClass="lightButton" text="Leave">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </Button>
+        </HBox>
+        <Label fx:id="labelDescription" styleClass="roboto-regular" text="Description" wrapText="true">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Label>
+        <!-- Spacer to push the button to the bottom -->
+        <Region VBox.vgrow="ALWAYS"/>
+        <HBox alignment="CENTER">
+            <Button mnemonicParsing="false" onAction="#closePopup" styleClass="darkButton" text="✖"/>
+        </HBox>
     </VBox>
     <VBox fx:id="ownerBox" visible="false">
-        <children>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-                <children>
-               <TextField fx:id="textfieldName" styleClass="roboto-medium">
-                  <font>
-                     <Font size="14.0" />
-                  </font>
-               </TextField>
-                    <Region prefHeight="200.0" prefWidth="180.0" HBox.hgrow="ALWAYS" />
-               <VBox alignment="TOP_CENTER" prefHeight="200.0">
-                  <children>
-                     <Button mnemonicParsing="false" onAction="#saveGroupChanges" text="Save">
-                        <font>
-                           <Font size="24.0" />
-                        </font>
-                        <styleClass>
-                           <String fx:value="darkButton" />
-                           <String fx:value="roboto-medium" />
-                        </styleClass>
-                        <VBox.margin>
-                           <Insets bottom="10.0" />
-                        </VBox.margin>
-                     </Button>
-                          <Button mnemonicParsing="false" onAction="#deleteGroup" text="Delete">
-                              <font>
-                                  <Font size="14.0" />
-                              </font>
-                        <styleClass>
-                           <String fx:value="lightButton" />
-                           <String fx:value="roboto-regular" />
-                        </styleClass>
-                     </Button>
-                  </children>
-               </VBox>
-                </children>
-            </HBox>
-         <TextArea fx:id="textAreaDescription" prefHeight="200.0" prefWidth="200.0" styleClass="roboto-regular">
-            <font>
-               <Font size="18.0" />
-            </font>
-         </TextArea>
-            <!-- Spacer to push the button to the bottom -->
-            <Region VBox.vgrow="ALWAYS" />
-            <HBox alignment="CENTER">
-                <children>
-                    <Button mnemonicParsing="false" onAction="#closePopup" styleClass="darkButton" text="✖" />
-                </children>
-            </HBox>
-        </children>
+        <HBox prefHeight="100.0" prefWidth="200.0">
+            <TextField fx:id="textfieldName" styleClass="roboto-medium">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </TextField>
+            <Region prefHeight="200.0" prefWidth="180.0" HBox.hgrow="ALWAYS"/>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0">
+                <Button mnemonicParsing="false" onAction="#saveGroupChanges" text="Save">
+                    <font>
+                        <Font size="24.0"/>
+                    </font>
+                    <styleClass>
+                        <String fx:value="darkButton"/>
+                        <String fx:value="roboto-medium"/>
+                    </styleClass>
+                    <VBox.margin>
+                        <Insets bottom="10.0"/>
+                    </VBox.margin>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#deleteGroup" text="Delete">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                    <styleClass>
+                        <String fx:value="lightButton"/>
+                        <String fx:value="roboto-regular"/>
+                    </styleClass>
+                </Button>
+            </VBox>
+        </HBox>
+        <TextArea fx:id="textAreaDescription" prefHeight="200.0" prefWidth="200.0" styleClass="roboto-regular">
+           <font>
+               <Font size="18.0"/>
+           </font>
+        </TextArea>
+        <!-- Spacer to push the button to the bottom -->
+        <Region VBox.vgrow="ALWAYS"/>
+        <HBox alignment="CENTER">
+            <Button mnemonicParsing="false" onAction="#closePopup" styleClass="darkButton" text="✖"/>
+        </HBox>
     </VBox>
 
 </StackPane>
