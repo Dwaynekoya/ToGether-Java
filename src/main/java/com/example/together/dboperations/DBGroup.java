@@ -10,7 +10,6 @@ import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -87,7 +86,7 @@ public class DBGroup {
         try {
             URL url = new URL(Constants.groupsFromMember + "?user_id=" + user.getId());
             String jsonResponse = DBGeneral.sendHttpGetRequest(url);
-            if (jsonResponse.equals("")) return null;
+            if (jsonResponse.isEmpty()) return null;
 
             HashSet<Group> groupHashSet = new HashSet<>();
             JsonArray jsonArray = JsonParser.parseString(jsonResponse).getAsJsonArray();
@@ -162,6 +161,26 @@ public class DBGroup {
         try {
             URL url = new URL(Constants.leaveAllGroups);
             String postdata = String.format("id=%d", Utils.loggedInUser.getId());
+            DBGeneral.sendHttpPostRequest(url, postdata);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void editGroup(Group group) {
+        try {
+            URL url = new URL(Constants.editGroup);
+            String postdata = String.format("id=%d&name=%s&description=%s", group.getId(), group.getName(),group.getDescription());
+            DBGeneral.sendHttpPostRequest(url, postdata);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteGroup(Group selectedGroup) {
+        try {
+            URL url = new URL(Constants.deleteGroup);
+            String postdata = String.format("id=%d", selectedGroup.getId());
             DBGeneral.sendHttpPostRequest(url, postdata);
         }catch (IOException e){
             e.printStackTrace();

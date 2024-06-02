@@ -31,6 +31,8 @@ public class Constants {
     public static String getTasksFromGroup = phpLocation + "phpgroups/gettasks_group.php";
     public static String getManager = phpLocation + "phpgroups/getmanager.php";
     public static String leaveAllGroups = phpLocation + "phpgroups/leaveallgroups.php";
+    public static String editGroup = phpLocation + "phpgroups/editgroup.php";
+    public static String deleteGroup = phpLocation + "phpgroups/removegroup.php";
     //Patterns
     public static String mysqlDateFormat = "yyyy-MM-dd";
 

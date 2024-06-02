@@ -1,18 +1,14 @@
 package com.example.together.controller;
 
 import com.example.together.dboperations.DBTask;
-import com.example.together.dboperations.DBUsers;
-import com.example.together.dboperations.SQLDateAdapter;
+
+import com.example.together.model.Group;
 import com.example.together.model.Task;
 import com.example.together.model.User;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -24,7 +20,6 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 
-import java.sql.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -32,11 +27,11 @@ import java.util.Set;
 public class FeedController {
     public Label usernameLabel;
     public Button openProfile;
-    public ListView groupsListview;
-    public ListView friendsListview;
+    public ListView<Group> groupsListview;
+    public ListView<User> friendsListview;
     @FXML
     private Button settingsButton, groupButton, listButton, homeButton;
-    private Set<Task> tasksFromFollowing=new HashSet<>();
+    private final Set<Task> tasksFromFollowing=new HashSet<>();
     @FXML
     private ScrollPane scrollPane;
 

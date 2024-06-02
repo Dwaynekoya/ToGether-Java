@@ -1,5 +1,7 @@
 package com.example.together.controller;
 
+import com.example.together.dboperations.DBGroup;
+import com.example.together.model.Group;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -33,9 +35,18 @@ public class GroupPopupController {
         }
     }
     public void saveGroupChanges(ActionEvent actionEvent) {
+        String name = textfieldName.getText();
+        String description = textAreaDescription.getText();
+
+        Group group = Utils.selectedGroup;
+        group.setName(name);
+        group.setDescription(description);
+
+        DBGroup.editGroup(group);
     }
 
     public void deleteGroup(ActionEvent actionEvent) {
+        DBGroup.deleteGroup(Utils.selectedGroup);
     }
 
     public void closePopup(ActionEvent actionEvent) {
