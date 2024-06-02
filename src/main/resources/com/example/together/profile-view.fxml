@@ -148,10 +148,24 @@
                   <font>
                      <Font size="24.0" />
                   </font></Label>
-               <Label fx:id="bioLabel" styleClass="roboto-regular" text="Lorem ipsum dolor sit amer ajhfgdjuyahbgsvdfhjuybgvaiuks dbfghjab hjasbdhj fjahsdgfhjasbdhjfbsdhjabfj sad (max 300)" wrapText="true" VBox.vgrow="ALWAYS">
-                  <font>
-                     <Font size="18.0" />
-                  </font></Label>
+               <TextArea fx:id="textAreaBio" prefHeight="200.0" prefWidth="200.0">
+                  <VBox.margin>
+                     <Insets top="20.0" />
+                  </VBox.margin>
+               </TextArea>
+               <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                  <children>
+                     <Button mnemonicParsing="false" onAction="#editBio" text="Edit bio">
+                        <font>
+                           <Font size="18.0" />
+                        </font>
+                        <styleClass>
+                           <String fx:value="lightButton" />
+                           <String fx:value="roboto-medium" />
+                        </styleClass>
+                     </Button>
+                  </children>
+               </HBox>
             </children>
             <padding>
                <Insets bottom="50.0" left="150.0" right="50.0" top="50.0" />

@@ -105,6 +105,9 @@
                         <font>
                            <Font size="18.0" />
                         </font>
+                        <VBox.margin>
+                           <Insets bottom="20.0" />
+                        </VBox.margin>
                      </Label>
                      <ScrollPane fx:id="groupScrollPane" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                        <content>

@@ -115,7 +115,6 @@ public class DBGroup {
             URL url = new URL(Constants.getManager);
             String postdata = String.format("group_id=%d", group.getId());
             String response = DBGeneral.sendHttpPostRequest(url, postdata);
-            System.out.println(response);
             Gson gson = new Gson();
             User manager = gson.fromJson(response, User.class);
             return manager;

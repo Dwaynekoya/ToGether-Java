@@ -157,11 +157,25 @@ public class DBUsers {
         }
     }
 
-    public static void updateProfilePicture(User currentUser) {
+    /**
+     * Method that assigns url for their profile picture to a user
+     */
+    public static void updateProfilePicture() {
         try {
             URL url = new URL(Constants.updateIcon);
-            String postdata = String.format("user_id=%d&icon_url=%s", currentUser.getId(), currentUser.getIcon());
+            String postdata = String.format("user_id=%d&icon_url=%s", Utils.loggedInUser.getId(), Utils.loggedInUser.getIcon());
             DBGeneral.sendHttpPostRequest(url, postdata);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static void editBio(String newBio) {
+        try {
+            URL url = new URL(Constants.updateUserBio);
+            String postdata = String.format("user_id=%d&field=%s&new_field=%s",
+                    Utils.loggedInUser.getId(), "bio",newBio);
+            String response = DBGeneral.sendHttpPostRequest(url, postdata);
+            System.out.println(response);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

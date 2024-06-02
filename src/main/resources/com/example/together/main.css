@@ -103,7 +103,16 @@
     -fx-underline: true;
 }
 
-
+.groupbox {
+    -fx-padding: 40px;
+    -fx-background-radius: 40px;
+    -fx-background-color: #ffcb9f;
+}
+.groupbox .label {
+    -fx-text-fill: #8C5D43;
+    -fx-font-size: 18px;
+    font-family: "Roboto", sans-serif;
+}
 
 /*custom font*/
 .roboto-thin {

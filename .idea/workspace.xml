@@ -4,17 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c554c44-767d-4434-8cb3-5256fb1e9951" name="Changes" comment="user popup">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/together/controller/GroupPopupController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/together/group-popup.fxml" afterDir="false" />
+    <list default="true" id="7c554c44-767d-4434-8cb3-5256fb1e9951" name="Changes" comment="group popup">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/controller/UserPopupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/controller/UserPopupController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/controller/GroupsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/controller/GroupsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/controller/NewTaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/controller/NewTaskController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/controller/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/controller/ProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/controller/TaskListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/controller/TaskListController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/controller/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/controller/Utils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/Constants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/DBGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/DBGroup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/model/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/model/Group.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/view/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/view/View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/DBTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/DBTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/DBUsers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/DBUsers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/PhotoUploader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/dboperations/PhotoUploader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/together/groups-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/together/groups-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/together/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/together/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/together/profile-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/together/profile-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -269,7 +273,9 @@
       <workItem from="1717003805284" duration="3537000" />
       <workItem from="1717089274717" duration="14089000" />
       <workItem from="1717171735670" duration="10196000" />
-      <workItem from="1717237834853" duration="25747000" />
+      <workItem from="1717237834853" duration="30306000" />
+      <workItem from="1717327419480" duration="2769000" />
+      <workItem from="1717336522875" duration="2921000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -431,7 +437,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717271491155</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="group popup">
+      <option name="closed" value="true" />
+      <created>1717281041474</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1717281041474</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -457,7 +471,8 @@
     <MESSAGE value="feed is almost ready" />
     <MESSAGE value="adding style" />
     <MESSAGE value="user popup" />
-    <option name="LAST_COMMIT_MESSAGE" value="user popup" />
+    <MESSAGE value="group popup" />
+    <option name="LAST_COMMIT_MESSAGE" value="group popup" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

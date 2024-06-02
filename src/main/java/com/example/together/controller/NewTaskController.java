@@ -94,7 +94,7 @@ public class NewTaskController {
         } else {
             DBTask.addTask(newTask);
         }
-        ViewSwitcher.switchView(View.TASKLIST);
+        ViewSwitcher.switchView(Utils.previousView); //takes you back to previous view
     }
     /**
      * Switches view back to the tasklists view

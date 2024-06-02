@@ -34,12 +34,11 @@ public class ProfileController {
     public Button searchGroup, searchFriend;
     public ListView listviewSearch;
     public Button createGroup;
+    public TextArea textAreaBio;
     @FXML
     private Button settingsButton, groupButton, listButton, homeButton;
     @FXML
     private Label usernameLabel;
-    @FXML
-    private Label bioLabel;
     private ToggleGroup toggleGroup;
 
     /**
@@ -49,7 +48,7 @@ public class ProfileController {
      */
     public void initialize() {
         usernameLabel.setText(Utils.loggedInUser.getUsername());
-        bioLabel.setText(Utils.loggedInUser.getBio());
+        textAreaBio.setText(Utils.loggedInUser.getBio());
         profilePic.setImage(new Image(Utils.loggedInUser.getIcon()));
         Utils.sidebarSetup(settingsButton,groupButton,listButton,homeButton);
         //Radio buttons:
@@ -102,7 +101,17 @@ public class ProfileController {
         Utils.loggedInUser.setIcon(selectedFile.getAbsolutePath());
         PhotoUploader photoUploader = new PhotoUploader(selectedFile,Utils.loggedInUser);
         photoUploader.start();
-        DBUsers.updateProfilePicture(Utils.loggedInUser);
+        DBUsers.updateProfilePicture();
+    }
+
+    /**
+     * Takes textarea's content and assigns it to user bio
+     * @param actionEvent
+     */
+    public void editBio(ActionEvent actionEvent) {
+        String bio = textAreaBio.getText();
+        System.out.println(bio);
+        DBUsers.editBio(bio);
     }
 
     /**
@@ -131,20 +140,7 @@ public class ProfileController {
                 setText(null);
             } else {
                 actionButton.setDisable(false);
-                if (item instanceof User) {
-                    User user = (User) item;
-                    /*if (user.getId()==Utils.loggedInUser.getId()){
-                        setGraphic(null);
-                        setText(null);
-                        actionButton.setDisable(true);
-                    }else {
-                        setText(user.getUsername());
-                        actionButton.setText("Follow");
-                        actionButton.setOnAction(event -> {
-                            System.out.println("Button clicked for user: " + user.getUsername());
-                            DBUsers.followUser(Utils.loggedInUser.getId(), user.getId());
-                        });
-                    }*/
+                if (item instanceof User user) {
                     setText(user.getUsername());
                     actionButton.setText("Follow");
                     actionButton.setOnAction(event -> {
@@ -153,8 +149,7 @@ public class ProfileController {
                     });
                     //can't follow someone you already follow
                     if (Utils.loggedInUser.getFollowing().contains(user)) actionButton.setDisable(true);
-                } else if (item instanceof Group) {
-                    Group group = (Group) item;
+                } else if (item instanceof Group group) {
                     setText(group.getName());
                     actionButton.setText("Join");
                     actionButton.setOnAction(event -> {

@@ -27,7 +27,16 @@ public class DBTask {
             postData.append("name=").append(URLEncoder.encode(task.getName(), StandardCharsets.UTF_8));
             if (task.getDate() != null) postData.append("&date=").append(URLEncoder.encode(String.valueOf(task.getDate()), StandardCharsets.UTF_8));
             if (task.getInfo() != null) postData.append("&info=").append(URLEncoder.encode(task.getInfo(), StandardCharsets.UTF_8));
-            postData.append("&user_id=").append(Utils.loggedInUser.getId());
+
+            //CHECK IF IT'S A GROUP TASK OR A USER TASK
+            if (Utils.groupNewTask != null){
+                postData.append("&group_id=").append(Utils.groupNewTask.getId());
+                Utils.groupNewTask = null; //removes the selected group so that a new task, by default, is a user task
+            }else { //if there is no group saved in that variable, the task is a personal one.
+                postData.append("&user_id=").append(Utils.loggedInUser.getId());
+            }
+
+
             if (task instanceof Habit) postData.append("&repeat=").append(((Habit) task).getRepetition());
             //postData.append("&repeat=").append(repeat != null ? repeat : "null"); // Include repeat field
 

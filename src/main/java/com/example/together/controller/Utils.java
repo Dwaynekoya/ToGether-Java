@@ -33,6 +33,8 @@ public class Utils {
     public static User loggedInUser;
     public static User selectedUser; //for popups
     public static Group selectedGroup; //for popups
+    public static Group groupNewTask; //to add a new task for a group
+    public static View previousView; //to go back to after closing add task view
     /**
      * Used to determine if the user has inputted all the data necessary to create an object
      * @param strings: fields that the user must fill

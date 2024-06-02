@@ -77,7 +77,7 @@ public class PhotoUploader extends Thread{
                         }
                         if (user!=null){
                             user.setIcon(url);
-                            DBUsers.updateProfilePicture(user);
+                            DBUsers.updateProfilePicture();
                         }
                     } else {
                         System.out.println("Failed to get URL from server response.");

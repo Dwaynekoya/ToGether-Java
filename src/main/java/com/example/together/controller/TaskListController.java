@@ -114,6 +114,7 @@ public class TaskListController {
      * @param actionEvent new task button
      */
     public void newTask(ActionEvent actionEvent) {
+        Utils.previousView = View.TASKLIST;
         ViewSwitcher.switchView(View.NEWTASK);
     }
 
