@@ -76,7 +76,7 @@
             </VBox>
         </center>
     </BorderPane>
-   <VBox fx:id="confirmPopup" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: FFF6ED;">
+   <VBox fx:id="confirmPopup" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: FFF6ED;" visible="false">
       <styleClass>
          <String fx:value="drop-shadow" />
          <String fx:value="popupBox" />
@@ -89,7 +89,7 @@
          </Label>
          <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
             <children>
-               <Button onAction="#confirmAction" mnemonicParsing="false" text="Yes">
+               <Button mnemonicParsing="false" onAction="#confirmAction" text="Yes">
                   <font>
                      <Font size="18.0" />
                   </font>
@@ -98,7 +98,7 @@
                      <String fx:value="lightButton" />
                   </styleClass>
                </Button>
-               <Button onAction="#dismissPopup" mnemonicParsing="false" text="No">
+               <Button mnemonicParsing="false" onAction="#dismissPopup" text="No">
                   <font>
                      <Font size="18.0" />
                   </font>
