@@ -10,11 +10,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 
 import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import static com.example.together.view.ViewSwitcher.scene;
 
 public class LoginController {
     @FXML
@@ -84,7 +88,30 @@ public class LoginController {
         Utils.loggedInUser = DBUsers.getUser(loginID);
         GroupsFollowsFetcher groupsFollowsFetcher = new GroupsFollowsFetcher();
         groupsFollowsFetcher.start();
+        setKeyboardShortcuts();
         ViewSwitcher.switchView(View.TASKLIST);
+    }
+
+    /**
+     * Sets keyboard shortcuts to switch between scenes using the keyboard
+     */
+    private void setKeyboardShortcuts() {
+        ViewSwitcher.scene.getAccelerators().put(
+                new KeyCodeCombination(KeyCode.L, KeyCombination.CONTROL_DOWN),
+                () -> ViewSwitcher.switchView(View.TASKLIST)
+        );
+        ViewSwitcher.scene.getAccelerators().put(
+                new KeyCodeCombination(KeyCode.G, KeyCombination.CONTROL_DOWN),
+                () -> ViewSwitcher.switchView(View.GROUPS)
+        );
+        ViewSwitcher.scene.getAccelerators().put(
+                new KeyCodeCombination(KeyCode.F, KeyCombination.CONTROL_DOWN),
+                () -> ViewSwitcher.switchView(View.FEED)
+        );
+        ViewSwitcher.scene.getAccelerators().put(
+                new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN),
+                () -> ViewSwitcher.switchView(View.NEWTASK)
+        );
     }
 
     /**

@@ -13,7 +13,7 @@ import java.util.Map;
  * This class handles changing the .fxml view in the main Stage for the app
  */
 public class ViewSwitcher {
-    private static Scene scene;
+    public static Scene scene;
     private static Map<View, Parent> cache = new HashMap<>();
 
     public static void setScene(Scene scene) {

@@ -66,15 +66,7 @@ public class TaskListController {
         listViewsSetup(habitListView, habits);
 
         //set spinner so it only takes integers
-        SpinnerValueFactory.IntegerSpinnerValueFactory valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 365, 1);
-        spinnerHabit.setValueFactory(valueFactory);
-
-        spinnerHabit.setEditable(true);
-        spinnerHabit.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("\\d*")) {
-                spinnerHabit.getEditor().setText(newValue.replaceAll("[^\\d]", ""));
-            }
-        });
+        Utils.integerSpinner(spinnerHabit);
 
         Utils.sidebarSetup(settingsButton,groupButton,listButton,homeButton);
         Utils.profileSideSetup(usernameLabel,groupsListview,friendsListview,openProfile);

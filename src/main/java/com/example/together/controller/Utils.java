@@ -177,6 +177,19 @@ public class Utils {
         Window currentWindow = ((ButtonBase) event.getSource()).getScene().getWindow();
         return fileChooser.showOpenDialog(currentWindow);
     }
+
+    public static void integerSpinner(Spinner spinner) {
+        SpinnerValueFactory.IntegerSpinnerValueFactory valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 365, 1);
+        spinner.setValueFactory(valueFactory);
+
+        spinner.setEditable(true);
+        spinner.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                spinner.getEditor().setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
+    }
+
     public void showPopup(Stage parentStage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/popup_view.fxml"));

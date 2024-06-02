@@ -47,5 +47,4 @@ public class SettingsController {
         }
         action=0;
     }
-    //TODO: Delete all (own) tasks, leave all groups, sign out
 }

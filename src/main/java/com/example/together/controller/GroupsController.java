@@ -55,6 +55,8 @@ public class GroupsController {
         fetchGroupTasks();
         displayGroups(Utils.loggedInUser.getGroups());
 
+        Utils.integerSpinner(spinnerHabit);
+
         Utils.sidebarSetup(settingsButton,groupButton,listButton,homeButton);
         Utils.profileSideSetup(usernameLabel,groupsListview,friendsListview, openProfile);
     }
@@ -75,8 +77,8 @@ public class GroupsController {
             ListView<Task> taskListView = new ListView<>();
             ListView<Habit> habitListView = new ListView<>();
 
-            taskListView.setItems(FXCollections.observableArrayList(group.getSharedTasks()));
-            habitListView.setItems(FXCollections.observableArrayList(group.getSharedHabits()));
+            listViewsSetup(taskListView, FXCollections.observableArrayList(group.getSharedTasks()));
+            listViewsSetup(habitListView,FXCollections.observableArrayList(group.getSharedHabits()));
 
             System.out.println("GROUPS: " + group.getSharedTasks());
             System.out.println("HABITS: " + group.getSharedHabits());
