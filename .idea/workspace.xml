@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c554c44-767d-4434-8cb3-5256fb1e9951" name="Changes" comment="added keyboard shortcuts">
+    <list default="true" id="7c554c44-767d-4434-8cb3-5256fb1e9951" name="Changes" comment="hide confirmation popup by default">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/controller/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/controller/ProfileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/model/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/model/Group.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/together/controller/GroupsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/together/controller/GroupsController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -264,7 +263,7 @@
       <workItem from="1717171735670" duration="10196000" />
       <workItem from="1717237834853" duration="30306000" />
       <workItem from="1717327419480" duration="2769000" />
-      <workItem from="1717336522875" duration="14156000" />
+      <workItem from="1717336522875" duration="16101000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -458,7 +457,23 @@
       <option name="project" value="LOCAL" />
       <updated>1717353638186</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="disable buttons">
+      <option name="closed" value="true" />
+      <created>1717355921442</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1717355921442</updated>
+    </task>
+    <task id="LOCAL-00026" summary="hide confirmation popup by default">
+      <option name="closed" value="true" />
+      <created>1717356599914</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1717356599914</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -488,7 +503,9 @@
     <MESSAGE value="add group tasks, edit user bio" />
     <MESSAGE value="settings view" />
     <MESSAGE value="added keyboard shortcuts" />
-    <option name="LAST_COMMIT_MESSAGE" value="added keyboard shortcuts" />
+    <MESSAGE value="disable buttons" />
+    <MESSAGE value="hide confirmation popup by default" />
+    <option name="LAST_COMMIT_MESSAGE" value="hide confirmation popup by default" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

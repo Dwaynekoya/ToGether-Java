@@ -22,6 +22,7 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 import java.sql.Date;
@@ -63,11 +64,13 @@ public class GroupsController {
     private void fetchGroupTasks(){
         for (Group group: Utils.loggedInUser.getGroups()){
             String json = DBGroup.getTasks(group.getId());
+            System.out.println(json);
             tasksHabitsFromJSON(json, group);
         }
     }
 
     public void displayGroups(Set<Group> groups) {
+        VBox scrollPaneVbox = new VBox();
         for (Group group : groups) {
             VBox groupVBox = new VBox();
             groupVBox.getStyleClass().add("groupbox"); // css class
@@ -80,10 +83,9 @@ public class GroupsController {
             listViewsSetup(taskListView, FXCollections.observableArrayList(group.getSharedTasks()));
             listViewsSetup(habitListView,FXCollections.observableArrayList(group.getSharedHabits()));
 
-            System.out.println("GROUPS: " + group.getSharedTasks());
-            System.out.println("HABITS: " + group.getSharedHabits());
-
             HBox listViewsHBox = new HBox(taskListView, habitListView);
+            listViewsHBox.setAlignment(Pos.CENTER);
+            listViewsHBox.setSpacing(60);
 
             Button addTask = new Button("Add task");
             addTask.setOnAction(actionEvent -> addGroupTask(group));
@@ -92,10 +94,10 @@ public class GroupsController {
             buttonContainer.setAlignment(Pos.BOTTOM_RIGHT);
 
             groupVBox.getChildren().addAll(groupNameLabel, listViewsHBox, buttonContainer);
-
-            groupScrollPane.setFitToWidth(true);
-            groupScrollPane.setContent(groupVBox);
+            scrollPaneVbox.getChildren().add(groupVBox);
         }
+        groupScrollPane.setFitToWidth(true);
+        groupScrollPane.setContent(scrollPaneVbox);
     }
 
     private void addGroupTask(Group group) {
@@ -210,7 +212,7 @@ public class GroupsController {
      */
     private void tasksHabitsFromJSON(String json, Group group) {
         if (json==null) return;
-
+        System.out.println(json);
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Date.class, new SQLDateAdapter())
                 .create();
