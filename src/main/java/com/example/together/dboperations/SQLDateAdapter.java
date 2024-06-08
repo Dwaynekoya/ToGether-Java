@@ -14,7 +14,6 @@ import java.text.SimpleDateFormat;
  */
 public class SQLDateAdapter extends TypeAdapter<Date> {
     private final SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.mysqlDateFormat);
-
     @Override
     public void write(JsonWriter out, Date value) throws IOException {
         if (value == null) {
@@ -26,8 +25,13 @@ public class SQLDateAdapter extends TypeAdapter<Date> {
 
     @Override
     public Date read(JsonReader in) throws IOException {
+        if (in.peek() == com.google.gson.stream.JsonToken.NULL) {
+            in.nextNull();
+            return null;
+        }
         try {
-            return new Date(dateFormat.parse(in.nextString()).getTime());
+            String dateStr = in.nextString();
+            return new Date(dateFormat.parse(dateStr).getTime());
         } catch (ParseException e) {
             throw new IOException(e);
         }

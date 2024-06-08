@@ -46,6 +46,10 @@ public class DBTask {
         }
     }
 
+    /**
+     * Updates task in DB
+     * @param task to update
+     */
     public static void updateTask(Task task) {
         System.out.println("Updating task with id " + task.getId());
         try {
@@ -91,8 +95,8 @@ public class DBTask {
     public static void finishTask(Task task){
         try {
             URL url = new URL(Constants.finishTask);
-            String queryString = String.format("task_id=%d&image=%s&finished=%s", task.getId(), task.getImage(), true);
-            String response = DBGeneral.sendHttpPostRequest(url, queryString);
+            String postdata = String.format("task_id=%d&image=%s&finished=%s", task.getId(), task.getImage(), true);
+            String response = DBGeneral.sendHttpPostRequest(url, postdata);
             System.out.printf("Response when finishing task with id $d: $s $n", task.getId(), response);
         } catch (IOException e) {
             e.printStackTrace();
@@ -115,6 +119,9 @@ public class DBTask {
         }
     }
 
+    /**
+     * Deletes all tasks owned by the current user
+     */
     public static void deleteAllTasks() {
         try {
             URL url = new URL(Constants.deleteAllTasks);

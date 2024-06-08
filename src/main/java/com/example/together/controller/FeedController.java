@@ -35,11 +35,16 @@ public class FeedController {
     @FXML
     private ScrollPane scrollPane;
 
+    /**
+     * Sets up sidebar and profile menu
+     * Gets tasks from DB and adds them to the scrollpane in the middle of the pane
+     */
     public void initialize(){
         Utils.sidebarSetup(settingsButton,groupButton,listButton,homeButton);
         Utils.profileSideSetup(usernameLabel,groupsListview,friendsListview,openProfile);
+
         fetchFollowingTasks();
-        System.out.println(Utils.loggedInUser.getFollowing());
+        populateScrollPaneWithTasks();
     }
 
     /**
@@ -52,11 +57,12 @@ public class FeedController {
             assert tasksFromUser != null;
             for (Task task: tasksFromUser) task.setOwner(user);
             tasksFromFollowing.addAll(tasksFromUser);
-            System.out.println(json);
         }
-
-        populateScrollPaneWithTasks();
     }
+
+    /**
+     * Goes over each task and prepares a container to show its info
+     */
     private void populateScrollPaneWithTasks() {
         VBox container = new VBox(); // Container VBox to hold all task VBoxes
 

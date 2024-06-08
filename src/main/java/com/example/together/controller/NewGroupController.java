@@ -21,18 +21,31 @@ public class NewGroupController {
     public Button settingsButton, groupButton,listButton,homeButton;
     private String groupName, description;
 
+    /**
+     * Creates a new group using the user inputted data, then switches back view
+     * @param actionEvent create button
+     */
     public void createGroup(ActionEvent actionEvent) {
         if (takeInputData()){
             Group newGroup = new Group(groupName,description);
             DBGroup.createGroup(newGroup);
+            ViewSwitcher.switchView(View.PROFILE);
         } else  {
             labelRequiredFields.setVisible(true);
         }
     }
 
+    /**
+     * Goes back to previous view
+     * @param actionEvent cancel button
+     */
     public void cancel(ActionEvent actionEvent) {
-        ViewSwitcher.switchView(View.TASKLIST);
+        ViewSwitcher.switchView(View.PROFILE);
     }
+
+    /**
+     * Sets up the sidebar
+     */
     @FXML
     public void initialize() {
         Utils.sidebarSetup(settingsButton,groupButton,listButton,homeButton);

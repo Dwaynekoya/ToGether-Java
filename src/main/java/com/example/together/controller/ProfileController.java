@@ -96,6 +96,11 @@ public class ProfileController {
         ViewSwitcher.switchView(View.NEWGROUP);
     }
 
+    /**
+     * Opens a file chooser to pick a new profile picture
+     * @param actionEvent change picture button
+     */
+
     public void changeProfilePicture(ActionEvent actionEvent) {
         File selectedFile = Utils.imageFileChooser(actionEvent);
         Utils.loggedInUser.setIcon(selectedFile.getAbsolutePath());
@@ -106,12 +111,12 @@ public class ProfileController {
 
     /**
      * Takes textarea's content and assigns it to user bio
-     * @param actionEvent
+     * @param actionEvent edit bio button
      */
     public void editBio(ActionEvent actionEvent) {
         String bio = textAreaBio.getText();
         System.out.println(bio);
-        DBUsers.editBio(bio);
+        DBUsers.editUser("bio", bio);
     }
 
     /**
@@ -132,6 +137,13 @@ public class ProfileController {
             content.setSpacing(80);
             content.getChildren().add(actionButton);
         }
+
+        /**
+         * Actions taken for each item in the list
+         * Sets actionButton text and behavior differently depending on the item's class
+         * @param item can be an User or a Group
+         * @param empty empty cells
+         */
         @Override
         protected void updateItem(Object item, boolean empty) {
             super.updateItem(item, empty);
@@ -148,7 +160,7 @@ public class ProfileController {
                         DBUsers.followUser(Utils.loggedInUser.getId(), user.getId());
                     });
                     //can't follow someone you already follow
-                    if (Utils.loggedInUser.getFollowing().contains(user)) actionButton.setDisable(true);
+                    actionButton.setDisable(Utils.loggedInUser.getFollowing().contains(user));
                 } else if (item instanceof Group group) {
                     setText(group.getName());
                     actionButton.setText("Join");
@@ -157,11 +169,8 @@ public class ProfileController {
                         DBGroup.putMember(group,Utils.loggedInUser);
                     });
                     //if user is in group disable the join button
-                    boolean inGroup = Utils.loggedInUser.getGroups().contains(group);
+                    actionButton.setDisable(Utils.loggedInUser.getGroups().contains(group));
 
-                    if (inGroup) {
-                        actionButton.setDisable(true);
-                    }
                 }
                 setGraphic(content);
             }

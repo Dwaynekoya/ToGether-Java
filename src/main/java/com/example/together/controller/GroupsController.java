@@ -52,6 +52,10 @@ public class GroupsController {
     private int repeat;
     private String taskName, date, info;
 
+    /**
+     * Sets up side menus and integer spinner
+     * Takes group tasks from database and displays them
+     */
     public void initialize() {
         fetchGroupTasks();
         displayGroups(Utils.loggedInUser.getGroups());
@@ -61,6 +65,10 @@ public class GroupsController {
         Utils.sidebarSetup(settingsButton,groupButton,listButton,homeButton);
         Utils.profileSideSetup(usernameLabel,groupsListview,friendsListview, openProfile);
     }
+
+    /**
+     * Takes all group tasks from each group the user is in
+     */
     private void fetchGroupTasks(){
         for (Group group: Utils.loggedInUser.getGroups()){
             String json = DBGroup.getTasks(group.getId());
@@ -68,6 +76,11 @@ public class GroupsController {
             tasksHabitsFromJSON(json, group);
         }
     }
+
+    /**
+     * Displays groups in scrollpane. Each group has its own VBox to show its name, tasks/habits and a new task button
+     * @param groups groups the user is in
+     */
 
     public void displayGroups(Set<Group> groups) {
         VBox scrollPaneVbox = new VBox();
@@ -100,17 +113,29 @@ public class GroupsController {
         groupScrollPane.setContent(scrollPaneVbox);
     }
 
+    /**
+     * Opens new task view, setting this view as the one to go back to and sharing the group to create the task in
+     * @param group
+     */
     private void addGroupTask(Group group) {
         Utils.groupNewTask = group;
         Utils.previousView = View.GROUPS;
         ViewSwitcher.switchView(View.NEWTASK);
     }
 
+    /**
+     * Used for hiding/unhiding habit parameters
+     * @param actionEvent habit checkbox in task popup
+     */
     public void habitToggle(ActionEvent actionEvent) {
         habit = !habit;
         habitbox.setVisible(habit);
     }
 
+    /**
+     * Edits task in DB
+     * @param actionEvent button in popup
+     */
     public void editTask(ActionEvent actionEvent) {
         takeInputData();
         //if task didn't use to be a Habit, but has been modified to become one:
@@ -122,6 +147,9 @@ public class GroupsController {
         closePopup(actionEvent);
     }
 
+    /**
+     * Stores user inputted data in variables
+     */
     private void takeInputData() {
         taskName = textfieldName.getText();
         info = textAreaInfo.getText();
@@ -247,8 +275,6 @@ public class GroupsController {
 
         ObservableSet<Task> newTaskSet = FXCollections.observableSet(fetchedTasks);
         ObservableSet<Habit> newHabitSet = FXCollections.observableSet(fetchedHabits);
-
-        //runLater is used so that the updates are handled on the JavaFX thread
 
         if (!tasksFromGroups.equals(newTaskSet)) {
             tasksFromGroups.addAll(newTaskSet);

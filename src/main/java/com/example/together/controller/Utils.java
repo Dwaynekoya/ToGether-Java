@@ -1,6 +1,7 @@
 package com.example.together.controller;
 
 import com.example.together.Main;
+import com.example.together.dboperations.Constants;
 import com.example.together.dboperations.SQLDateAdapter;
 import com.example.together.model.Group;
 import com.example.together.model.Task;
@@ -178,6 +179,10 @@ public class Utils {
         return fileChooser.showOpenDialog(currentWindow);
     }
 
+    /**
+     * Makes it so a spinner can only take integer values
+     * @param spinner to set the new format to
+     */
     public static void integerSpinner(Spinner spinner) {
         SpinnerValueFactory.IntegerSpinnerValueFactory valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 365, 1);
         spinner.setValueFactory(valueFactory);
@@ -190,23 +195,30 @@ public class Utils {
         });
     }
 
-    public void showPopup(Stage parentStage) {
+    /**
+     * Makes a DB backup by connecting to a python script
+     */
+    public static void backupDB(){
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/popup_view.fxml"));
-            Parent root = fxmlLoader.load();
+            String pythonCommand = "python";
+            String scriptURL = "http://localhost/ToGether/backup.py";
 
-            Stage popupStage = new Stage();
-            popupStage.initModality(Modality.APPLICATION_MODAL);
-            popupStage.initStyle(StageStyle.UNDECORATED);  // Hide the title bar
-            popupStage.setScene(new Scene(root));
+            String command = String.format("%s -c \"import urllib.request; exec(urllib.request.urlopen('%s').read())\"", pythonCommand, scriptURL);
+            ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", command);
 
-            // Set the popup at the center of the parent window
-            popupStage.setX(parentStage.getX() + parentStage.getWidth() / 2 - root.prefWidth(-1) / 2);
-            popupStage.setY(parentStage.getY() + parentStage.getHeight() / 2 - root.prefHeight(-1) / 2);
+            // redirecting streams
+            processBuilder.redirectOutput(ProcessBuilder.Redirect.INHERIT);
+            processBuilder.redirectError(ProcessBuilder.Redirect.INHERIT);
 
-            popupStage.showAndWait();
+            Process process = processBuilder.start();
 
-        } catch (IOException e) {
+            int exitCode = process.waitFor();
+            if (exitCode == 0) {
+                System.out.println("Backup completed successfully");
+            } else {
+                System.out.println("Backup failed");
+            }
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
     }

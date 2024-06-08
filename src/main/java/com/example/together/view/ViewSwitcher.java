@@ -4,6 +4,7 @@ import com.example.together.Main;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -14,11 +15,8 @@ import java.util.Map;
  */
 public class ViewSwitcher {
     public static Scene scene;
+    public static Stage loginStage;
     private static Map<View, Parent> cache = new HashMap<>();
-
-    public static void setScene(Scene scene) {
-        ViewSwitcher.scene = scene;
-    }
 
     public static void switchView(View view) {
         if (scene==null) {
@@ -44,4 +42,5 @@ public class ViewSwitcher {
             throw new RuntimeException(e);
         }
     }
+
 }

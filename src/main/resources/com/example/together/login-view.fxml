@@ -3,73 +3,71 @@
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="459.0" prefWidth="777.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.together.controller.LoginController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="459.0" prefWidth="777.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.together.controller.LoginController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-
-   <top>
-      <Label styleClass="roboto-bold" text="Login" textFill="#fff6ed" BorderPane.alignment="CENTER">
-         <font>
-            <Font name="JetBrains Mono SemiBold" size="24.0" />
-         </font></Label>
-   </top>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" spacing="25.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="25.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </BorderPane.margin>
+         <ImageView fitHeight="300.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@logo.png" />
+            </image>
+         </ImageView>
          <Label alignment="CENTER" styleClass="roboto-medium" text="Username" textAlignment="CENTER" textFill="#fff6ed">
             <font>
-               <Font name="JetBrains Mono Medium" size="14.0"/>
+               <Font name="JetBrains Mono Medium" size="14.0" />
             </font>
          </Label>
-         <TextField fx:id="usernameField"/>
+         <TextField fx:id="usernameField" />
          <Label styleClass="roboto-medium" text="Password" textFill="#fff6ed">
             <font>
-               <Font name="JetBrains Mono Medium" size="14.0"/>
+               <Font name="JetBrains Mono Medium" size="14.0" />
             </font>
          </Label>
          <PasswordField fx:id="passwordField">
             <VBox.margin>
-               <Insets/>
+               <Insets />
             </VBox.margin>
          </PasswordField>
          <Label fx:id="infoLabel" textFill="#fff6ed">
             <font>
-               <Font size="14.0"/>
+               <Font size="14.0" />
             </font>
          </Label>
       </VBox>
    </center>
    <bottom>
-      <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0"
-            BorderPane.alignment="BOTTOM_CENTER">
+      <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="BOTTOM_CENTER">
          <BorderPane.margin>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </BorderPane.margin>
          <padding>
-            <Insets top="20.0"/>
+            <Insets top="20.0" />
          </padding>
          <Button mnemonicParsing="false" onAction="#login" text="Login">
             <styleClass>
-               <String fx:value="darkButton"/>
-               <String fx:value="roboto-medium"/>
+               <String fx:value="darkButton" />
+               <String fx:value="roboto-medium" />
             </styleClass>
             <font>
-               <Font size="18.0"/>
+               <Font size="18.0" />
             </font>
          </Button>
          <Button mnemonicParsing="false" onAction="#signup" stylesheets="@main.css" text="Sign Up">
             <styleClass>
-               <String fx:value="darkButton"/>
-               <String fx:value="roboto-medium"/>
+               <String fx:value="darkButton" />
+               <String fx:value="roboto-medium" />
             </styleClass>
             <font>
-               <Font size="18.0"/>
+               <Font size="18.0" />
             </font>
          </Button>
       </HBox>

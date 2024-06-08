@@ -17,9 +17,12 @@ public class GroupPopupController {
     public TextField textfieldName;
     public TextArea textAreaDescription;
 
+    /**
+     * Shows different elements from the fxml if the user is the group's manager or not
+     * Assigns group info to labels/textfields accordingly
+     */
     @FXML
     public void initialize() {
-        System.out.println( "manager: " + Utils.selectedGroup.getManager());
         if (Utils.selectedGroup.getManager().equals(Utils.loggedInUser)){
             nonOwnerBox.setVisible(false);
             ownerBox.setVisible(true);
@@ -34,6 +37,11 @@ public class GroupPopupController {
             this.labelDescription.setText(Utils.selectedGroup.getDescription());
         }
     }
+
+    /**
+     * Takes user inputted data and updates DB for the group
+     * @param actionEvent button accesible by group owner
+     */
     public void saveGroupChanges(ActionEvent actionEvent) {
         String name = textfieldName.getText();
         String description = textAreaDescription.getText();
@@ -45,9 +53,18 @@ public class GroupPopupController {
         DBGroup.editGroup(group);
     }
 
+    /**
+     * Deletes the group
+     * @param actionEvent button accesible by group owner
+     */
     public void deleteGroup(ActionEvent actionEvent) {
         DBGroup.deleteGroup(Utils.selectedGroup);
     }
+
+    /**
+     * Closes this view
+     * @param actionEvent close button
+     */
 
     public void closePopup(ActionEvent actionEvent) {
         Stage stage = (Stage) ((javafx.scene.Node) actionEvent.getSource()).getScene().getWindow();

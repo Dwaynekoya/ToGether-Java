@@ -109,6 +109,11 @@ public class DBGroup {
         return null;
     }
 
+    /**
+     * Looks for the user who created/manages a group
+     * @param group to extract the manager from
+     * @return User manager
+     */
     private static User searchManager(Group group) {
         try {
             URL url = new URL(Constants.getManager);
@@ -157,6 +162,10 @@ public class DBGroup {
         }
     }
 
+    /**
+     * Removes all entries in user_groups for the current user
+     */
+
     public static void leaveAllGroups() {
         try {
             URL url = new URL(Constants.leaveAllGroups);
@@ -167,6 +176,10 @@ public class DBGroup {
         }
     }
 
+    /**
+     * Updates group info (name and description)
+     * @param group group to edit
+     */
     public static void editGroup(Group group) {
         try {
             URL url = new URL(Constants.editGroup);
@@ -177,6 +190,10 @@ public class DBGroup {
         }
     }
 
+    /**
+     * Deletes group from DB
+     * @param selectedGroup to delete from DB
+     */
     public static void deleteGroup(Group selectedGroup) {
         try {
             URL url = new URL(Constants.deleteGroup);

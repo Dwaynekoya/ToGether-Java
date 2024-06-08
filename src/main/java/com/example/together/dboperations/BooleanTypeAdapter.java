@@ -7,6 +7,9 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
+/**
+ * USED FOR GSON. Makes Gson interpret 0,1 (mysql) as false, true
+ */
 class BooleanTypeAdapter extends TypeAdapter<Boolean> {
     @Override
     public void write(JsonWriter out, Boolean value) throws IOException {

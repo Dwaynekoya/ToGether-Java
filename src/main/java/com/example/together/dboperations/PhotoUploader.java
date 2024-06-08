@@ -22,6 +22,10 @@ public class PhotoUploader extends Thread{
         this.photoFile=photoFile;
         this.user=user;
     }
+
+    /**
+     * uploads a picture and sets its url as a field in a given object (either a Task or a User)
+     */
     @Override
     public void run() {
         String boundary = Long.toHexString(System.currentTimeMillis()); // Just a random string

@@ -166,19 +166,24 @@ public class DBUsers {
             String postdata = String.format("user_id=%d&icon_url=%s", Utils.loggedInUser.getId(), Utils.loggedInUser.getIcon());
             DBGeneral.sendHttpPostRequest(url, postdata);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
-    public static void editBio(String newBio) {
+
+    /**
+     * Updates user
+     * @param field name of the column to update
+     * @param value new value for the column for the current user
+     */
+    public static void editUser(String field, String value) {
         try {
-            URL url = new URL(Constants.updateUserBio);
-            String postdata = String.format("user_id=%d&field=%s&new_field=%s",
-                    Utils.loggedInUser.getId(), "bio",newBio);
+            URL url = new URL(Constants.editUser);
+            String postdata = String.format("id=%d&field=%s&value=%s", Utils.loggedInUser.getId(), field, value);
             String response = DBGeneral.sendHttpPostRequest(url, postdata);
-            System.out.println(response);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        }catch (IOException e){
+            e.printStackTrace();
         }
     }
+
 }
 

@@ -9,40 +9,40 @@
 <?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
-<StackPane prefHeight="1024.0" prefWidth="1440.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.together.controller.GroupsController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.together.controller.GroupsController">
     <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#fff6ed" height="1024.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="drop-shadow" width="1300.0" StackPane.alignment="CENTER_RIGHT" />
     <Rectangle arcHeight="50.0" arcWidth="50.0" fill="WHITE" height="1024.0" layoutX="150.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="drop-shadow" width="424.0" StackPane.alignment="CENTER_RIGHT" />
     <BorderPane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
         <left>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="130.0">
                 <VBox.margin>
-                    <Insets top="15.0"/>
+                    <Insets top="15.0" />
                 </VBox.margin>
                 <padding>
-                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                 </padding>
                 <Button fx:id="settingsButton" mnemonicParsing="false" styleClass="transparent-button">
                     <graphic>
-                        <FontIcon fill="#fff6ed" iconLiteral="fa-cog" iconSize="40"/>
+                        <FontIcon fill="#fff6ed" iconLiteral="fa-cog" iconSize="40" />
                     </graphic>
                 </Button>
                 <VBox alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
                     <padding>
-                        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0"/>
+                        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
                     </padding>
                     <Button fx:id="groupButton" mnemonicParsing="false" styleClass="transparent-button">
                         <graphic>
-                            <FontIcon fill="#fff6ed" iconLiteral="fa-users" iconSize="40"/>
+                            <FontIcon fill="#fff6ed" iconLiteral="fa-users" iconSize="40" />
                         </graphic>
                     </Button>
                     <Button fx:id="listButton" mnemonicParsing="false" styleClass="transparent-button">
                         <graphic>
-                            <FontIcon fill="#fff6ed" iconLiteral="fa-list" iconSize="40"/>
+                            <FontIcon fill="#fff6ed" iconLiteral="fa-list" iconSize="40" />
                         </graphic>
                     </Button>
                     <Button fx:id="homeButton" mnemonicParsing="false" styleClass="transparent-button">
                         <graphic>
-                            <FontIcon fill="#fff6ed" iconLiteral="fa-home" iconSize="40"/>
+                            <FontIcon fill="#fff6ed" iconLiteral="fa-home" iconSize="40" />
                         </graphic>
                     </Button>
                 </VBox>
@@ -52,144 +52,143 @@
         <right>
             <VBox prefHeight="200.0" prefWidth="424.0" BorderPane.alignment="CENTER">
                 <padding>
-                    <Insets bottom="40.0" left="40.0" right="40.0" top="40.0"/>
+                    <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
                 </padding>
                 <HBox prefHeight="100.0" prefWidth="200.0">
-                    <ImageView fitHeight="117.0" fitWidth="117.0" pickOnBounds="true" preserveRatio="true"/>
+                    <ImageView fitHeight="117.0" fitWidth="117.0" pickOnBounds="true" preserveRatio="true" />
                     <VBox alignment="TOP_RIGHT" prefHeight="200.0" HBox.hgrow="ALWAYS">
                         <padding>
-                            <Insets left="20.0"/>
+                            <Insets left="20.0" />
                         </padding>
                         <Label fx:id="usernameLabel" styleClass="roboto-medium" text="USERNAME">
                             <font>
-                                <Font size="24.0"/>
+                                <Font size="24.0" />
                             </font>
                         </Label>
                         <Button fx:id="openProfile" mnemonicParsing="false" text="Profile">
                             <font>
-                                <Font name="JetBrains Mono SemiBold" size="18.0"/>
+                                <Font name="JetBrains Mono SemiBold" size="18.0" />
                             </font>
                             <styleClass>
-                                <String fx:value="darkButton"/>
-                                <String fx:value="roboto-medium"/>
+                                <String fx:value="darkButton" />
+                                <String fx:value="roboto-medium" />
                             </styleClass>
                         </Button>
                     </VBox>
                 </HBox>
                 <Label styleClass="roboto-medium" text="My Groups">
                     <font>
-                        <Font name="JetBrains Mono Medium" size="18.0"/>
+                        <Font name="JetBrains Mono Medium" size="18.0" />
                     </font>
                 </Label>
-                <ListView fx:id="groupsListview" prefHeight="200.0" prefWidth="200.0"/>
+                <ListView fx:id="groupsListview" prefHeight="200.0" prefWidth="200.0" />
                 <Label styleClass="roboto-medium" text="My friends">
                     <font>
-                        <Font name="JetBrains Mono Medium" size="18.0"/>
+                        <Font name="JetBrains Mono Medium" size="18.0" />
                     </font>
                 </Label>
-                <ListView fx:id="friendsListview" prefHeight="200.0" prefWidth="200.0"/>
+                <ListView fx:id="friendsListview" prefHeight="200.0" prefWidth="200.0" />
             </VBox>
         </right>
         <center>
             <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                 <VBox alignment="TOP_RIGHT" HBox.hgrow="ALWAYS">
                     <HBox.margin>
-                        <Insets bottom="20.0" left="40.0" right="20.0" top="20.0"/>
+                        <Insets bottom="20.0" left="40.0" right="20.0" top="20.0" />
                     </HBox.margin>
                     <Label alignment="TOP_RIGHT" styleClass="roboto-medium" text="My Groups">
                         <font>
-                            <Font size="18.0"/>
+                            <Font size="18.0" />
                         </font>
                         <VBox.margin>
-                            <Insets bottom="20.0"/>
+                            <Insets bottom="20.0" />
                         </VBox.margin>
                     </Label>
                     <ScrollPane fx:id="groupScrollPane" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0"/>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
                     </ScrollPane>
                 </VBox>
             </HBox>
         </center></BorderPane>
-    <VBox fx:id="taskPopup" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0" prefWidth="400.0"
-          visible="false">
+    <VBox fx:id="taskPopup" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0" prefWidth="400.0" visible="false">
         <styleClass>
-            <String fx:value="popupBox"/>
-            <String fx:value="drop-shadow"/>
+            <String fx:value="popupBox" />
+            <String fx:value="drop-shadow" />
         </styleClass>
         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
         </padding>
         <Label text="Name">
             <padding>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
             </padding>
             <font>
-                <Font name="JetBrains Mono Medium" size="18.0"/>
+                <Font name="JetBrains Mono Medium" size="18.0" />
             </font>
         </Label>
-        <TextField fx:id="textfieldName"/>
+        <TextField fx:id="textfieldName" />
         <Label text="Date">
             <padding>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
             </padding>
             <font>
-                <Font name="JetBrains Mono Medium" size="18.0"/>
+                <Font name="JetBrains Mono Medium" size="18.0" />
             </font>
         </Label>
-        <DatePicker fx:id="datePicker"/>
+        <DatePicker fx:id="datePicker" />
         <Label text="Info">
             <padding>
-                <Insets bottom="5.0" top="5.0"/>
+                <Insets bottom="5.0" top="5.0" />
             </padding>
             <font>
-                <Font name="JetBrains Mono Medium" size="18.0"/>
+                <Font name="JetBrains Mono Medium" size="18.0" />
             </font>
         </Label>
         <TextArea fx:id="textAreaInfo" prefHeight="200.0" prefWidth="200.0">
             <padding>
-                <Insets bottom="5.0" top="5.0"/>
+                <Insets bottom="5.0" top="5.0" />
             </padding>
         </TextArea>
         <CheckBox fx:id="checkBox" mnemonicParsing="false" onAction="#habitToggle" text="Habit?">
             <padding>
-                <Insets top="5.0"/>
+                <Insets top="5.0" />
             </padding>
             <font>
-                <Font name="JetBrains Mono Medium" size="18.0"/>
+                <Font name="JetBrains Mono Medium" size="18.0" />
             </font>
         </CheckBox>
         <HBox fx:id="habitbox" alignment="CENTER" prefHeight="100.0" visible="false">
             <Label text="Repeat every...">
                 <font>
-                    <Font name="JetBrains Mono Medium" size="18.0"/>
+                    <Font name="JetBrains Mono Medium" size="18.0" />
                 </font>
             </Label>
             <Spinner fx:id="spinnerHabit" prefWidth="70.0">
                 <HBox.margin>
-                    <Insets left="10.0" right="10.0"/>
+                    <Insets left="10.0" right="10.0" />
                 </HBox.margin>
             </Spinner>
             <Label text="days">
                 <font>
-                    <Font name="JetBrains Mono Medium" size="18.0"/>
+                    <Font name="JetBrains Mono Medium" size="18.0" />
                 </font>
             </Label>
         </HBox>
         <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
             <padding>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </padding>
             <VBox.margin>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </VBox.margin>
             <Button mnemonicParsing="false" onAction="#editTask" styleClass="darkButton" text="Save">
                 <font>
-                    <Font size="18.0"/>
+                    <Font size="18.0" />
                 </font>
             </Button>
             <Button mnemonicParsing="false" onAction="#closePopup" styleClass="lightButton" text="Cancel">
                 <font>
-                    <Font size="18.0"/>
+                    <Font size="18.0" />
                 </font>
             </Button>
         </HBox>

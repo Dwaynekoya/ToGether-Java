@@ -1,5 +1,6 @@
 package com.example.together.controller;
 
+import com.example.together.Feed;
 import com.example.together.dboperations.DBUsers;
 import com.example.together.dboperations.GroupsFollowsFetcher;
 import com.example.together.view.View;
@@ -13,6 +14,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
 import java.net.ConnectException;
 import java.util.ArrayList;
@@ -88,31 +90,16 @@ public class LoginController {
         Utils.loggedInUser = DBUsers.getUser(loginID);
         GroupsFollowsFetcher groupsFollowsFetcher = new GroupsFollowsFetcher();
         groupsFollowsFetcher.start();
-        setKeyboardShortcuts();
-        ViewSwitcher.switchView(View.TASKLIST);
+        Utils.backupDB();
+        try {
+            new Feed().start(new Stage());
+            ViewSwitcher.loginStage.close(); //closes login window
+        } catch (Exception e) {
+            System.out.println("Issue launching main app");
+            e.printStackTrace();
+        }
     }
 
-    /**
-     * Sets keyboard shortcuts to switch between scenes using the keyboard
-     */
-    private void setKeyboardShortcuts() {
-        ViewSwitcher.scene.getAccelerators().put(
-                new KeyCodeCombination(KeyCode.L, KeyCombination.CONTROL_DOWN),
-                () -> ViewSwitcher.switchView(View.TASKLIST)
-        );
-        ViewSwitcher.scene.getAccelerators().put(
-                new KeyCodeCombination(KeyCode.G, KeyCombination.CONTROL_DOWN),
-                () -> ViewSwitcher.switchView(View.GROUPS)
-        );
-        ViewSwitcher.scene.getAccelerators().put(
-                new KeyCodeCombination(KeyCode.F, KeyCombination.CONTROL_DOWN),
-                () -> ViewSwitcher.switchView(View.FEED)
-        );
-        ViewSwitcher.scene.getAccelerators().put(
-                new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN),
-                () -> ViewSwitcher.switchView(View.NEWTASK)
-        );
-    }
 
     /**
      * Creates a new user in the database taking the input from the textfields
