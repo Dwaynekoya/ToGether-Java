@@ -1,4 +1,4 @@
-package com.example.together;
+package com.example.together.view;
 
 import com.example.together.view.View;
 import com.example.together.view.ViewSwitcher;

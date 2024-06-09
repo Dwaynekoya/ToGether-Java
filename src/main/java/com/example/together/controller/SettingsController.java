@@ -37,6 +37,7 @@ public class SettingsController {
      */
     public void logOut(ActionEvent actionEvent) {
         Utils.loggedInUser=null;
+        ViewSwitcher.clearCache();
         ViewSwitcher.switchView(View.LOGIN);
     }
 

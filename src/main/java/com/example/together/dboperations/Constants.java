@@ -3,7 +3,7 @@ package com.example.together.dboperations;
 import java.net.URL;
 
 public class Constants {
-    public static String phpLocation = "http://192.168.1.101/ToGether/";
+    public static String phpLocation = "http://192.168.23.7/ToGether/";
     //USER MANAGEMENT PHP FILES:
     public static String updateUserBio = phpLocation + "phpusers/updateuser_bio.php";
     public static String getUserGivenId = phpLocation+"phpusers/getuser_id.php";

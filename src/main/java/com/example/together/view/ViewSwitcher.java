@@ -43,4 +43,11 @@ public class ViewSwitcher {
         }
     }
 
+    /**
+     * Clears all views contained in cache. Used when logging out
+     */
+    public static void clearCache(){
+        cache = new HashMap<>();
+    }
+
 }

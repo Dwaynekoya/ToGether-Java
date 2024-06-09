@@ -10,8 +10,8 @@
 <?import org.kordamp.ikonli.javafx.*?>
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.together.controller.GroupsController">
-    <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#fff6ed" height="1024.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="drop-shadow" width="1300.0" StackPane.alignment="CENTER_RIGHT" />
-    <Rectangle arcHeight="50.0" arcWidth="50.0" fill="WHITE" height="1024.0" layoutX="150.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="drop-shadow" width="424.0" StackPane.alignment="CENTER_RIGHT" />
+    <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#fff6ed" height="800.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="drop-shadow" width="1300.0" StackPane.alignment="CENTER_RIGHT" />
+    <Rectangle arcHeight="50.0" arcWidth="50.0" fill="WHITE" height="800.0" layoutX="150.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="drop-shadow" width="424.0" StackPane.alignment="CENTER_RIGHT" />
     <BorderPane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
         <left>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="130.0">
@@ -107,6 +107,15 @@
                     <ScrollPane fx:id="groupScrollPane" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
                     </ScrollPane>
+               <Button mnemonicParsing="false" text="New">
+                  <styleClass>
+                     <String fx:value="roboto-medium" />
+                     <String fx:value="darkButton" />
+                  </styleClass>
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+               </Button>
                 </VBox>
             </HBox>
         </center></BorderPane>

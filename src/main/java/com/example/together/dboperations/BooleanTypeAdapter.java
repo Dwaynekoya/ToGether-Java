@@ -14,7 +14,7 @@ class BooleanTypeAdapter extends TypeAdapter<Boolean> {
     @Override
     public void write(JsonWriter out, Boolean value) throws IOException {
         if (value == null) {
-            out.value(false);  // Default value for null
+            out.value(false);
         } else {
             out.value(value);
         }
@@ -25,7 +25,7 @@ class BooleanTypeAdapter extends TypeAdapter<Boolean> {
         JsonToken token = in.peek();
         if (token == JsonToken.NULL) {
             in.nextNull();
-            return false;  // Default value for null
+            return false;
         }
         switch (token) {
             case NUMBER:

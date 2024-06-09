@@ -8,7 +8,7 @@
 <?import org.kordamp.ikonli.javafx.*?>
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.together.controller.NewGroupController">
-    <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#fff6ed" height="1024.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="drop-shadow" width="1300.0" StackPane.alignment="CENTER_RIGHT" />
+    <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#fff6ed" height="800.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="drop-shadow" width="1300.0" StackPane.alignment="CENTER_RIGHT" />
     <BorderPane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
         <left>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="130.0">

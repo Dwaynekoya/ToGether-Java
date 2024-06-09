@@ -1,9 +1,8 @@
 package com.example.together.controller;
 
-import com.example.together.Feed;
+import com.example.together.view.Feed;
 import com.example.together.dboperations.DBUsers;
 import com.example.together.dboperations.GroupsFollowsFetcher;
-import com.example.together.view.View;
 import com.example.together.view.ViewSwitcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,16 +10,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCodeCombination;
-import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import static com.example.together.view.ViewSwitcher.scene;
 
 public class LoginController {
     @FXML
@@ -92,8 +87,10 @@ public class LoginController {
         groupsFollowsFetcher.start();
         Utils.backupDB();
         try {
-            new Feed().start(new Stage());
+            Stage newStage = new Stage();
+            new Feed().start(newStage);
             ViewSwitcher.loginStage.close(); //closes login window
+            ViewSwitcher.loginStage = newStage; //new stage gets saved, so it can be closed when used to login after logout
         } catch (Exception e) {
             System.out.println("Issue launching main app");
             e.printStackTrace();
