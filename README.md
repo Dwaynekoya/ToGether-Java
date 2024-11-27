@@ -7,7 +7,7 @@ ToGether es una aplicación multiplataforma para gestionar tareas desde ordenado
 Emplea Java (AndroidStudio, JavaFX), PHP, JSON, MySQL.
 
 ## Características Principales
-- **Conexión con BBDD**: Tanto la aplicación móvil como la versión de escritorio se comunican con la base de datos MySQL mediante los mismos ficheros PHP. Las consultas son recibidas como ficheros JSON por la aplicación e interpretadas acordemente con los objetos Java que representan.
+- **Conexión con BBDD**: Tanto la aplicación móvil como la versión de escritorio se comunican con la base de datos MySQL mediante los mismos ficheros PHP. Las consultas son recibidas como ficheros JSON por la aplicación e interpretadas acordemente con los objetos Java que representan.
 - **Gestión de tareas**: Tareas propias, compartidas y hábitos recurrentes.
 - **Subida de fotos**: Asociación de imágenes a tareas completadas o usuarios.
 - **Seguimiento:** Un usuario puede seguir a otros para ver qué tareas completan. 
